@@ -14,18 +14,12 @@ import {
   DropdownMenu,
   DropdownItem,
   UncontrolledTooltip,
-  InputGroupAddon,
-  InputGroup,
-  Input,
-  Form,
-  FormGroup,
 } from 'reactstrap';
 
 import { logoutUser } from '../../actions/user';
 import { toggleSidebar, openSidebar, closeSidebar, changeActiveSidebarItem } from '../../actions/navigation';
 
 import a5 from '../../images/people/a5.jpg';
-import a6 from '../../images/people/a6.jpg';
 
 import s from './Header.scss'; // eslint-disable-line css-modules/no-unused-class
 

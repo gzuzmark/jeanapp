@@ -60,7 +60,6 @@ import s from './Layout.scss';
 import Header from '../Header';
 import Bundle from '../../core/Bundle';
 import Sidebar from '../Sidebar';
-import Chat from '../Chat';
 import { openSidebar, closeSidebar, changeActiveSidebarItem, toggleSidebar } from '../../actions/navigation';
 
 // Dashboard component is loaded directly as an example of server side rendering

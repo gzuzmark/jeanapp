@@ -81,7 +81,7 @@ const items = [
     groups: [
       'people',
     ],
-    src: pic9,
+    src: pic1,
     date: '2 mins',
   },
   {

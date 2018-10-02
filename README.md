@@ -1,4 +1,4 @@
-## Sing App React Version
+## Jean ReactApp
 
 
 ### Getting Started
