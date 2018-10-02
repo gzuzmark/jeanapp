@@ -21,7 +21,6 @@ async function copy() {
     }, null, 2)),
     copyDir('public', 'build/public'),
   ]);
-  await copyFile('_redirects', 'build/_redirects');
 
   if (process.argv.includes('--watch')) {
     const watcher = chokidar.watch([
