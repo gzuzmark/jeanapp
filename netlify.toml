@@ -12,6 +12,8 @@ ID = "Your_Site_ID"
   # This will be your default build command
   command = "yarn run build"
 
+  environment = {  NODE_VERSION = "9.11.1", YARN_VERSION = "1.10.1", NPM_VERSION = "5.6.0" }
+
 # Deploy Preview context: All Deploy Previews (https://www.netlify.com/blog/2016/07/20/introducing-deploy-previews-in-netlify/)
 # will inherit these settings.
 [context.deploy-preview]
