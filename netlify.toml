@@ -18,7 +18,7 @@ ID = "Jean app"
 # will inherit these settings.
 [context.deploy-preview]
   publish = "build/"
-  command = "yarn start"
+  command = "yarn run build"
 # Here is another way to define context specific environment variables
 [context.deploy-preview.environment]
   NODE_VERSION = "9.11.1"
@@ -28,7 +28,7 @@ ID = "Jean app"
 
 [context.production]
   publish = "build/"
-  command = "yarn start"
+  command = "yarn run build"
   environment = {  NODE_VERSION = "9.11.1", YARN_VERSION = "1.10.1", NPM_VERSION = "5.6.0" }
 
  
