@@ -247,7 +247,7 @@ class Layout extends React.Component {
                 <Route path="/app/core/grid" exact component={CoreGridBundle} />
               </Switch>
               <footer className={s.contentFooter}>
-                Sing React Version - Made by <a href="https://flatlogic.com" rel="nofollow noopener noreferrer" target="_blank">Flatlogic</a>
+                Jean - Made by <a href="#" rel="nofollow noopener noreferrer" target="_blank">ForEach</a>
               </footer>
             </main>
           </Hammer>

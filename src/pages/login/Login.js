@@ -54,13 +54,11 @@ class Login extends React.Component {
         <Container>
           <h5 className={`${s.logo}`}>
             <i className="fa fa-circle text-gray" />
-            sing
+            Login
             <i className="fa fa-circle text-warning" />
           </h5>
-          <Widget className={`${s.widget} mx-auto`} title={<h3 className="mt-0">Login to your Web App</h3>}>
-            <p className={s.widgetLoginInfo}>
-              Use Facebook, Twitter or your email to sign in.
-            </p>
+          <Widget className={`${s.widget} mx-auto`} title={<h3 className="mt-0">Login Jean App</h3>}>
+            
             {/* eslint-disable */}
             <p className={s.widgetLoginInfo}>
               Don't have an account? Sign up now!
@@ -103,7 +101,7 @@ class Login extends React.Component {
           </Widget>
         </Container>
         <footer className={s.footer}>
-          2017 &copy; Sing. Admin Dashboard Template.
+          2018 Jean app
         </footer>
       </div>
     );

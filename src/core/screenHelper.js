@@ -1,6 +1,6 @@
 const config = {
-  name: 'sing',
-  title: 'Sing Dashboard App built with React JS by Flatlogic',
+  name: 'jean',
+  title: 'Jean Dashboard',
   version: '3.8.0',
   settings: {
     screens: {

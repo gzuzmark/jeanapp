@@ -26,7 +26,7 @@ class ProgressDemo extends React.Component {
           <span className="text-muted float-right">83%</span>
           <h6 className="m-0 mb-1 text-gray">
             <strong>Primary:</strong>
-            &nbsp;Sing Web App
+            &nbsp;Jean Web App
           </h6>
           <Progress className={['progress-sm', 'm-0'].join(' ')} color="success" value="83" />
           <span className="help-block">verifying stable probability status</span>

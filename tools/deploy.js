@@ -16,9 +16,9 @@ import run from './run';
 // Heroku
 const remote = {
   name: 'heroku',
-  url: 'https://git.heroku.com/sing-app.git',
+  url: 'https://git.heroku.com/jean-app.git',
   branch: 'master',
-  website: 'https://sing-app.herokuapp.com',
+  website: 'https://jean-app.herokuapp.com/',
 };
 
 // Azure Web Apps
