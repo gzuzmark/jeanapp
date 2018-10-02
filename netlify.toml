@@ -1,5 +1,5 @@
 [Settings]
-ID = "Your_Site_ID"
+ID = "Jean app"
 
 # Settings in the [build] context are global and are applied to all contexts unless otherwise overridden by more specific contexts.  
 
@@ -8,7 +8,7 @@ ID = "Your_Site_ID"
   base    = "/"
   # NOTE: This is where we will look for package.json/.nvmrc/etc, not root.
   # This is the directory that you are publishing from (relative to root of your repo)
-  publish = "/build/"
+  publish = "build/"
   # This will be your default build command
   command = "yarn run build"
 
@@ -24,5 +24,11 @@ ID = "Your_Site_ID"
   NODE_VERSION = "9.11.1"
   YARN_VERSION = "1.10.1"
   NPM_VERSION = "5.6.0"
+
+
+[context.production]
+  publish = "build/"
+  command = "yarn start"
+  environment = {  NODE_VERSION = "9.11.1", YARN_VERSION = "1.10.1", NPM_VERSION = "5.6.0" }
 
  
