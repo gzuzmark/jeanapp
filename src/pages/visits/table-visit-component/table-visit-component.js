@@ -46,7 +46,6 @@ class TableVisitsComponent extends React.Component {
   };
 
   render() {
-
     return (
       <div>
         <Breadcrumb>

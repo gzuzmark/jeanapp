@@ -1,20 +1,20 @@
 @import '../../../styles/app';
 
-.bootstrapTable {
-  border: none;
+// .bootstrapTable {
+//   border: none;
 
-  :global .table {
-    thead,
-    tbody {
-      th,
-      td {
-        border-right: none;
-        border-left: none;
-      }
-    }
+//   :global .table {
+//     thead,
+//     tbody {
+//       th,
+//       td {
+//         border-right: none;
+//         border-left: none;
+//       }
+//     }
 
-    thead th {
-      background: transparent;
-    }
-  }
-}
+//     thead th {
+//       background: transparent;
+//     }
+//   }
+// }
