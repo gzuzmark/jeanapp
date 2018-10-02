@@ -58,7 +58,7 @@ class Login extends React.Component {
             <i className="fa fa-circle text-warning" />
           </h5>
           <Widget className={`${s.widget} mx-auto`} title={<h3 className="mt-0">Login Jean App</h3>}>
-            
+
             {/* eslint-disable */}
             <p className={s.widgetLoginInfo}>
               Don't have an account? Sign up now!

@@ -9,6 +9,8 @@ ID = "Jean app"
   # NOTE: This is where we will look for package.json/.nvmrc/etc, not root.
   # This is the directory that you are publishing from (relative to root of your repo)
   publish = "build/"
+  # This will be your default build command
+  command = "yarn run build"
 
   environment = {  NODE_VERSION = "9.11.1", YARN_VERSION = "1.10.1", NPM_VERSION = "5.6.0" }
 
