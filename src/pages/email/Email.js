@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import cx from 'classnames';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  Alert,
-} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Alert } from 'reactstrap';
 
 import Filters from './components/Filters/Filters';
 import MessageTable from './components/MessageTable/MessageTable';
@@ -20,10 +16,12 @@ class Email extends Component {
     compose: false,
     composeData: null,
     alertAfter: false,
-  }
+  };
 
   componentDidMount() {
-    setTimeout(() => { this.fixAlert(); }, 0);
+    setTimeout(() => {
+      this.fixAlert();
+    }, 0);
   }
 
   fixAlert() {
@@ -32,7 +30,7 @@ class Email extends Component {
 
   filter = (filter) => {
     this.setState({ filter, compose: false, composeData: null });
-  }
+  };
 
   closeNotification() {
     this.setState({ isNotificationOpen: false });
@@ -44,7 +42,7 @@ class Email extends Component {
       compose: id === null ? false : pvState.compose,
       composeData: id === null ? null : pvState.composeData,
     }));
-  }
+  };
 
   changeCompose = (compose, data) => {
     this.setState({ compose });
@@ -52,17 +50,10 @@ class Email extends Component {
     if (data) {
       this.setState({ composeData: data });
     }
-  }
+  };
 
   render() {
-    const {
-      isNotificationOpen,
-      filter,
-      openedMessage,
-      alertAfter,
-      compose,
-      composeData,
-    } = this.state;
+    const { isNotificationOpen, filter, openedMessage, alertAfter, compose, composeData } = this.state;
     return (
       <div>
         <Breadcrumb>
@@ -70,7 +61,9 @@ class Email extends Component {
           <BreadcrumbItem active>Email</BreadcrumbItem>
         </Breadcrumb>
         <div className={s.pageTopLine}>
-          <h1 className="page-title">Email - <span className="fw-semi-bold">Inbox</span></h1>
+          <h1 className="page-title">
+            Email - <span className="fw-semi-bold">Inbox</span>
+          </h1>
           <Alert
             isOpen={isNotificationOpen}
             color="success"
@@ -81,11 +74,7 @@ class Email extends Component {
           </Alert>
         </div>
         <div className={s.view}>
-          <Filters
-            filter={this.filter}
-            openMessage={this.openMessage}
-            compose={this.changeCompose}
-          />
+          <Filters filter={this.filter} openMessage={this.openMessage} compose={this.changeCompose} />
           <MessageTable
             filter={filter}
             openedMessage={openedMessage}

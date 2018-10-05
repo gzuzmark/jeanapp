@@ -1,0 +1,6 @@
+{
+  "name": "form-visit-component",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Wizard.js"
+}
