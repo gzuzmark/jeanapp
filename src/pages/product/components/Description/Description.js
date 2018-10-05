@@ -25,12 +25,12 @@ class Description extends Component {
     return (
       <div>
         <div className={s.productDescription}>
-          {description.map(item => <div className={cx(item.extraClass, s.productDescriptionBlock)} key={item.id}>
+          {description.map(item => (<div className={cx(item.extraClass, s.productDescriptionBlock)} key={item.id}>
             <h3>{item.title}</h3>
             {/* eslint-disable */}
             <div dangerouslySetInnerHTML={{ __html: item.body }} />
             {/* eslint-enable */}
-          </div>)}
+          </div>))}
         </div>
         <Row className={cx(s.productDescription, s.productDescriptionMobile)}>
           <Col xs="12">

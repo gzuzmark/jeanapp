@@ -59,12 +59,12 @@ class Alerts extends Component {
               close collapse
             >
               <p>Alerts are available for any length of text, as well as an optional dismiss button.</p>
-              {alerts.map((alert, index) => <Alert
+              {alerts.map((alert, index) => (<Alert
                 key={alert.id} isOpen={alert.visible[0]} toggle={() => this.closeAlert(index, 0)}
                 color={alert.type}
               >
                 <span dangerouslySetInnerHTML={{ __html: alert.msg }} />
-              </Alert>)}
+              </Alert>))}
             </Widget>
           </Col>
           <Col xs={12} md={8}>
@@ -73,13 +73,13 @@ class Alerts extends Component {
               close collapse
             >
               <p>Transparent  alerts are available by adding <code>.alert-transparent</code> class.</p>
-              {alerts.map((alert, index) => <Alert
+              {alerts.map((alert, index) => (<Alert
                 className="alert-transparent"
                 key={alert.id} isOpen={alert.visible[1]} toggle={() => this.closeAlert(index, 1)}
                 color={alert.type}
               >
                 <span dangerouslySetInnerHTML={{ __html: alert.msg }} />
-              </Alert>)}
+              </Alert>))}
             </Widget>
           </Col>
           <Col xs={12} md={8}>
@@ -88,13 +88,13 @@ class Alerts extends Component {
               close collapse
             >
               <p>Rounded alerts are available by adding <code>.alert-rounded</code> class.</p>
-              {alerts.map((alert, index) => <Alert
+              {alerts.map((alert, index) => (<Alert
                 className={cx('alert-rounded', { 'alert-transparent': index % 2 !== 1 })}
                 key={alert.id} isOpen={alert.visible[2]} toggle={() => this.closeAlert(index, 2)}
                 color={alert.type}
               >
                 <span dangerouslySetInnerHTML={{ __html: alert.msg }} />
-              </Alert>)}
+              </Alert>))}
             </Widget>
           </Col>
           <Col xs={12} md={8}>

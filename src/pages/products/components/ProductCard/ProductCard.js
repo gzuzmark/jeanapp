@@ -41,7 +41,7 @@ class ProductCard extends Component {
             : <div className={s.sale}>
               <span className={s.old}>${price.old}</span>
               {price.percents}% off
-           <span className={s.new}> ${price.new}</span>
+              <span className={s.new}> ${price.new}</span>
             </div>
           }
           {rating && <Rating rating={rating} size="sm" />}

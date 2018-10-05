@@ -163,7 +163,7 @@ class Chat extends React.Component {
             {this.state.todayConversations
               .filter(this.filterConversations)
               .map(item =>
-                <ListGroupItem
+                (<ListGroupItem
                   key={item.name}
                   onClick={e => this.openMessages(item, e)}
                 >
@@ -175,7 +175,7 @@ class Chat extends React.Component {
                     <h6 className={s.messageSender}>{item.name}</h6>
                     <p className={s.messagePreview}>{item.lastMessage}</p>
                   </div>
-                </ListGroupItem>,
+                </ListGroupItem>),
             )}
           </ListGroup>
 
@@ -184,7 +184,7 @@ class Chat extends React.Component {
             {this.state.lastWeekConversations
               .filter(this.filterConversations)
               .map(item =>
-                <ListGroupItem
+                (<ListGroupItem
                   key={item.name}
                   onClick={e => this.openMessages(item, e)}
                 >
@@ -196,7 +196,7 @@ class Chat extends React.Component {
                     <h6 className={s.messageSender}>{item.name}</h6>
                     <p className={s.messagePreview}>{item.lastMessage}</p>
                   </div>
-                </ListGroupItem>,
+                </ListGroupItem>),
             )}
           </ListGroup>
         </div>

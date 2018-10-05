@@ -39,7 +39,7 @@ const MessageTableHeader = (props) => {
             className="dropdown-toggle-split mr-xs"
           >
             Select
-        </DropdownToggle>
+          </DropdownToggle>
           <DropdownMenu>
             {select.map(item =>
               (Object.keys(item).length > 1
@@ -54,7 +54,7 @@ const MessageTableHeader = (props) => {
             className="dropdown-toggle-split mr-xs"
           >
             Actions
-        </DropdownToggle>
+          </DropdownToggle>
           <DropdownMenu>
             {action.map(item =>
               (Object.keys(item).length > 1

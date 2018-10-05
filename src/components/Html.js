@@ -37,11 +37,11 @@ class Html extends React.Component {
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           <link rel="icon" href="/favicon.png" />
           {styles.map(style =>
-            <style
+            (<style
               key={style.id}
               id={style.id}
               dangerouslySetInnerHTML={{ __html: style.cssText }}
-            />,
+            />),
           )}
           <script dangerouslySetInnerHTML={{ __html: {/* analytics here */} }} />
         </head>

@@ -121,7 +121,7 @@ class LinksGroup extends Component {
                 <ul>
                   {this.props.childrenLinks &&
                     this.props.childrenLinks.map((child, ind) =>
-                      <LinksGroup
+                      (<LinksGroup
                         onActiveSidebarItemChange={this.props.onActiveSidebarItemChange}
                         activeItem={this.props.activeItem}
                         header={child.header}
@@ -130,7 +130,7 @@ class LinksGroup extends Component {
                         childrenLinks={child.childrenLinks}
                         deep={this.props.deep + 1}
                         key={ind} // eslint-disable-line
-                      />,
+                      />),
                     )}
                 </ul>
               </Collapse>

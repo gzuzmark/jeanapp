@@ -3,9 +3,8 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
 
 import ReactTable from 'react-table';
-import PropTypes from 'prop-types';
 
-import { reactTableData, reactBootstrapTableData } from './data';
+import { reactTableData } from './data';
 import Widget from '../../../components/Widget/Widget';
 import s from './table-visit-component.scss';
 import FormWizardVisitComponent from '../form-visit-component/form-visit-component';
@@ -27,7 +26,7 @@ class TableVisitsComponent extends React.Component {
   }
 
   render() {
-    const { reactTable, addVisit, openedVisit, openAddVisit } = this.state;
+    const { addVisit } = this.state;
     return (
       <div>
         <Breadcrumb>
@@ -37,6 +36,7 @@ class TableVisitsComponent extends React.Component {
         <h2 className="page-title">
           Visitas en <span className="fw-semi-bold">agenda</span>
         </h2>
+        {/* eslint-disable */}
         {!addVisit ? (
           <Widget
             title={
@@ -89,6 +89,7 @@ class TableVisitsComponent extends React.Component {
         ) : (
           <FormWizardVisitComponent />
         )}
+        {/* eslint-disable */}
       </div>
     );
   }

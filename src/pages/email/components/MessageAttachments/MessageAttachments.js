@@ -13,7 +13,7 @@ const MessageAttachments = ({ attachments }) => (
       <a href="#">View all attachments</a>
     </div>
     {attachments.map(att =>
-      <div className={s.attachment} key={att.id}>
+      (<div className={s.attachment} key={att.id}>
         <img src={att.photo} alt="attachment" />
         <h5>{att.photoName}</h5>
         <div className={s.attachmentButtons}>
@@ -21,7 +21,7 @@ const MessageAttachments = ({ attachments }) => (
           <a href="#">View</a>
           <a href="#">Download</a>
         </div>
-      </div>,
+      </div>),
     )}
   </div>
 );

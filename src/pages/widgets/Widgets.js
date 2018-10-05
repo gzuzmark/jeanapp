@@ -589,7 +589,7 @@ class Widgets extends React.Component {
                   <span className="input-group-btn">
                     <button type="submit" className="btn btn-default">
               Send
-            </button>
+                    </button>
                   </span>
                 </div>
               </footer>

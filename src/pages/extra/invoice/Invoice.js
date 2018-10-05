@@ -114,7 +114,7 @@ class Stats extends React.Component {
                           <td className="hidden-sm-down d-print-none">Novel by Ayn Rand, first published in 1957 in the
                           United
                           States
-                        </td>
+                          </td>
                           <td>5</td>
                           <td className="hidden-sm-down d-print-none">35</td>
                           <td>175.00</td>
@@ -124,7 +124,7 @@ class Stats extends React.Component {
                           <td>New Song by Dr. Pre</td>
                           <td className="hidden-sm-down d-print-none">Lyrics: praesent blandit augue non sapien ornare
                           imperdiet
-                        </td>
+                          </td>
                           <td>1</td>
                           <td className="hidden-sm-down d-print-none">2</td>
                           <td>2.00</td>

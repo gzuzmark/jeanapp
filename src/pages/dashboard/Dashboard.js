@@ -91,7 +91,7 @@ class Dashboard extends React.Component {
             <Widget
               className="bg-transparent"
               title={<h5> Map
-                      <span className="fw-semi-bold">&nbsp;Statistics</span></h5>} settings refresh close
+                <span className="fw-semi-bold">&nbsp;Statistics</span></h5>} settings refresh close
             >
               <p>Status: <strong>Live</strong></p>
               <p>

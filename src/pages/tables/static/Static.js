@@ -167,7 +167,7 @@ class Static extends React.Component {
                 <tbody>
                   {
                   this.state.tableStyles.map(row =>
-                    <tr key={row.id}>
+                    (<tr key={row.id}>
                       <td>{row.id}</td>
                       <td>
                         <img className="img-rounded" src={row.picture} alt="" height="50" />
@@ -206,7 +206,7 @@ class Static extends React.Component {
                           className="progress-sm mb-xs"
                         />
                       </td>
-                    </tr>,
+                    </tr>),
                   )
                 }
                 </tbody>

@@ -22,13 +22,13 @@ import avatar from '../../../images/avatar.png';
 import img8 from '../../../images/search/8.jpg';
 
 const BasicMap = withScriptjs(withGoogleMap(() =>
-  <GoogleMap
+  (<GoogleMap
     defaultZoom={8}
     defaultCenter={{ lat: 51, lng: 7 }}
     defaultOptions={{ mapTypeControl: false, fullscreenControl: false, gestureHandling: 'greedy' }}
   >
     <Marker position={{ lat: 51, lng: 7 }} draggable />
-  </GoogleMap>,
+  </GoogleMap>),
 ));
 
 class Timeline extends React.Component {

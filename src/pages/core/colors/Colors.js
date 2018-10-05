@@ -69,12 +69,12 @@ const Colors = () => (
             </thead>
             <tbody>
               {tableData.map(({ state, usage, id }) =>
-                <tr key={id}>
+                (<tr key={id}>
                   <th scope="row" className="fw-thin">{state}</th>
                   <td><span className={`circle bg-${state.toLowerCase()}`}>&nbsp;</span></td>
                   <td><code>*-{state.toLowerCase()}</code></td>
                   <td>{usage.map(item => <code key={item} className="mr-xs">{item}</code>)}</td>
-                </tr>,
+                </tr>),
               )}
             </tbody>
           </Table>

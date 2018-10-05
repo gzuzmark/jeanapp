@@ -23,7 +23,7 @@ class Bag extends Component {
       <div className={s.bag} >
         <button className={cx('btn', s.add)}>
           add to bag
-      <img src={bag} alt="bag" />
+          <img src={bag} alt="bag" />
         </button>
         <button className={cx('btn', s.star)} onClick={() => this.changeFavourite()}>
           <img src={favourite ? starFilled : star} alt="star" />

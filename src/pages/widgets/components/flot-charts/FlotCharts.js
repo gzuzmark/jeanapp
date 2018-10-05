@@ -98,7 +98,7 @@ class FlotCharts extends React.Component {
               <span className="fw-semi-bold text-gray-dark">Jess:</span> Seems like statically it&apos;s getting impossible
                 to achieve any sort of
                 results in nearest future. The only thing we can hope for is pressing one of these two buttons:
-              </p>
+            </p>
             <div className="btn-toolbar">
               <Button color="success" size="xs">Accept</Button>
               <Button color="default" size="xs">Reject</Button>
@@ -137,7 +137,7 @@ class FlotCharts extends React.Component {
                 <div className="clearfix m-t-1">
                   <h6 className="pull-left text-muted mb-xs">
                       Income
-                    </h6>
+                  </h6>
                   <p className="pull-right h6 mb-xs">
                     <span className="fw-semi-bold">$14,595</span>
                   </p>
@@ -145,7 +145,7 @@ class FlotCharts extends React.Component {
                 <div className="clearfix">
                   <h6 className="pull-left no-margin text-muted">
                       Recent
-                    </h6>
+                  </h6>
                   <p className="pull-right">
                     <span className="fw-semi-bold">$7,647</span>
                   </p>

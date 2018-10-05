@@ -31,7 +31,7 @@ class Validation extends React.Component {
           <Col lg={8} xs={12}>
             <Widget
               title={<h5> Dead simple validation
-              <small> No JS needed to tune-up</small>
+                <small> No JS needed to tune-up</small>
               </h5>} close collapse
             >
               <Formsy.Form>

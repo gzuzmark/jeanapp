@@ -10,12 +10,12 @@ import Widget from '../../../components/Widget';
 
 import s from './ListGroups.scss';
 
-const SortableItem = SortableElement(({ value }) => <li className="list-group-item">
+const SortableItem = SortableElement(({ value }) => (<li className="list-group-item">
   <i className="fa fa-sort" />
   <a className="close flex-last ml-auto" data-dismiss="alert">&times;</a>
   &nbsp;&nbsp;&nbsp; {value.id} &nbsp;&nbsp;&nbsp;
   {value.text}
-</li>);
+</li>));
 
 
 const SortableList = SortableContainer(({ items }) => (
