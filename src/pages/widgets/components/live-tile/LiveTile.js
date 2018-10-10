@@ -29,15 +29,11 @@ class LiveTile extends React.Component {
 
   componentDidMount() {
     const el = $(`#${this.state.id}`);
-    el.css('height', el.data('height'))
-      .liveTile();
+    el.css('height', el.data('height')).liveTile();
   }
 
   render() {
-    const {
-      children,
-      ...attr
-    } = this.props;
+    const { children, ...attr } = this.props;
     return (
       <div {...attr} id={this.state.id} className="live-tile">
         {children}

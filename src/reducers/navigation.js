@@ -1,4 +1,9 @@
-import { TOGGLE_SIDEBAR, OPEN_SIDEBAR, CLOSE_SIDEBAR, CHANGE_ACTIVE_SIDEBAR_ITEM } from '../actions/navigation';
+import {
+  TOGGLE_SIDEBAR,
+  OPEN_SIDEBAR,
+  CLOSE_SIDEBAR,
+  CHANGE_ACTIVE_SIDEBAR_ITEM,
+} from '../actions/navigation';
 
 const initialState = {
   sidebarOpened: false,

@@ -1,10 +1,6 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import {
-  ListGroup,
-  ListGroupItem,
-  Button,
-} from 'reactstrap';
+import { ListGroup, ListGroupItem, Button } from 'reactstrap';
 
 import s from './ListGroup.scss';
 
@@ -24,9 +20,7 @@ class NotificationsDemo extends React.Component {
             {/* eslint-disable */}
             &nbsp;<a href="#">Monica Smith</a>'s account.
             {/* eslint-enable */}
-            <time className="help-block m-0">
-              2 mins ago
-            </time>
+            <time className="help-block m-0">2 mins ago</time>
           </p>
         </ListGroupItem>
         <ListGroupItem className={s.listGroupItem}>
@@ -35,9 +29,7 @@ class NotificationsDemo extends React.Component {
           </span>
           <p className="text-ellipsis m-0">
             2.1.0-pre-alpha just released.
-            <time className="help-block m-0">
-              5h ago
-            </time>
+            <time className="help-block m-0">5h ago</time>
           </p>
         </ListGroupItem>
         <ListGroupItem className={s.listGroupItem}>
@@ -46,9 +38,7 @@ class NotificationsDemo extends React.Component {
           </span>
           <p className="text-ellipsis m-0 overflow-hidden">
             Server load limited.
-            <time className="help-block m-0">
-              7h ago
-            </time>
+            <time className="help-block m-0">7h ago</time>
           </p>
         </ListGroupItem>
         <ListGroupItem className={s.listGroupItem}>
@@ -60,11 +50,13 @@ class NotificationsDemo extends React.Component {
             User <a href="#">Jeff</a> registered
             {/* eslint-enable */}
             &nbsp;&nbsp;
-            <Button size="xs" color="success" className="mr-1">Allow</Button>
-            <Button size="xs" color="danger">Deny</Button>
-            <time className="help-block m-0">
-              12:18 AM
-            </time>
+            <Button size="xs" color="success" className="mr-1">
+              Allow
+            </Button>
+            <Button size="xs" color="danger">
+              Deny
+            </Button>
+            <time className="help-block m-0">12:18 AM</time>
           </p>
         </ListGroupItem>
         <ListGroupItem className={s.listGroupItem}>
@@ -76,9 +68,7 @@ class NotificationsDemo extends React.Component {
             Instructions for changing your Envato Account password. Please
             check your account <a href="#">security page</a>.
             {/* eslint-enable */}
-            <time className="help-block m-0">
-              12:18 AM
-            </time>
+            <time className="help-block m-0">12:18 AM</time>
           </p>
         </ListGroupItem>
         <ListGroupItem className={s.listGroupItem}>
@@ -89,9 +79,7 @@ class NotificationsDemo extends React.Component {
           </span>
           <p className="text-ellipsis m-0">
             New <strong>76</strong> facebook likes received.
-            <time className="help-block m-0">
-              15 Apr 2014
-            </time>
+            <time className="help-block m-0">15 Apr 2014</time>
           </p>
         </ListGroupItem>
         <ListGroupItem className={s.listGroupItem}>
@@ -102,9 +90,7 @@ class NotificationsDemo extends React.Component {
           </span>
           <p className="text-ellipsis m-0">
             Dark matter detected.
-            <time className="help-block m-0">
-              15 Apr 2014
-            </time>
+            <time className="help-block m-0">15 Apr 2014</time>
           </p>
         </ListGroupItem>
       </ListGroup>

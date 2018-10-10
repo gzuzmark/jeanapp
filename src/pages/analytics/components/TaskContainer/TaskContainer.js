@@ -14,7 +14,7 @@ export default class TasksContainer extends Component {
         date: PropTypes.string,
       }),
     ).isRequired,
-  }
+  };
 
   componentWillMount() {
     const tasks = this.props.data;
@@ -33,7 +33,7 @@ export default class TasksContainer extends Component {
     newTasks[index].complited = !this.state.tasks[index].complited;
 
     this.setState({ tasks: newTasks });
-  }
+  };
 
   render() {
     const { tasks } = this.state;
@@ -44,14 +44,32 @@ export default class TasksContainer extends Component {
         bodyClass="task-container mt"
         title={
           <div>
-            <h4>Today&apos;s Tasks <span className="badge badge-pill badge-success fw-normal pull-right mt-xs">{tasks.length}</span></h4>
-            <p className="text-primary mb-0"><small>{totalComplited} of {tasks.length} complited</small></p>
+            <h4>
+              Today&apos;s Tasks{' '}
+              <span className="badge badge-pill badge-success fw-normal pull-right mt-xs">
+                {tasks.length}
+              </span>
+            </h4>
+            <p className="text-primary mb-0">
+              <small>
+                {totalComplited} of {tasks.length} complited
+              </small>
+            </p>
           </div>
         }
       >
-        {tasks.map((item, index) =>
-          <Task key={item.id} index={index} toggle={this.toggleTaskState} {...item} />)}
-        <Button color="transparent" className="bg-white w-100 text-center text-muted">
+        {tasks.map((item, index) => (
+          <Task
+            key={item.id}
+            index={index}
+            toggle={this.toggleTaskState}
+            {...item}
+          />
+        ))}
+        <Button
+          color="transparent"
+          className="bg-white w-100 text-center text-muted"
+        >
           See All <i className="la la-arrow-down" />
         </Button>
       </Widget>

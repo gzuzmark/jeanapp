@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { Col, Row, Alert, Progress, Button, ButtonGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import {
+  Col,
+  Row,
+  Alert,
+  Progress,
+  Button,
+  ButtonGroup,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+} from 'reactstrap';
 import $ from 'jquery';
 /* eslint-disable */
 import 'imports-loader?jQuery=jquery,this=>window!jquery-sparkline';
@@ -7,7 +17,7 @@ import 'imports-loader?jQuery=jquery,this=>window!jquery-sparkline';
 import Widget from '../../../components/Widget';
 
 class Sparkline extends Component {
-  state = { isAlertVisible: true }
+  state = { isAlertVisible: true };
 
   componentDidMount() {
     this.initCharts();
@@ -27,11 +37,11 @@ class Sparkline extends Component {
     this.initSparkline5();
     this.initSparkline6();
     this.initSparkline7();
-  }
+  };
 
   toggleAlert = () => {
     this.setState(prevState => ({ isAlertVisible: !prevState.isAlertVisible }));
-  }
+  };
 
   generateRandomArr(length, min, max, isFloat) { // eslint-disable-line
     const result = [];
@@ -43,7 +53,8 @@ class Sparkline extends Component {
     max = max === 0 ? 0 : (max || maxDefault); // eslint-disable-line
 
     for (let i = 0; i < length; i += 1) {
-      rand = Math.random() * (Math.abs(result[i - 1] / 10) || 1) * [min, max][i % 2];
+      rand =
+        Math.random() * (Math.abs(result[i - 1] / 10) || 1) * [min, max][i % 2];
       rand = rand < min ? min : rand;
       result.push(isFloat ? rand : Math.round(rand));
     }
@@ -77,26 +88,28 @@ class Sparkline extends Component {
   }
 
   initSparkline3() {
-    this.$sparkline3.sparkline(this.generateRandomArr(5), {
-      width: '100%',
-      fillColor: '#ffebb2',
-      height: '100px',
-      lineColor: 'transparent',
-      spotColor: '#c0d0f0',
-      minSpotColor: null,
-      maxSpotColor: null,
-      highlightSpotColor: '#ddd',
-      highlightLineColor: '#ddd',
-    }).sparkline(this.generateRandomArr(7), {
-      composite: true,
-      lineColor: 'transparent',
-      spotColor: '#c0d0f0',
-      fillColor: '#ace5d1',
-      minSpotColor: null,
-      maxSpotColor: null,
-      highlightSpotColor: '#ddd',
-      highlightLineColor: '#ddd',
-    });
+    this.$sparkline3
+      .sparkline(this.generateRandomArr(5), {
+        width: '100%',
+        fillColor: '#ffebb2',
+        height: '100px',
+        lineColor: 'transparent',
+        spotColor: '#c0d0f0',
+        minSpotColor: null,
+        maxSpotColor: null,
+        highlightSpotColor: '#ddd',
+        highlightLineColor: '#ddd',
+      })
+      .sparkline(this.generateRandomArr(7), {
+        composite: true,
+        lineColor: 'transparent',
+        spotColor: '#c0d0f0',
+        fillColor: '#ace5d1',
+        minSpotColor: null,
+        maxSpotColor: null,
+        highlightSpotColor: '#ddd',
+        highlightLineColor: '#ddd',
+      });
   }
 
   initSparkline4() {
@@ -162,11 +175,24 @@ class Sparkline extends Component {
         <Row>
           <Col xs={12} lg={6} xl={5}>
             <Widget
-              title={<h5>Sparkline <span className="fw-semi-bold">Bar Chart</span></h5>}
-              close collapse
+              title={
+                <h5>
+                  Sparkline <span className="fw-semi-bold">Bar Chart</span>
+                </h5>
+              }
+              close
+              collapse
             >
-              <p className="fs-mini text-muted">Each example displayed below takes just 1 line of HTML or javascript to generate.</p>
-              <div className="chart-overflow-bottom" ref={(r) => { this.$sparkline1 = $(r); }} />
+              <p className="fs-mini text-muted">
+                Each example displayed below takes just 1 line of HTML or
+                javascript to generate.
+              </p>
+              <div
+                className="chart-overflow-bottom"
+                ref={(r) => {
+                  this.$sparkline1 = $(r);
+                }}
+              />
               <div className="stats-row text-muted mt-xlg">
                 <div className="stat-item">
                   <h6 className="name">ARR ($)</h6>
@@ -188,34 +214,70 @@ class Sparkline extends Component {
               <hr />
               <div className="d-flex justify-content-between">
                 <small>
-                  <span className="badge badge-warning">Profit</span> Legend Item Emulation
+                  <span className="badge badge-warning">Profit</span> Legend
+                  Item Emulation
                 </small>
                 <small>
-                  <span className="badge badge-danger">Loss</span> Legend Item Emulation
+                  <span className="badge badge-danger">Loss</span> Legend Item
+                  Emulation
                 </small>
               </div>
             </Widget>
           </Col>
           <Col xs={12} lg={6} xl={4}>
             <Widget
-              title={<h5>Sparkline <span className="fw-semi-bold">Pie Chart</span></h5>}
-              close collapse
+              title={
+                <h5>
+                  Sparkline <span className="fw-semi-bold">Pie Chart</span>
+                </h5>
+              }
+              close
+              collapse
             >
-              <p className="fs-mini text-muted">Each example displayed below takes just 1 line of HTML or javascript to generate.</p>
-              <div className="text-center" ref={(r) => { this.$sparkline2 = $(r); }} />
-              <Alert className="text-muted" color="white" isOpen={this.state.isAlertVisible} toggle={this.toggleAlert}>
+              <p className="fs-mini text-muted">
+                Each example displayed below takes just 1 line of HTML or
+                javascript to generate.
+              </p>
+              <div
+                className="text-center"
+                ref={(r) => {
+                  this.$sparkline2 = $(r);
+                }}
+              />
+              <Alert
+                className="text-muted"
+                color="white"
+                isOpen={this.state.isAlertVisible}
+                toggle={this.toggleAlert}
+              >
                 <h5>Sales Report</h5>
-                <Progress className="progress-xs" color="secondary" value="16" />
-                <p className="text-muted"><small>Prev year quota achievement 16%. Should work harder!</small></p>
+                <Progress
+                  className="progress-xs"
+                  color="secondary"
+                  value="16"
+                />
+                <p className="text-muted">
+                  <small>
+                    Prev year quota achievement 16%. Should work harder!
+                  </small>
+                </p>
               </Alert>
             </Widget>
           </Col>
           <Col xs={12} lg={6} xl={3}>
             <Widget
-              title={<h5>Area <span className="fw-semi-bold">Sparkline</span></h5>}
-              close collapse
+              title={
+                <h5>
+                  Area <span className="fw-semi-bold">Sparkline</span>
+                </h5>
+              }
+              close
+              collapse
             >
-              <p className="fs-mini text-muted">Each example displayed below takes just 1 line of HTML or javascript to generate.</p>
+              <p className="fs-mini text-muted">
+                Each example displayed below takes just 1 line of HTML or
+                javascript to generate.
+              </p>
               <div className="stats-row text-muted mt">
                 <div className="stat-item">
                   <h6 className="name">Overall Growth</h6>
@@ -229,27 +291,58 @@ class Sparkline extends Component {
               <p className="text-muted fs-mini">
                 <span className="fw-semi-bold">17% higher</span> than last month
               </p>
-              <div className="chart-overflow-bottom" ref={(r) => { this.$sparkline3 = $(r); }} />
+              <div
+                className="chart-overflow-bottom"
+                ref={(r) => {
+                  this.$sparkline3 = $(r);
+                }}
+              />
             </Widget>
           </Col>
         </Row>
         <Row>
           <Col xs={12} lg={7} xl={9}>
             <Widget
-              title={<h5>Sparkline <span className="fw-semi-bold">Line Chart</span></h5>}
-              close collapse
+              title={
+                <h5>
+                  Sparkline <span className="fw-semi-bold">Line Chart</span>
+                </h5>
+              }
+              close
+              collapse
             >
-              <p className="fs-mini text-muted">Each example displayed below takes just 1 line of HTML or javascript to generate.</p>
-              <div className="chart-overflow-bottom" ref={(r) => { this.$sparkline4 = $(r); }} />
+              <p className="fs-mini text-muted">
+                Each example displayed below takes just 1 line of HTML or
+                javascript to generate.
+              </p>
+              <div
+                className="chart-overflow-bottom"
+                ref={(r) => {
+                  this.$sparkline4 = $(r);
+                }}
+              />
             </Widget>
           </Col>
           <Col xs={12} lg={5} xl={3}>
             <Widget
-              title={<h5>Sparkline <span className="fw-semi-bold">Pie Chart</span></h5>}
-              close collapse
+              title={
+                <h5>
+                  Sparkline <span className="fw-semi-bold">Pie Chart</span>
+                </h5>
+              }
+              close
+              collapse
             >
-              <p className="fs-mini text-muted">Each example displayed below takes just 1 line of HTML or javascript to generate.</p>
-              <div className="text-center" ref={(r) => { this.$sparkline5 = $(r); }} />
+              <p className="fs-mini text-muted">
+                Each example displayed below takes just 1 line of HTML or
+                javascript to generate.
+              </p>
+              <div
+                className="text-center"
+                ref={(r) => {
+                  this.$sparkline5 = $(r);
+                }}
+              />
               <p className="mt">Possible actions:</p>
               <ButtonGroup>
                 <Button color="light">Yoga</Button>
@@ -260,24 +353,56 @@ class Sparkline extends Component {
           </Col>
           <Col xs={12} lg={6}>
             <Widget
-              title={<h5>Sparkline <span className="fw-semi-bold">Pie Chart</span></h5>}
-              close collapse
+              title={
+                <h5>
+                  Sparkline <span className="fw-semi-bold">Pie Chart</span>
+                </h5>
+              }
+              close
+              collapse
             >
               <InputGroup>
-                <Input type="text" size={16} placeholder="Filter By Period: MM/DD/YYY" />
-                <InputGroupAddon><i className="fa fa-search text-gray" /></InputGroupAddon>
+                <Input
+                  type="text"
+                  size={16}
+                  placeholder="Filter By Period: MM/DD/YYY"
+                />
+                <InputGroupAddon>
+                  <i className="fa fa-search text-gray" />
+                </InputGroupAddon>
               </InputGroup>
-              <p className="fs-mini text-muted mt">Each example displayed below takes just 1 line of HTML or javascript to generate.</p>
-              <div className="chart-overflow-bottom" ref={(r) => { this.$sparkline6 = $(r); }} />
+              <p className="fs-mini text-muted mt">
+                Each example displayed below takes just 1 line of HTML or
+                javascript to generate.
+              </p>
+              <div
+                className="chart-overflow-bottom"
+                ref={(r) => {
+                  this.$sparkline6 = $(r);
+                }}
+              />
             </Widget>
           </Col>
           <Col xs={12} lg={6}>
             <Widget
-              title={<h5>Sparkline <span className="fw-semi-bold">Line Chart</span></h5>}
-              close collapse
+              title={
+                <h5>
+                  Sparkline <span className="fw-semi-bold">Line Chart</span>
+                </h5>
+              }
+              close
+              collapse
             >
-              <p className="fs-mini text-muted">Each example displayed below takes just 1 line of HTML or javascript to generate.</p>
-              <div className="chart-overflow-bottom" ref={(r) => { this.$sparkline7 = $(r); }} />
+              <p className="fs-mini text-muted">
+                Each example displayed below takes just 1 line of HTML or
+                javascript to generate.
+              </p>
+              <div
+                className="chart-overflow-bottom"
+                ref={(r) => {
+                  this.$sparkline7 = $(r);
+                }}
+              />
             </Widget>
           </Col>
         </Row>

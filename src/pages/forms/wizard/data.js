@@ -245,7 +245,6 @@ export const select2CountriesData = [
   { text: 'Zimbabwe', id: 'ZW' },
 ];
 
-
 export const select2ShipmentData = [
   { id: 'Australia Post', text: 'Australia Post' },
   { id: 'DHL US', text: 'DHL US' },

@@ -15,10 +15,20 @@ import s from './Banner.scss';
 
 const Banner = ({ image }) => (
   <div className={s.productDetailsBanner}>
-    <div className={s.productPhoto} style={{ backgroundImage: `url(${image})` }} />
+    <div
+      className={s.productPhoto}
+      style={{ backgroundImage: `url(${image})` }}
+    />
     <div className={s.productInfo}>
-      <General rating={4.8} title="Trainers" subtitle="trainers in white" price={76} />
-      <a href="#" className={s.productGuide}>Size Guide</a>
+      <General
+        rating={4.8}
+        title="Trainers"
+        subtitle="trainers in white"
+        price={76}
+      />
+      <a href="#" className={s.productGuide}>
+        Size Guide
+      </a>
       <Selects sizes={[1, 2, 3, 4, 5]} quantity={[1, 2, 3, 4, 5, 6, 7]} />
       <Bag />
       <div className={s.payments}>
@@ -29,7 +39,7 @@ const Banner = ({ image }) => (
       </div>
       <span className={s.delivery}>FREE Delivery & Returns</span>
     </div>
-  </div >
+  </div>
 );
 
 Banner.propTypes = {

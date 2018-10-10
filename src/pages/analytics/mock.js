@@ -71,7 +71,8 @@ export default {
       id: 0,
       icon: 'thumbs-up',
       color: 'primary',
-      content: 'Ken <span className="fw-semi-bold">accepts</span> your invitation',
+      content:
+        'Ken <span className="fw-semi-bold">accepts</span> your invitation',
     },
     {
       id: 1,
@@ -101,7 +102,8 @@ export default {
       id: 5,
       icon: 'bell',
       color: 'info',
-      content: '15 <span className="fw-semi-bold">Notifications</span> from Social Apps',
+      content:
+        '15 <span className="fw-semi-bold">Notifications</span> from Social Apps',
     },
   ],
   table: [
@@ -149,7 +151,7 @@ export default {
       id: 4,
       name: 'Peter Horadnia',
       email: 'horadnia@wxample.com',
-      product: 'Let\'s Dance',
+      product: "Let's Dance",
       price: '$43 594.7',
       date: '1 Mar 2018',
       city: 'Hanoverton',

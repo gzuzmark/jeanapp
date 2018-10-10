@@ -12,8 +12,8 @@ const MessageAttachments = ({ attachments }) => (
       <a href="#">Download all attachments</a>
       <a href="#">View all attachments</a>
     </div>
-    {attachments.map(att =>
-      (<div className={s.attachment} key={att.id}>
+    {attachments.map(att => (
+      <div className={s.attachment} key={att.id}>
         <img src={att.photo} alt="attachment" />
         <h5>{att.photoName}</h5>
         <div className={s.attachmentButtons}>
@@ -21,17 +21,19 @@ const MessageAttachments = ({ attachments }) => (
           <a href="#">View</a>
           <a href="#">Download</a>
         </div>
-      </div>),
-    )}
+      </div>
+    ))}
   </div>
 );
 
 MessageAttachments.propTypes = {
-  attachments: PropTypes.arrayOf(PropTypes.shape({
-    photo: PropTypes.string,
-    photoName: PropTypes.string,
-    weight: PropTypes.string,
-  })).isRequired,
+  attachments: PropTypes.arrayOf(
+    PropTypes.shape({
+      photo: PropTypes.string,
+      photoName: PropTypes.string,
+      weight: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 export default withStyles(s)(MessageAttachments);

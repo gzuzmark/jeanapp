@@ -35,7 +35,9 @@ class Login extends React.Component {
   }
 
   doLogin(e) {
-    this.props.dispatch(loginUser({ login: this.state.login, password: this.state.password }));
+    this.props.dispatch(
+      loginUser({ login: this.state.login, password: this.state.password }),
+    );
     e.preventDefault();
   }
 
@@ -44,9 +46,7 @@ class Login extends React.Component {
 
     // cant access login page while logged in
     if (this.props.isAuthenticated) { // eslint-disable-line
-      return (
-        <Redirect to={from} />
-      );
+      return <Redirect to={from} />;
     }
 
     return (
@@ -57,8 +57,10 @@ class Login extends React.Component {
             Login
             <i className="fa fa-circle text-warning" />
           </h5>
-          <Widget className={`${s.widget} mx-auto`} title={<h3 className="mt-0">Login Jean App</h3>}>
-
+          <Widget
+            className={`${s.widget} mx-auto`}
+            title={<h3 className="mt-0">Login Jean App</h3>}
+          >
             {/* eslint-disable */}
             <p className={s.widgetLoginInfo}>
               Don't have an account? Sign up now!

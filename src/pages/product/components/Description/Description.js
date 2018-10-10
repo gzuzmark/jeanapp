@@ -25,18 +25,23 @@ class Description extends Component {
     return (
       <div>
         <div className={s.productDescription}>
-          {description.map(item => (<div className={cx(item.extraClass, s.productDescriptionBlock)} key={item.id}>
-            <h3>{item.title}</h3>
-            {/* eslint-disable */}
+          {description.map(item => (
+            <div
+              className={cx(item.extraClass, s.productDescriptionBlock)}
+              key={item.id}
+            >
+              <h3>{item.title}</h3>
+              {/* eslint-disable */}
             <div dangerouslySetInnerHTML={{ __html: item.body }} />
             {/* eslint-enable */}
-          </div>))}
+            </div>
+          ))}
         </div>
         <Row className={cx(s.productDescription, s.productDescriptionMobile)}>
           <Col xs="12">
             {description.map((element, index) => (
               <div className="card panel" key={`accord-${index.toString()}`}>
-                { /* eslint-disable */}
+                {/* eslint-disable */}
                 <div
                   className={cx("card-header panel-header", { 'panel-first': index === 0 })} role="button"
                   onClick={() => { this.toggleAccordion(index); }}
@@ -45,16 +50,24 @@ class Description extends Component {
                   <div className="mb-0">
                     <a className="accordion-toggle" role="button">
                       {element.title}
-                      <i className={`fa fa-angle-down fa-2x ${this.state.accordion[index] ? 'expanded' : ''}`} />
+                      <i
+                        className={`fa fa-angle-down fa-2x ${
+                          this.state.accordion[index] ? 'expanded' : ''
+                        }`}
+                      />
                     </a>
                   </div>
                 </div>
-                <Collapse className="panel-body" isOpen={this.state.accordion[index]}>
+                <Collapse
+                  className="panel-body"
+                  isOpen={this.state.accordion[index]}
+                >
                   {/* eslint-disable */}
                   <div className="card-body" dangerouslySetInnerHTML={{ __html: element.body }} />
                   {/* eslint-enable */}
                 </Collapse>
-              </div>))}
+              </div>
+            ))}
           </Col>
         </Row>
       </div>

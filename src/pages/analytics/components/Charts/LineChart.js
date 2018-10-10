@@ -9,7 +9,7 @@ import 'imports-loader?jQuery=jquery,this=>window!jquery-sparkline';
 export default class LineChart extends PureComponent {
   static propTypes = {
     color: PropTypes.string.isRequired,
-  }
+  };
 
   componentDidMount() {
     this.initChart(this.getData());
@@ -43,7 +43,11 @@ export default class LineChart extends PureComponent {
 
   render() {
     return (
-      <div ref={(r) => { this.$chartContainer = $(r); }} />
+      <div
+        ref={(r) => {
+          this.$chartContainer = $(r);
+        }}
+      />
     );
   }
 }

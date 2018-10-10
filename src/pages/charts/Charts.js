@@ -16,9 +16,7 @@ import d3 from 'd3';
 import nv from 'nvd3';
 import Rickshaw from 'rickshaw';
 
-import {
-  Row, Col, Progress,
-} from 'reactstrap';
+import { Row, Col, Progress } from 'reactstrap';
 
 import FlotBars from './flot/charts/BarsChart';
 import Widget from '../../components/Widget';
@@ -28,41 +26,25 @@ import s from './Charts.scss';
 const FlotChartData = [
   {
     label: 'Traffic',
-    data: [[1, 23],
-      [2, 13],
-      [3, 33],
-      [4, 16],
-      [5, 32],
-      [6, 28],
-      [7, 31]],
+    data: [[1, 23], [2, 13], [3, 33], [4, 16], [5, 32], [6, 28], [7, 31]],
     lines: {
       fill: 0.3,
       lineWidth: 0,
     },
     color: ['#fff8e3'],
-  }, {
+  },
+  {
     label: 'Traffic',
-    data: [[1, 13],
-      [2, 8],
-      [3, 17],
-      [4, 10],
-      [5, 17],
-      [6, 15],
-      [7, 16]],
+    data: [[1, 13], [2, 8], [3, 17], [4, 10], [5, 17], [6, 15], [7, 16]],
     lines: {
       fill: 0.6,
       lineWidth: 0,
     },
     color: ['#ffebb2'],
-  }, {
+  },
+  {
     label: 'Traffic',
-    data: [[1, 20],
-      [2, 20],
-      [3, 40],
-      [4, 30],
-      [5, 40],
-      [6, 35],
-      [7, 47]],
+    data: [[1, 20], [2, 20], [3, 40], [4, 30], [5, 40], [6, 35], [7, 47]],
     animator: { steps: 60, duration: 1000, start: 0 },
     lines: { lineWidth: 2 },
     shadowSize: 0,
@@ -167,26 +149,28 @@ class Charts extends React.Component {
   }
 
   initSparklineAreaChart() { // eslint-disable-line
-    this.$sparklineAreaChart.sparkline([2, 4, 6, 2, 7, 5, 3, 7, 8, 3, 6], {
-      width: '100%',
-      fillColor: '#e2e1ff',
-      height: '100px',
-      lineColor: 'transparent',
-      spotColor: '#b7b3ff',
-      minSpotColor: null,
-      maxSpotColor: null,
-      highlightSpotColor: '#ffebb2',
-      highlightLineColor: '#ffebb2',
-    }).sparkline([5, 3, 7, 8, 3, 6, 2, 4, 6, 2, 7], {
-      composite: true,
-      lineColor: 'transparent',
-      spotColor: '#b7b3ff',
-      fillColor: '#b7b3ff',
-      minSpotColor: null,
-      maxSpotColor: null,
-      highlightSpotColor: '#b7b3ff',
-      highlightLineColor: '#b7b3ff',
-    });
+    this.$sparklineAreaChart
+      .sparkline([2, 4, 6, 2, 7, 5, 3, 7, 8, 3, 6], {
+        width: '100%',
+        fillColor: '#e2e1ff',
+        height: '100px',
+        lineColor: 'transparent',
+        spotColor: '#b7b3ff',
+        minSpotColor: null,
+        maxSpotColor: null,
+        highlightSpotColor: '#ffebb2',
+        highlightLineColor: '#ffebb2',
+      })
+      .sparkline([5, 3, 7, 8, 3, 6, 2, 4, 6, 2, 7], {
+        composite: true,
+        lineColor: 'transparent',
+        spotColor: '#b7b3ff',
+        fillColor: '#b7b3ff',
+        minSpotColor: null,
+        maxSpotColor: null,
+        highlightSpotColor: '#b7b3ff',
+        highlightLineColor: '#b7b3ff',
+      });
   }
 
   initSparklineLine() {
@@ -212,10 +196,10 @@ class Charts extends React.Component {
 
       const bump = (a) => {
         const x = 1 / (0.1 + Math.random());
-        const y = (2 * Math.random()) - 0.5;
+        const y = 2 * Math.random() - 0.5;
         const z = 10 / (0.1 + Math.random());
         for (let i = 0; i < m; i += 1) {
-          const w = ((i / m) - y) * z;
+          const w = (i / m - y) * z;
           a[i] += x * Math.exp(-w * w);
         }
       };
@@ -224,7 +208,7 @@ class Charts extends React.Component {
         const a = [];
         let i;
         for (i = 0; i < m; i += 1) {
-          a[i] = o + (o * Math.random());
+          a[i] = o + o * Math.random();
         }
         for (i = 0; i < 5; i += 1) {
           bump(a);
@@ -241,19 +225,22 @@ class Charts extends React.Component {
       const daysAgoDate = now - daysAgo;
       const pointsCount = pointCount || 45; // less for better performance
       const daysPerPoint = daysAgoCount / pointsCount;
-      return streamLayers(streamNames.length, pointsCount, 0.1).map((data, i) => ({
-        key: streamNames[i],
-        values: data.map(d => ({
-          x: daysAgoDate + (d.x * day * daysPerPoint),
-          y: Math.floor(d.y * 100), // just a coefficient,
-        })),
-        yAxis: i + 1,
-        type: 'line',
-      }));
+      return streamLayers(streamNames.length, pointsCount, 0.1).map(
+        (data, i) => ({
+          key: streamNames[i],
+          values: data.map(d => ({
+            x: daysAgoDate + d.x * day * daysPerPoint,
+            y: Math.floor(d.y * 100), // just a coefficient,
+          })),
+          yAxis: i + 1,
+          type: 'line',
+        }),
+      );
     };
 
     nv.addGraph(() => {
-      const chart = nv.models.lineChart()
+      const chart = nv.models
+        .lineChart()
         .useInteractiveGuideline(true)
         .margin({ left: 28, bottom: 30, right: 0 })
         .color(['#ffd7de', '#e2e1ff'])
@@ -261,32 +248,31 @@ class Charts extends React.Component {
       chart.xAxis
         .showMaxMin(false)
         .tickFormat(d => d3.time.format('%b %d')(new Date(d)));
-      chart.yAxis
-        .showMaxMin(false)
-        .tickFormat(d3.format(',f'));
+      chart.yAxis.showMaxMin(false).tickFormat(d3.format(',f'));
 
       const chartData = testData(['Search', 'Referral'], 50);
       d3.select(this.nvd3ChartLineSvg)
         .style('height', '300px')
-        .datum(chartData.map((el) => {
-          el.area = true;
-          return el;
-        }))
+        .datum(
+          chartData.map((el) => {
+            el.area = true;
+            return el;
+          }),
+        )
         .call(chart);
 
       return chart;
     });
 
     nv.addGraph(() => {
-      const bar = nv.models.multiBarChart()
+      const bar = nv.models
+        .multiBarChart()
         .margin({ left: 28, bottom: 30, right: 0 })
         .color(['#8fe5d4', '#ffd7de']);
       bar.xAxis
         .showMaxMin(false)
         .tickFormat(d => d3.time.format('%b %d')(new Date(d)));
-      bar.yAxis
-        .showMaxMin(false)
-        .tickFormat(d3.format(',f'));
+      bar.yAxis.showMaxMin(false).tickFormat(d3.format(',f'));
       const barData = testData(['Uploads', 'Downloads'], 10).map((el) => {
         el.area = true;
         return el;
@@ -294,10 +280,12 @@ class Charts extends React.Component {
 
       d3.select(this.nvd3ChartBarSvg)
         .style('height', '300px')
-        .datum(barData.map((el) => {
-          el.area = true;
-          return el;
-        }))
+        .datum(
+          barData.map((el) => {
+            el.area = true;
+            return el;
+          }),
+        )
         .call(bar);
 
       return bar;
@@ -446,7 +434,6 @@ class Charts extends React.Component {
           order: 3,
         },
       },
-
     ];
     const flotBarsOptions = {
       series: {
@@ -456,11 +443,14 @@ class Charts extends React.Component {
           lineWidth: 0,
           order: 1,
           fillColor: {
-            colors: [{
-              opacity: 1,
-            }, {
-              opacity: 0.7,
-            }],
+            colors: [
+              {
+                opacity: 1,
+              },
+              {
+                opacity: 0.7,
+              },
+            ],
           },
         },
       },
@@ -520,33 +510,51 @@ class Charts extends React.Component {
       [2, 4, 6, 2, 7, 5, 3, 7, 8, 3, 6],
       [5, 3, 7, 8, 3, 6, 2, 4, 6, 2, 7],
     ];
-    const option = [{
-      width: '99%',
-      fillColor: '#ddd',
-      height: '100px',
-      lineColor: 'transparent',
-      spotColor: '#c0d0f0',
-      minSpotColor: null,
-      maxSpotColor: null,
-      highlightSpotColor: '#ddd',
-      highlightLineColor: '#ddd',
-    }, {
-      lineColor: 'transparent',
-      spotColor: '#c0d0f0',
-      fillColor: 'rgba(192, 208, 240, 0.76)',
-      minSpotColor: null,
-      maxSpotColor: null,
-      highlightSpotColor: '#ddd',
-      highlightLineColor: '#ddd',
-    }];
+    const option = [
+      {
+        width: '99%',
+        fillColor: '#ddd',
+        height: '100px',
+        lineColor: 'transparent',
+        spotColor: '#c0d0f0',
+        minSpotColor: null,
+        maxSpotColor: null,
+        highlightSpotColor: '#ddd',
+        highlightLineColor: '#ddd',
+      },
+      {
+        lineColor: 'transparent',
+        spotColor: '#c0d0f0',
+        fillColor: 'rgba(192, 208, 240, 0.76)',
+        minSpotColor: null,
+        maxSpotColor: null,
+        highlightSpotColor: '#ddd',
+        highlightLineColor: '#ddd',
+      },
+    ];
     $(this.sparklineComposite).sparkline(data[0], option[0]);
-    $(this.sparklineComposite).sparkline(data[1], $.extend({ composite: true }, option[1]));
+    $(this.sparklineComposite).sparkline(
+      data[1],
+      $.extend({ composite: true }, option[1]),
+    );
   }
 
   initInteractiveSparklines() {
     const data = [9, 12, 14, 15, 10, 14, 20];
-    const option = { type: 'bar', barColor: '#FFC247', height: '30px', barWidth: 6, barSpacing: 2 };
-    const option2 = { type: 'bar', barColor: '#FFF8E3', height: '30px', barWidth: 6, barSpacing: 2 };
+    const option = {
+      type: 'bar',
+      barColor: '#FFC247',
+      height: '30px',
+      barWidth: 6,
+      barSpacing: 2,
+    };
+    const option2 = {
+      type: 'bar',
+      barColor: '#FFF8E3',
+      height: '30px',
+      barWidth: 6,
+      barSpacing: 2,
+    };
     $(this.InteractiveSparkline1).sparkline(data, option);
     $(this.InteractiveSparkline2).sparkline(data, option2);
   }
@@ -566,7 +574,8 @@ class Charts extends React.Component {
           color: '#ffebb2',
           data: seriesData[0],
           name: 'Uploads',
-        }, {
+        },
+        {
           color: '#fff8e3',
           data: seriesData[1],
           name: 'Downloads',
@@ -597,31 +606,59 @@ class Charts extends React.Component {
           <li className="breadcrumb-item">YOU ARE HERE</li>
           <li className="breadcrumb-item active">Charts</li>
         </ol>
-        <h1 className="page-title">Visual - <span className="fw-semi-bold">Charts</span></h1>
+        <h1 className="page-title">
+          Visual - <span className="fw-semi-bold">Charts</span>
+        </h1>
         <div>
           <Row>
             <Col lg={6} xl={5} xs={12}>
               <Widget
-                title={<h5>Flot <span className="fw-semi-bold">Charts</span></h5>}
-                close collapse
+                title={
+                  <h5>
+                    Flot <span className="fw-semi-bold">Charts</span>
+                  </h5>
+                }
+                close
+                collapse
               >
                 <div>
-                  <div className="mt mb" id="flotChart" ref={(r) => { this.flotChart = r; }} style={{ width: '100%', height: '260px' }} />
-                  <div className="chart-tooltip" id="flot-main-tooltip" style={{ opacity: 0 }} />
+                  <div
+                    className="mt mb"
+                    id="flotChart"
+                    ref={(r) => {
+                      this.flotChart = r;
+                    }}
+                    style={{ width: '100%', height: '260px' }}
+                  />
+                  <div
+                    className="chart-tooltip"
+                    id="flot-main-tooltip"
+                    style={{ opacity: 0 }}
+                  />
                   <p className="fs-mini text-muted">
-                    Flot is a <span className="fw-semi-bold">pure</span> JavaScript plotting library for jQuery, with a
-                    focus on simple usage, attractive looks and interactive features.
+                    Flot is a <span className="fw-semi-bold">pure</span>{' '}
+                    JavaScript plotting library for jQuery, with a focus on
+                    simple usage, attractive looks and interactive features.
                   </p>
-                  <h5 className="mt">Interactive <span className="fw-semi-bold">Sparklines</span></h5>
+                  <h5 className="mt">
+                    Interactive <span className="fw-semi-bold">Sparklines</span>
+                  </h5>
                   <Row className="mt">
                     <Col md={6} xs={12}>
                       <div className="stats-row">
                         <div className="stat-item">
                           <p className="value5 fw-thin">34 567</p>
-                          <h6 className="name text-muted m-0 fs-mini">Overall Values</h6>
+                          <h6 className="name text-muted m-0 fs-mini">
+                            Overall Values
+                          </h6>
                         </div>
                         <div className="stat-item stat-item-mini-chart">
-                          <div className="sparkline" ref={(r) => { this.InteractiveSparkline1 = r; }} />
+                          <div
+                            className="sparkline"
+                            ref={(r) => {
+                              this.InteractiveSparkline1 = r;
+                            }}
+                          />
                         </div>
                       </div>
                     </Col>
@@ -629,17 +666,25 @@ class Charts extends React.Component {
                       <div className="stats-row">
                         <div className="stat-item">
                           <p className="value5 fw-thin">34 567</p>
-                          <h6 className="name text-muted m-0 fs-mini">Overall Values</h6>
+                          <h6 className="name text-muted m-0 fs-mini">
+                            Overall Values
+                          </h6>
                         </div>
                         <div className="stat-item stat-item-mini-chart">
-                          <div className="sparkline" ref={(r) => { this.InteractiveSparkline2 = r; }} />
+                          <div
+                            className="sparkline"
+                            ref={(r) => {
+                              this.InteractiveSparkline2 = r;
+                            }}
+                          />
                         </div>
                       </div>
                     </Col>
                   </Row>
                   <p className="fs-mini text-muted">
-                    This jQuery plugin generates sparklines (small inline charts) directly in the browser using
-                    data supplied either inline in the HTML, or via javascript.
+                    This jQuery plugin generates sparklines (small inline
+                    charts) directly in the browser using data supplied either
+                    inline in the HTML, or via javascript.
                   </p>
                 </div>
               </Widget>
@@ -648,43 +693,82 @@ class Charts extends React.Component {
               <Row>
                 <Col xs={12} lg={7}>
                   <Widget
-                    title={<h5> Easy <span className="fw-semi-bold">Pie Charts</span></h5>}
-                    collapse close
+                    title={
+                      <h5>
+                        {' '}
+                        Easy <span className="fw-semi-bold">Pie Charts</span>
+                      </h5>
+                    }
+                    collapse
+                    close
                   >
                     <div>
-                      <div ref={(r) => { this.$easyPieChart = $(r); }} className="mb text-center" data-percent="47" />
+                      <div
+                        ref={(r) => {
+                          this.$easyPieChart = $(r);
+                        }}
+                        className="mb text-center"
+                        data-percent="47"
+                      />
                       <p className="fs-mini text-muted">
-                        Easy pie chart is a jQuery plugin that uses the canvas element to render
-                        simple pie charts for single values. These charts are highly customizable,
-                        very easy to implement, scale to the resolution of the display of the client
-                        to provide sharp charts even on retina displays.
+                        Easy pie chart is a jQuery plugin that uses the canvas
+                        element to render simple pie charts for single values.
+                        These charts are highly customizable, very easy to
+                        implement, scale to the resolution of the display of the
+                        client to provide sharp charts even on retina displays.
                       </p>
                     </div>
                   </Widget>
                 </Col>
                 <Col xs={12} lg={5}>
                   <Widget
-                    title={<h5> Sparkline <span className="fw-semi-bold">Pie Charts</span></h5>}
-                    collapse close
+                    title={
+                      <h5>
+                        {' '}
+                        Sparkline{' '}
+                        <span className="fw-semi-bold">Pie Charts</span>
+                      </h5>
+                    }
+                    collapse
+                    close
                   >
                     <div>
                       <p className="fs-mini text-muted">
-                        Each example displayed below takes just 1 line of HTML or javascript to generate.
+                        Each example displayed below takes just 1 line of HTML
+                        or javascript to generate.
                       </p>
-                      <div ref={(r) => { this.sparklinePie = r; }} className="chart-overflow-bottom mb-0 text-center" />
+                      <div
+                        ref={(r) => {
+                          this.sparklinePie = r;
+                        }}
+                        className="chart-overflow-bottom mb-0 text-center"
+                      />
                       <p className="fs-mini text-muted">
-                        Nevertheless Sparkline charts can be configured quite accurate.
+                        Nevertheless Sparkline charts can be configured quite
+                        accurate.
                       </p>
                     </div>
                   </Widget>
                 </Col>
                 <Col xs={12}>
                   <Widget
-                    title={<h5> Sparkline <span className="fw-semi-bold">Line Charts</span></h5>}
-                    collapse close
+                    title={
+                      <h5>
+                        {' '}
+                        Sparkline{' '}
+                        <span className="fw-semi-bold">Line Charts</span>
+                      </h5>
+                    }
+                    collapse
+                    close
                   >
                     <div>
-                      <div ref={(r) => { this.$sparklineLineChart = $(r); }} className="chart-overflow-bottom mb-0 text-center" />
+                      <div
+                        ref={(r) => {
+                          this.$sparklineLineChart = $(r);
+                        }}
+                        className="chart-overflow-bottom mb-0 text-center"
+                      />
                     </div>
                   </Widget>
                 </Col>
@@ -692,63 +776,96 @@ class Charts extends React.Component {
             </Col>
             <Col xs={12}>
               <Widget
-                title={<h5><span className="fw-semi-bold">D3</span> Charts</h5>}
+                title={
+                  <h5>
+                    <span className="fw-semi-bold">D3</span> Charts
+                  </h5>
+                }
                 close
               >
                 <div>
                   <p className="fs-mini text-muted">
-                    This project is an attempt to build re-usable charts and chart components for <span
-                      className="fw-semi-bold"
-                    >d3.js</span> without
-                    taking away the power that d3.js gives you.
+                    This project is an attempt to build re-usable charts and
+                    chart components for{' '}
+                    <span className="fw-semi-bold">d3.js</span> without taking
+                    away the power that d3.js gives you.
                   </p>
                   <div>
-                    <svg ref={(r) => { this.nvd3ChartLineSvg = r; }} />
+                    <svg
+                      ref={(r) => {
+                        this.nvd3ChartLineSvg = r;
+                      }}
+                    />
                   </div>
                 </div>
               </Widget>
             </Col>
             <Col lg={7} xs={12}>
               <Widget
-                title={<h5><span className="fw-semi-bold">D3</span> Charts</h5>}
+                title={
+                  <h5>
+                    <span className="fw-semi-bold">D3</span> Charts
+                  </h5>
+                }
                 close
               >
                 <div>
                   <p className="fs-mini text-muted">
-                    This is a very young collection of components, with the goal of keeping these components
-                    very customizeable.
+                    This is a very young collection of components, with the goal
+                    of keeping these components very customizeable.
                   </p>
                   <div>
-                    <svg ref={(r) => { this.nvd3ChartBarSvg = r; }} />
+                    <svg
+                      ref={(r) => {
+                        this.nvd3ChartBarSvg = r;
+                      }}
+                    />
                   </div>
                 </div>
               </Widget>
             </Col>
             <Col lg={5} xs={12}>
               <Widget
-                title={<h5> Realtime <span className="fw-semi-bold">Rickshaw</span></h5>}
-                collapse close
+                title={
+                  <h5>
+                    {' '}
+                    Realtime <span className="fw-semi-bold">Rickshaw</span>
+                  </h5>
+                }
+                collapse
+                close
               >
                 <div>
                   <p className="fs-mini text-muted mb-lg">
-                    Rickshaw provides the elements you need to create interactive graphs: renderers, legends,
-                    hovers, range selectors, etc. You put the pieces together.
-                    It&apos;s all based on <span className="fw-semi-bold">d3</span> underneath, so graphs are drawn with
-                    standard
-                    SVG and styled with CSS.
-                    Customize all you like with techniques you already know.
+                    Rickshaw provides the elements you need to create
+                    interactive graphs: renderers, legends, hovers, range
+                    selectors, etc. You put the pieces together. It&apos;s all
+                    based on <span className="fw-semi-bold">d3</span>{' '}
+                    underneath, so graphs are drawn with standard SVG and styled
+                    with CSS. Customize all you like with techniques you already
+                    know.
                   </p>
                   <h5>720 Users</h5>
-                  <Progress value="60" color="gray" size="xs" className="mb-sm progress-xs" />
+                  <Progress
+                    value="60"
+                    color="gray"
+                    size="xs"
+                    className="mb-sm progress-xs"
+                  />
                   <p className="fs-mini text-muted mb-lg">
                     <span className="circle bg-warning-light text-white">
                       <i className="fa fa-circle" />
                     </span>
-                    &nbsp;
-                    Target <span className="fw-semi-bold">820</span> users
-                    is <span className="fw-semi-bold">96%</span> reached.
+                    &nbsp; Target <span className="fw-semi-bold">820</span>{' '}
+                    users is <span className="fw-semi-bold">96%</span> reached.
                   </p>
-                  <div ref={(r) => { this.rickshawChart = r; }} className="chart-overflow-bottom" style={{ height: '130px' }} />
+                  <div
+                    ref={(r) => {
+                      this.rickshawChart = r;
+                    }}
+                    className="chart-overflow-bottom"
+                    style={{ height: '130px' }}
+                  />
                 </div>
               </Widget>
             </Col>
@@ -756,31 +873,59 @@ class Charts extends React.Component {
           <Row>
             <Col lg={6} xs={12}>
               <Widget
-                title={<h5> Morris <span className="fw-semi-bold">Area Charts</span></h5>}
-                close collapse
+                title={
+                  <h5>
+                    {' '}
+                    Morris <span className="fw-semi-bold">Area Charts</span>
+                  </h5>
+                }
+                close
+                collapse
               >
                 <div>
                   <p className="fs-mini text-muted">
-                    Good-looking charts shouldn&apos;t be difficult.
-                    The public API is terribly simple. It&apos;s just one function: <code>Morris.Line(options)</code>,
-                    where options is an object containing some of the following configuration options.
+                    Good-looking charts shouldn&apos;t be difficult. The public
+                    API is terribly simple. It&apos;s just one function:{' '}
+                    <code>Morris.Line(options)</code>, where options is an
+                    object containing some of the following configuration
+                    options.
                   </p>
-                  <div className="text-center" ref={(r) => { this.morrisAreaChart = r; }} style={{ height: '343px' }} />
+                  <div
+                    className="text-center"
+                    ref={(r) => {
+                      this.morrisAreaChart = r;
+                    }}
+                    style={{ height: '343px' }}
+                  />
                 </div>
               </Widget>
             </Col>
             <Col lg={6} xs={12}>
               <Widget
-                title={<h5> Morris <span className="fw-semi-bold">Line Charts</span></h5>}
-                close collapse
+                title={
+                  <h5>
+                    {' '}
+                    Morris <span className="fw-semi-bold">Line Charts</span>
+                  </h5>
+                }
+                close
+                collapse
               >
                 <div>
                   <p className="fs-mini text-muted">
-                    Good-looking charts shouldn&apos;t be difficult.
-                    The public API is terribly simple. It&apos;s just one function: <code>Morris.Line(options)</code>,
-                    where options is an object containing some of the following configuration options.
+                    Good-looking charts shouldn&apos;t be difficult. The public
+                    API is terribly simple. It&apos;s just one function:{' '}
+                    <code>Morris.Line(options)</code>, where options is an
+                    object containing some of the following configuration
+                    options.
                   </p>
-                  <div className="text-center" ref={(r) => { this.morrisLineChart = r; }} style={{ height: '343px' }} />
+                  <div
+                    className="text-center"
+                    ref={(r) => {
+                      this.morrisLineChart = r;
+                    }}
+                    style={{ height: '343px' }}
+                  />
                 </div>
               </Widget>
             </Col>
@@ -788,10 +933,18 @@ class Charts extends React.Component {
           <Row>
             <Col xs={12} lg={6} xl={3}>
               <Widget
-                title={<h5>Area <span className="fw-semi-bold">Sparkline</span></h5>}
-                close collapse
+                title={
+                  <h5>
+                    Area <span className="fw-semi-bold">Sparkline</span>
+                  </h5>
+                }
+                close
+                collapse
               >
-                <p className="fs-mini text-muted">Each example displayed below takes just 1 line of HTML or javascript to generate.</p>
+                <p className="fs-mini text-muted">
+                  Each example displayed below takes just 1 line of HTML or
+                  javascript to generate.
+                </p>
                 <div className="stats-row text-muted mt">
                   <div className="stat-item">
                     <h6 className="name">Overall Growth</h6>
@@ -803,37 +956,62 @@ class Charts extends React.Component {
                   </div>
                 </div>
                 <p className="text-muted fs-mini">
-                  <span className="fw-semi-bold">17% higher</span> than last month
+                  <span className="fw-semi-bold">17% higher</span> than last
+                  month
                 </p>
-                <div className="chart-overflow-bottom" ref={(r) => { this.$sparklineAreaChart = $(r); }} />
+                <div
+                  className="chart-overflow-bottom"
+                  ref={(r) => {
+                    this.$sparklineAreaChart = $(r);
+                  }}
+                />
               </Widget>
             </Col>
             <Col lg={6} xl={6} xs={12}>
               <Widget
-                title={<h5> Flot <span className="fw-semi-bold">Bars</span></h5>}
-                close collapse
+                title={
+                  <h5>
+                    {' '}
+                    Flot <span className="fw-semi-bold">Bars</span>
+                  </h5>
+                }
+                close
+                collapse
               >
                 <div>
                   <FlotBars />
                   <p className="fs-mini text-muted">
-                    Flot is a <span className="fw-semi-bold">pure</span> JavaScript plotting library for jQuery, with a
-                    focus on simple usage, attractive looks and interactive features.
+                    Flot is a <span className="fw-semi-bold">pure</span>{' '}
+                    JavaScript plotting library for jQuery, with a focus on
+                    simple usage, attractive looks and interactive features.
                   </p>
                 </div>
               </Widget>
             </Col>
             <Col lg={6} xl={3} xs={12}>
               <Widget
-                title={<h5> Morris <span className="fw-semi-bold">Donut Charts</span></h5>}
-                close collapse
+                title={
+                  <h5>
+                    {' '}
+                    Morris <span className="fw-semi-bold">Donut Charts</span>
+                  </h5>
+                }
+                close
+                collapse
               >
                 <div>
-                  <div className="text-center" ref={(r) => { this.morrisDonutChart = r; }} style={{ height: '180px' }} />
+                  <div
+                    className="text-center"
+                    ref={(r) => {
+                      this.morrisDonutChart = r;
+                    }}
+                    style={{ height: '180px' }}
+                  />
                   <p className="fs-mini text-muted">
-                    Donuts a great for representing some parted information like traffice sources,
-                    disk partitions, etc.
-                    This really couldn&apos;t be easier. Create a Donut chart using <code>Morris.Donut(options)</code>,
-                    with only few options.
+                    Donuts a great for representing some parted information like
+                    traffice sources, disk partitions, etc. This really
+                    couldn&apos;t be easier. Create a Donut chart using{' '}
+                    <code>Morris.Donut(options)</code>, with only few options.
                   </p>
                 </div>
               </Widget>
@@ -843,7 +1021,6 @@ class Charts extends React.Component {
       </div>
     );
   }
-
 }
 
 export default withStyles(s)(Charts);

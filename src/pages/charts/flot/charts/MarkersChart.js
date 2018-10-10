@@ -51,12 +51,25 @@ class Markers extends PureComponent {
         borderWidth: 1,
         borderColor: '#ffffff',
       },
-      colors: ['#e2e1ff', '#f59f9f', '#ffd7de', '#8fe5d4', '#ace5d1', '#ffebb2', '#fff8e3'],
+      colors: [
+        '#e2e1ff',
+        '#f59f9f',
+        '#ffd7de',
+        '#8fe5d4',
+        '#ace5d1',
+        '#ffebb2',
+        '#fff8e3',
+      ],
     });
   }
   render() {
     return (
-      <div ref={(r) => { this.$chartContainer = $(r); }} style={{ height: '200px' }} />
+      <div
+        ref={(r) => {
+          this.$chartContainer = $(r);
+        }}
+        style={{ height: '200px' }}
+      />
     );
   }
 }

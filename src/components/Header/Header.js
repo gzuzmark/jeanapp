@@ -17,7 +17,12 @@ import {
 } from 'reactstrap';
 
 import { logoutUser } from '../../actions/user';
-import { toggleSidebar, openSidebar, closeSidebar, changeActiveSidebarItem } from '../../actions/navigation';
+import {
+  toggleSidebar,
+  openSidebar,
+  closeSidebar,
+  changeActiveSidebarItem,
+} from '../../actions/navigation';
 
 import a5 from '../../images/people/a5.jpg';
 
@@ -96,14 +101,25 @@ class Header extends React.Component {
       <Navbar className={`${s.root} d-print-none`}>
         <Nav>
           <NavItem>
-            <NavLink className="d-md-down-none ml-3" href="#" id="toggleSidebar" onClick={this.toggleSidebar}>
+            <NavLink
+              className="d-md-down-none ml-3"
+              href="#"
+              id="toggleSidebar"
+              onClick={this.toggleSidebar}
+            >
               <i className="la la-bars" />
             </NavLink>
             <UncontrolledTooltip placement="bottom" target="toggleSidebar">
               Turn on/off<br />sidebar<br />collapsing
             </UncontrolledTooltip>
-            <NavLink className="fs-lg d-lg-none" href="#" onClick={this.switchSidebar}>
-              <span className="rounded rounded-lg bg-gray text-white d-md-none"><i className="la la-bars" /></span>
+            <NavLink
+              className="fs-lg d-lg-none"
+              href="#"
+              onClick={this.switchSidebar}
+            >
+              <span className="rounded rounded-lg bg-gray text-white d-md-none">
+                <i className="la la-bars" />
+              </span>
               <i className="la la-bars ml-3 d-sm-down-none" />
             </NavLink>
           </NavItem>
@@ -112,33 +128,54 @@ class Header extends React.Component {
         <NavLink className={`${s.navbarBrand} d-md-none`}>
           <i className="fa fa-circle text-gray mr-n-sm" />
           <i className="fa fa-circle text-warning" />
-          &nbsp;
-          sing
-          &nbsp;
+          &nbsp; sing &nbsp;
           <i className="fa fa-circle text-warning mr-n-sm" />
           <i className="fa fa-circle text-gray" />
         </NavLink>
 
         <Nav className="ml-auto">
-          <NavDropdown isOpen={this.state.notificationsOpen} toggle={this.toggleNotifications} id="basic-nav-dropdown" className={`${s.notificationsMenu} d-sm-down-none`}>
+          <NavDropdown
+            isOpen={this.state.notificationsOpen}
+            toggle={this.toggleNotifications}
+            id="basic-nav-dropdown"
+            className={`${s.notificationsMenu} d-sm-down-none`}
+          >
             <DropdownToggle nav caret>
               <span className={`${s.avatar} thumb-sm float-left mr-2`}>
                 <img className="rounded-circle" src={a5} alt="..." />
               </span>
-              <span className="small">Jean <span className="fw-semi-bold">Claude</span></span>
+              <span className="small">
+                Jean <span className="fw-semi-bold">Claude</span>
+              </span>
             </DropdownToggle>
           </NavDropdown>
-          <NavDropdown isOpen={this.state.menuOpen} toggle={this.toggleMenu} className="d-sm-down-none">
+          <NavDropdown
+            isOpen={this.state.menuOpen}
+            toggle={this.toggleMenu}
+            className="d-sm-down-none"
+          >
             <DropdownToggle nav>
               <i className="la la-cog" />
             </DropdownToggle>
             <DropdownMenu right className="super-colors">
-              <DropdownItem><i className="la la-user" /> My Account</DropdownItem>
+              <DropdownItem>
+                <i className="la la-user" /> My Account
+              </DropdownItem>
               <DropdownItem divider />
               <DropdownItem href="/calendar">Calendar</DropdownItem>
-              <DropdownItem href="/inbox">Inbox &nbsp;&nbsp;<Badge color="danger" pill className="animated bounceIn">9</Badge></DropdownItem>
+              <DropdownItem href="/inbox">
+                Inbox &nbsp;&nbsp;<Badge
+                  color="danger"
+                  pill
+                  className="animated bounceIn"
+                >
+                  9
+                </Badge>
+              </DropdownItem>
               <DropdownItem divider />
-              <DropdownItem onClick={this.doLogout}><i className="la la-sign-out" /> Log Out</DropdownItem>
+              <DropdownItem onClick={this.doLogout}>
+                <i className="la la-sign-out" /> Log Out
+              </DropdownItem>
             </DropdownMenu>
           </NavDropdown>
         </Nav>
@@ -155,4 +192,3 @@ function mapStateToProps(store) {
 }
 
 export default withRouter(connect(mapStateToProps)(withStyles(s)(Header)));
-

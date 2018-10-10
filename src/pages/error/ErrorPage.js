@@ -1,12 +1,6 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import {
-  Container,
-  Form,
-  FormGroup,
-  Input,
-  Button,
-} from 'reactstrap';
+import { Container, Form, FormGroup, Input, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import s from './ErrorPage.scss';
@@ -26,7 +20,11 @@ class ErrorPage extends React.Component {
             </p>
             <Form method="get">
               <FormGroup>
-                <Input className="input-no-border" type="text" placeholder="Search Pages" />
+                <Input
+                  className="input-no-border"
+                  type="text"
+                  placeholder="Search Pages"
+                />
               </FormGroup>
               <Link to="app/extra/search">
                 <Button className={s.errorBtn} type="submit" color="inverse">

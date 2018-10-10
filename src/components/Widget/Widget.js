@@ -76,87 +76,126 @@ class Widget extends React.Component {
       ...attributes
     } = this.props;
     const randomId = this.state.randomId;
-    const mainControls = !!(close || fullscreen || collapse || refresh || settings || settingsInverse);
+    const mainControls = !!(
+      close ||
+      fullscreen ||
+      collapse ||
+      refresh ||
+      settings ||
+      settingsInverse
+    );
     return (
       <section
         className={[s.widget, 'widget', className].join(' ')}
-        ref={(widget) => { this.el = widget; }} {...attributes}
+        ref={(widget) => {
+          this.el = widget;
+        }}
+        {...attributes}
       >
-        {
-          title && (
-            typeof title === 'string'
-              ? <h5 className={s.title}>{title}</h5>
-              : <header className={s.title}>{title}</header>
-          )
-        }
-        {
-          !customControls && mainControls && (
+        {title &&
+          (typeof title === 'string' ? (
+            <h5 className={s.title}>{title}</h5>
+          ) : (
+            <header className={s.title}>{title}</header>
+          ))}
+        {!customControls &&
+          mainControls && (
             <div className={`${s.widgetControls} widget-controls`}>
               {settings && (
-                <a href="#"><i className="la la-cog" /></a>
+                <a href="#">
+                  <i className="la la-cog" />
+                </a>
               )}
               {settingsInverse && (
-                <a href="#" className={`bg-gray-transparent ${s.inverse}`}><i
-                  className="la la-cog text-white"
-                /></a>
+                <a href="#" className={`bg-gray-transparent ${s.inverse}`}>
+                  <i className="la la-cog text-white" />
+                </a>
               )}
               {refresh && (
                 <a href="#" data-widgster="load" id={`reloadId-${randomId}`}>
-                  {typeof refresh === 'string' ?
-                    <strong className="text-gray-light">{refresh}</strong> :
-                    <i className="la la-refresh" />}
+                  {typeof refresh === 'string' ? (
+                    <strong className="text-gray-light">{refresh}</strong>
+                  ) : (
+                    <i className="la la-refresh" />
+                  )}
                   {showTooltip && (
                     <UncontrolledTooltip
                       placement={tooltipPlacement}
                       target={`reloadId-${randomId}`}
-                    >Reload</UncontrolledTooltip>
+                    >
+                      Reload
+                    </UncontrolledTooltip>
                   )}
                 </a>
               )}
               {fullscreen && (
-                <a href="#" data-widgster="fullscreen" id={`fullscreenId-${randomId}`}>
+                <a
+                  href="#"
+                  data-widgster="fullscreen"
+                  id={`fullscreenId-${randomId}`}
+                >
                   <i className="glyphicon glyphicon-resize-full" />
                   {showTooltip && (
                     <UncontrolledTooltip
                       placement={tooltipPlacement}
                       target={`fullscreenId-${randomId}`}
-                    >Fullscreen</UncontrolledTooltip>
+                    >
+                      Fullscreen
+                    </UncontrolledTooltip>
                   )}
                 </a>
               )}
               {fullscreen && (
-                <a href="#" data-widgster="restore" id={`restoreId-${randomId}`}>
+                <a
+                  href="#"
+                  data-widgster="restore"
+                  id={`restoreId-${randomId}`}
+                >
                   <i className="glyphicon glyphicon-resize-small" />
                   {showTooltip && (
                     <UncontrolledTooltip
                       placement={tooltipPlacement}
                       target={`restoreId-${randomId}`}
-                    >Restore</UncontrolledTooltip>
+                    >
+                      Restore
+                    </UncontrolledTooltip>
                   )}
                 </a>
               )}
               {collapse && (
                 <span>
-                  <a href="#" data-widgster="collapse" id={`collapseId-${randomId}`}>
+                  <a
+                    href="#"
+                    data-widgster="collapse"
+                    id={`collapseId-${randomId}`}
+                  >
                     <i className="la la-angle-down" />
                     {showTooltip && (
                       <UncontrolledTooltip
                         placement={tooltipPlacement}
                         target={`collapseId-${randomId}`}
-                      >Collapse</UncontrolledTooltip>
+                      >
+                        Collapse
+                      </UncontrolledTooltip>
                     )}
                   </a>
                 </span>
               )}
               {collapse && (
                 <span>
-                  <a href="#" data-widgster="expand" id={`expandId-${randomId}`}>
+                  <a
+                    href="#"
+                    data-widgster="expand"
+                    id={`expandId-${randomId}`}
+                  >
                     <i className="la la-angle-up" />
                     {showTooltip && (
                       <UncontrolledTooltip
                         placement={tooltipPlacement}
                         target={`expandId-${randomId}`}
-                      >Expand</UncontrolledTooltip>
+                      >
+                        Expand
+                      </UncontrolledTooltip>
                     )}
                   </a>
                 </span>
@@ -164,26 +203,28 @@ class Widget extends React.Component {
 
               {close && (
                 <a href="#" data-widgster="close" id={`closeId-${randomId}`}>
-                  {typeof close === 'string' ?
-                    <strong className="text-gray-light">{close}</strong> :
-                    <i className="la la-remove" />}
+                  {typeof close === 'string' ? (
+                    <strong className="text-gray-light">{close}</strong>
+                  ) : (
+                    <i className="la la-remove" />
+                  )}
                   {showTooltip && (
                     <UncontrolledTooltip
                       placement={tooltipPlacement}
                       target={`closeId-${randomId}`}
-                    >Close</UncontrolledTooltip>
+                    >
+                      Close
+                    </UncontrolledTooltip>
                   )}
                 </a>
               )}
             </div>
           )}
-        {
-          customControls && (
-            <div className={`${s.widgetControls} widget-controls`}>
-              {customControls}
-            </div>
-          )
-        }
+        {customControls && (
+          <div className={`${s.widgetControls} widget-controls`}>
+            {customControls}
+          </div>
+        )}
         <div className={`${s.widgetBody} widget-body ${bodyClass}`}>
           {children}
         </div>

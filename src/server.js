@@ -41,13 +41,16 @@ app.use(bodyParser.json());
 //
 // Authentication
 // -----------------------------------------------------------------------------
-app.use(expressJwt({
-  secret: config.auth.jwt.secret,
-  credentialsRequired: false,
-  getToken: req => req.cookies.id_token,
-}));
+app.use(
+  expressJwt({
+    secret: config.auth.jwt.secret,
+    credentialsRequired: false,
+    getToken: req => req.cookies.id_token,
+  }),
+);
 // Error handler for express-jwt
-app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+app.use((err, req, res, next) => {
+  // eslint-disable-line no-unused-vars
   if (err instanceof Jwt401Error) {
     console.error('[express-jwt-error]', req.cookies.id_token);
     // `clearCookie`, otherwise user can't use web-app until cookie expires
@@ -73,13 +76,17 @@ app.post('/login', (req, res) => {
   if (user) {
     const expiresIn = 60 * 60 * 24 * 180; // 180 days
     const token = jwt.sign(user, config.auth.jwt.secret, { expiresIn });
-    res.cookie('id_token', token, { maxAge: 1000 * expiresIn, httpOnly: false });
+    res.cookie('id_token', token, {
+      maxAge: 1000 * expiresIn,
+      httpOnly: false,
+    });
     res.json({ id_token: token });
   } else {
-    res.status(401).json({ message: 'To login use any user/password combination' });
+    res
+      .status(401)
+      .json({ message: 'To login use any user/password combination' });
   }
 });
-
 
 //
 // Register server-side rendering middleware
@@ -103,9 +110,11 @@ app.get('*', async (req, res, next) => {
     });
 
     if (req.user && req.user.login) {
-      store.dispatch(receiveLogin({
-        id_token: req.cookies.id_token,
-      }));
+      store.dispatch(
+        receiveLogin({
+          id_token: req.cookies.id_token,
+        }),
+      );
     } else {
       store.dispatch(receiveLogout());
     }
@@ -131,45 +140,33 @@ app.get('*', async (req, res, next) => {
       storeSubscription: null,
     };
 
-      // eslint-disable-next-line no-underscore-dangle
+    // eslint-disable-next-line no-underscore-dangle
     css.add(theme._getCss());
 
     const data = {
       title: 'App',
       description: 'App de control de vendedores',
     };
-    data.styles = [
-      { id: 'css', cssText: [...css].join('') },
-    ];
-    data.scripts = [
-      assets.vendor.js,
-      assets.client.js,
-    ];
+    data.styles = [{ id: 'css', cssText: [...css].join('') }];
+    data.scripts = [assets.vendor.js, assets.client.js];
     data.app = {
       apiUrl: config.api.clientUrl,
       state: context.store.getState(),
     };
 
     const html = ReactDOM.renderToString(
-      <StaticRouter
-        location={req.url}
-        context={context}
-      >
+      <StaticRouter location={req.url} context={context}>
         <Provider store={store}>
           <App store={store} />
         </Provider>
       </StaticRouter>,
-      );
+    );
 
-    data.styles = [
-        { id: 'css', cssText: [...css].join('') },
-    ];
+    data.styles = [{ id: 'css', cssText: [...css].join('') }];
 
     data.children = html;
 
-    const markup = ReactDOM.renderToString(
-      <Html {...data} />,
-      );
+    const markup = ReactDOM.renderToString(<Html {...data} />);
 
     res.status(200);
     res.send(`<!doctype html>${markup}`);
@@ -185,13 +182,11 @@ const pe = new PrettyError();
 pe.skipNodeFiles();
 pe.skipPackage('express');
 
-app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+app.use((err, req, res) => {
+  // eslint-disable-line no-unused-vars
   console.error(pe.render(err));
   const html = ReactDOM.renderToStaticMarkup(
-    <Html
-      title="Internal Server Error"
-      description={err.message}
-    >
+    <Html title="Internal Server Error" description={err.message}>
       {ReactDOM.renderToString(<ErrorPageWithoutStyle error={err} />)}
     </Html>,
   );

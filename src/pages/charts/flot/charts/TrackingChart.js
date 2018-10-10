@@ -11,8 +11,8 @@ class TrackingChart extends PureComponent {
     }
 
     return [
-        { data: sin, label: 'sin(x) = -0.00' },
-        { data: cos, label: 'cos(x) = -0.00' },
+      { data: sin, label: 'sin(x) = -0.00' },
+      { data: cos, label: 'cos(x) = -0.00' },
     ];
   }
 
@@ -23,57 +23,64 @@ class TrackingChart extends PureComponent {
   }
 
   createChart(data) {
-    return $.plotAnimator(this.$chartContainer, [{
-      label: data[0].label,
-      data: data[0].data,
-    }, {
-      label: data[1].label,
-      data: data[1].data,
-      animator: { steps: 60, duration: 1000, start: 0 },
-    }], {
-      series: {
-        lines: {
-          show: true,
+    return $.plotAnimator(
+      this.$chartContainer,
+      [
+        {
+          label: data[0].label,
+          data: data[0].data,
+        },
+        {
+          label: data[1].label,
+          data: data[1].data,
+          animator: { steps: 60, duration: 1000, start: 0 },
+        },
+      ],
+      {
+        series: {
+          lines: {
+            show: true,
+          },
+        },
+        colors: ['#8fe5d4', '#ffd7de'],
+        crosshair: {
+          mode: 'x',
+          color: '#f55d5d',
+        },
+        grid: {
+          hoverable: true,
+          autoHighlight: false,
+          backgroundColor: { colors: ['#ffffff', '#ffffff'] },
+          borderWidth: 1,
+          borderColor: '#ffffff',
+          margin: 0,
+          minBorderMargin: 0,
+          labelMargin: 40,
+          mouseActiveRadius: 6,
+        },
+        xaxis: {
+          tickLength: 0,
+          tickDecimals: 0,
+          min: 1,
+          max: 6,
+          font: {
+            lineHeight: 13,
+            weight: 'bold',
+            color: '#c1ccd3',
+          },
+        },
+        yaxis: {
+          min: -1.2,
+          max: 1.2,
+          tickDecimals: 0,
+          font: {
+            lineHeight: 13,
+            weight: 'bold',
+            color: '#c1ccd3',
+          },
         },
       },
-      colors: ['#8fe5d4', '#ffd7de'],
-      crosshair: {
-        mode: 'x',
-        color: '#f55d5d',
-      },
-      grid: {
-        hoverable: true,
-        autoHighlight: false,
-        backgroundColor: { colors: ['#ffffff', '#ffffff'] },
-        borderWidth: 1,
-        borderColor: '#ffffff',
-        margin: 0,
-        minBorderMargin: 0,
-        labelMargin: 40,
-        mouseActiveRadius: 6,
-      },
-      xaxis: {
-        tickLength: 0,
-        tickDecimals: 0,
-        min: 1,
-        max: 6,
-        font: {
-          lineHeight: 13,
-          weight: 'bold',
-          color: '#c1ccd3',
-        },
-      },
-      yaxis: {
-        min: -1.2,
-        max: 1.2,
-        tickDecimals: 0,
-        font: {
-          lineHeight: 13,
-          weight: 'bold',
-          color: '#c1ccd3',
-        },
-      },
-    });
+    );
   }
 
   initEventListeners() {
@@ -81,7 +88,10 @@ class TrackingChart extends PureComponent {
 
     this.$chartContainer.bind('plothover', (event, pos) => {
       if (!self.updateLegendTimeout) {
-        self.updateLegendTimeout = setTimeout(self.updateLegendContent.bind(self, event, pos), 50);
+        self.updateLegendTimeout = setTimeout(
+          self.updateLegendContent.bind(self, event, pos),
+          50,
+        );
       }
     });
   }
@@ -90,8 +100,12 @@ class TrackingChart extends PureComponent {
     this.updateLegendTimeout = null;
 
     const axes = this.chart.getAxes();
-    if (pos.x < axes.xaxis.min || pos.x > axes.xaxis.max ||
-          pos.y < axes.yaxis.min || pos.y > axes.yaxis.max) {
+    if (
+      pos.x < axes.xaxis.min ||
+      pos.x > axes.xaxis.max ||
+      pos.y < axes.yaxis.min ||
+      pos.y > axes.yaxis.max
+    ) {
       return;
     }
 
@@ -101,7 +115,7 @@ class TrackingChart extends PureComponent {
       let point1;
       let point2;
 
-          // Find the nearest points, x-wise
+      // Find the nearest points, x-wise
       for (let j = 0; j < series.data.length; j += 1) {
         if (series.data[j][0] > pos.x) {
           point1 = series.data[j - 1];
@@ -111,7 +125,7 @@ class TrackingChart extends PureComponent {
       }
 
       let y;
-          // Now Interpolate
+      // Now Interpolate
       if (point1 == null && point2) {
         y = point2[1];
       } else if (point2 == null && point1) {
@@ -129,7 +143,12 @@ class TrackingChart extends PureComponent {
   render() {
     return (
       <div>
-        <div ref={(r) => { this.$chartContainer = $(r); }} style={{ height: '340px' }} />
+        <div
+          ref={(r) => {
+            this.$chartContainer = $(r);
+          }}
+          style={{ height: '340px' }}
+        />
       </div>
     );
   }

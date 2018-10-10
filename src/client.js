@@ -21,7 +21,9 @@ const context = {
   insertCss: (...styles) => {
     // eslint-disable-next-line no-underscore-dangle
     const removeCss = styles.map(x => x._insertCss());
-    return () => { removeCss.forEach(f => f()); };
+    return () => {
+      removeCss.forEach(f => f());
+    };
   },
   // Universal HTTP client
   fetch: createFetch({
@@ -109,9 +111,7 @@ async function onLocationChange(location, action) {
     }
 
     appInstance = ReactDOM.render(
-      <Router
-        history={history}
-      >
+      <Router history={history}>
         <App store={context.store} context={context} />
       </Router>,
       container,
@@ -150,7 +150,7 @@ if (__DEV__) {
   });
 }
 
- // Enable Hot Module Replacement (HMR)
+// Enable Hot Module Replacement (HMR)
 if (module.hot) {
   module.hot.accept('./components/App', () => {
     if (appInstance) {

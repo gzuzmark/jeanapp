@@ -1,10 +1,5 @@
 import React, { PureComponent } from 'react';
-import {
-  Row,
-  Col,
-  Breadcrumb,
-  BreadcrumbItem,
-} from 'reactstrap';
+import { Row, Col, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import $ from 'jquery';
 /* eslint-disable */
 import 'imports-loader?jQuery=jquery,this=>window!easy-pie-chart/dist/jquery.easypiechart.js';
@@ -64,56 +59,67 @@ class EasyPie extends PureComponent {
           <BreadcrumbItem>Charts</BreadcrumbItem>
           <BreadcrumbItem active>Easy Pie</BreadcrumbItem>
         </Breadcrumb>
-        <h1 className="page-title">Visual - <span className="fw-semi-bold">Charts</span></h1>
+        <h1 className="page-title">
+          Visual - <span className="fw-semi-bold">Charts</span>
+        </h1>
         <Row>
           <Col xs={12} md={6} lg={4}>
-            <Widget
-              title={<h5>Easy Pie Charts</h5>}
-              close collapse
-            >
+            <Widget title={<h5>Easy Pie Charts</h5>} close collapse>
               <div className="text-center">
-                <div className="easy-pie-chart-md mb-lg" id="easy-pie1" data-percent="73">
+                <div
+                  className="easy-pie-chart-md mb-lg"
+                  id="easy-pie1"
+                  data-percent="73"
+                >
                   73
                 </div>
               </div>
               <p className="fs-mini text-muted">
-                Easy pie chart is a jQuery plugin that uses the canvas
-                element to render simple pie charts for single values.
-                These charts are highly customizable, very easy to
-                implement, scale to the resolution of the display of
-                the client to provide sharp charts even on retina displays.
+                Easy pie chart is a jQuery plugin that uses the canvas element
+                to render simple pie charts for single values. These charts are
+                highly customizable, very easy to implement, scale to the
+                resolution of the display of the client to provide sharp charts
+                even on retina displays.
               </p>
             </Widget>
           </Col>
           <Col xs={12} md={6} lg={4}>
-            <Widget
-              title={<h5>Easy Pie Charts</h5>}
-              close collapse
-            >
+            <Widget title={<h5>Easy Pie Charts</h5>} close collapse>
               <div className="text-center">
-                <div className="easy-pie-chart-lg mb-lg" id="easy-pie2" data-percent="22">
+                <div
+                  className="easy-pie-chart-lg mb-lg"
+                  id="easy-pie2"
+                  data-percent="22"
+                >
                   22
                 </div>
               </div>
               <div className="text-center">
-                <div className="easy-pie-chart-lg mb-lg" id="easy-pie3" data-percent="88">
+                <div
+                  className="easy-pie-chart-lg mb-lg"
+                  id="easy-pie3"
+                  data-percent="88"
+                >
                   88
                 </div>
               </div>
             </Widget>
           </Col>
           <Col xs={12} md={6} lg={4}>
-            <Widget
-              title={<h5>Easy Pie Charts</h5>}
-              close collapse
-            >
+            <Widget title={<h5>Easy Pie Charts</h5>} close collapse>
               <p className="fw-mini text-muted">
-                Ok, but <span className="fw-semi-bold">when to use pie chart?</span> Pie
-                charts are mostly used to show how much individual shares — such as
-                quarterly sales figures — contribute to a total amount, such as annual sales.
+                Ok, but{' '}
+                <span className="fw-semi-bold">when to use pie chart?</span> Pie
+                charts are mostly used to show how much individual shares — such
+                as quarterly sales figures — contribute to a total amount, such
+                as annual sales.
               </p>
               <div className="text-center">
-                <div className="easy-pie-chart-md mb-lg" id="easy-pie4" data-percent="43">
+                <div
+                  className="easy-pie-chart-md mb-lg"
+                  id="easy-pie4"
+                  data-percent="43"
+                >
                   43
                 </div>
               </div>

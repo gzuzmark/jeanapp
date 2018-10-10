@@ -10,10 +10,7 @@ import {
   DropdownItem,
 } from 'reactstrap';
 
-import {
-  BootstrapTable,
-  TableHeaderColumn,
-} from 'react-bootstrap-table';
+import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 import ReactTable from 'react-table';
 
@@ -22,7 +19,6 @@ import Widget from '../../../components/Widget';
 import s from './Dynamic.scss';
 
 class Dynamic extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -35,17 +31,22 @@ class Dynamic extends React.Component {
   renderSizePerPageDropDown = (props) => {
     const limits = [];
     props.sizePerPageList.forEach((limit) => {
-      limits.push(<DropdownItem key={limit} onClick={() => props.changeSizePerPage(limit)}>{ limit }</DropdownItem>);
+      limits.push(
+        <DropdownItem
+          key={limit}
+          onClick={() => props.changeSizePerPage(limit)}
+        >
+          {limit}
+        </DropdownItem>,
+      );
     });
 
     return (
       <Dropdown isOpen={props.open} toggle={props.toggleDropDown}>
         <DropdownToggle color="default" caret>
-          { props.currSizePerPage }
+          {props.currSizePerPage}
         </DropdownToggle>
-        <DropdownMenu>
-          { limits }
-        </DropdownMenu>
+        <DropdownMenu>{limits}</DropdownMenu>
       </Dropdown>
     );
   };
@@ -65,23 +66,25 @@ class Dynamic extends React.Component {
           </small>
           <br />
           <small>
-            Dimensions:&nbsp;<span className="fw-semi-bold">{cell.dimensions}</span>
+            Dimensions:&nbsp;<span className="fw-semi-bold">
+              {cell.dimensions}
+            </span>
           </small>
         </div>
       );
     }
 
     function descriptionFormatter(cell) {
-      return (
-        <a href="#">
-          {cell}
-        </a>
-      );
+      return <a href="#">{cell}</a>;
     }
 
     function progressFormatter(cell) {
       return (
-        <Progress style={{ height: '15px' }} color={cell.type} value={cell.progress} />
+        <Progress
+          style={{ height: '15px' }}
+          color={cell.type}
+          value={cell.progress}
+        />
       );
     }
 
@@ -105,35 +108,105 @@ class Dynamic extends React.Component {
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
           <BreadcrumbItem active>Tables Dynamic</BreadcrumbItem>
         </Breadcrumb>
-        <h2 className="page-title">Tables - <span className="fw-semi-bold">Dynamic</span></h2>
-        <Widget title={<h4>The <span className="fw-semi-bold">React</span> Way</h4>} collapse close>
+        <h2 className="page-title">
+          Tables - <span className="fw-semi-bold">Dynamic</span>
+        </h2>
+        <Widget
+          title={
+            <h4>
+              The <span className="fw-semi-bold">React</span> Way
+            </h4>
+          }
+          collapse
+          close
+        >
           <p>
-            Fully customizable Table. Built with <a href="https://allenfang.github.io/react-bootstrap-table/" target="_blank" rel="noopener noreferrer">react-bootstrap-table</a>
+            Fully customizable Table. Built with{' '}
+            <a
+              href="https://allenfang.github.io/react-bootstrap-table/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              react-bootstrap-table
+            </a>
           </p>
-          <BootstrapTable data={this.state.reactBootstrapTable} version="4" pagination options={options} search tableContainerClass={`table-striped table-hover ${s.bootstrapTable}`}>
-            <TableHeaderColumn className="width-50" columnClassName="width-50" dataField="id" isKey>
+          <BootstrapTable
+            data={this.state.reactBootstrapTable}
+            version="4"
+            pagination
+            options={options}
+            search
+            tableContainerClass={`table-striped table-hover ${
+              s.bootstrapTable
+            }`}
+          >
+            <TableHeaderColumn
+              className="width-50"
+              columnClassName="width-50"
+              dataField="id"
+              isKey
+            >
               <span className="fs-sm">ID</span>
             </TableHeaderColumn>
             <TableHeaderColumn dataField="name" dataSort>
               <span className="fs-sm">Name</span>
             </TableHeaderColumn>
-            <TableHeaderColumn className="d-none d-md-table-cell" columnClassName="d-none d-md-table-cell" dataField="info" dataFormat={infoFormatter}>
+            <TableHeaderColumn
+              className="d-none d-md-table-cell"
+              columnClassName="d-none d-md-table-cell"
+              dataField="info"
+              dataFormat={infoFormatter}
+            >
               <span className="fs-sm">Info</span>
             </TableHeaderColumn>
-            <TableHeaderColumn className="d-none d-md-table-cell" columnClassName="d-none d-md-table-cell" dataField="description" dataFormat={descriptionFormatter}>
+            <TableHeaderColumn
+              className="d-none d-md-table-cell"
+              columnClassName="d-none d-md-table-cell"
+              dataField="description"
+              dataFormat={descriptionFormatter}
+            >
               <span className="fs-sm">Description</span>
             </TableHeaderColumn>
-            <TableHeaderColumn className="d-none d-md-table-cell" columnClassName="d-none d-md-table-cell" dataField="date" dataSort sortFunc={dateSortFunc}>
+            <TableHeaderColumn
+              className="d-none d-md-table-cell"
+              columnClassName="d-none d-md-table-cell"
+              dataField="date"
+              dataSort
+              sortFunc={dateSortFunc}
+            >
               <span className="fs-sm">Date</span>
             </TableHeaderColumn>
-            <TableHeaderColumn className="width-150" columnClassName="width-150" dataField="status" dataSort dataFormat={progressFormatter} sortFunc={progressSortFunc}>
+            <TableHeaderColumn
+              className="width-150"
+              columnClassName="width-150"
+              dataField="status"
+              dataSort
+              dataFormat={progressFormatter}
+              sortFunc={progressSortFunc}
+            >
               <span className="fs-sm">Status</span>
             </TableHeaderColumn>
           </BootstrapTable>
         </Widget>
-        <Widget title={<h4>React <span className="fw-semi-bold">Table</span></h4>} collapse close>
+        <Widget
+          title={
+            <h4>
+              React <span className="fw-semi-bold">Table</span>
+            </h4>
+          }
+          collapse
+          close
+        >
           <p>
-            Simple table extension with sorting, filtering and pagination for React apps. Built with <a href="https://react-table.js.org/" target="_blank" rel="noopener noreferrer">react-table</a>
+            Simple table extension with sorting, filtering and pagination for
+            React apps. Built with{' '}
+            <a
+              href="https://react-table.js.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              react-table
+            </a>
           </p>
           <ReactTable
             data={this.state.reactTable}
@@ -171,7 +244,6 @@ class Dynamic extends React.Component {
       </div>
     );
   }
-
 }
 
 export default withStyles(s)(Dynamic);

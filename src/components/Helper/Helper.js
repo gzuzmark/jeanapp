@@ -14,7 +14,7 @@ class Helper extends Component {
     this.setState(prevState => ({
       isOpened: !prevState.isOpened,
     }));
-  }
+  };
 
   render() {
     const { isOpened } = this.state;
@@ -25,7 +25,11 @@ class Helper extends Component {
           bodyClass="mt-3"
           title={
             <header className={cx(s.themeHelperHeader, 'd-flex p-0')}>
-              <Button color="warning" className={s.themeHelperBtn} onClick={this.toggle}>
+              <Button
+                color="warning"
+                className={s.themeHelperBtn}
+                onClick={this.toggle}
+              >
                 <div className={cx(s.themeHelperSpinner, 'text-white')}>
                   <i className="la la-cog" />
                   <i className="la la-cog" />
@@ -71,9 +75,7 @@ class Helper extends Component {
             </Button>
           </div>
           <div className="mt-lg d-flex flex-column align-items-center theme-helper__sharing">
-            <span className="fs-sm">
-              Thank you for sharing!
-            </span>
+            <span className="fs-sm">Thank you for sharing!</span>
             <div className="d-flex justify-content-center text-light mt-2">
               <a
                 target="_blank"

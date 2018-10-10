@@ -12,9 +12,7 @@ import loadErrorPage from 'bundle-loader?lazy!../pages/error';
 import LayoutComponent from '../components/Layout';
 import LoginComponent from '../pages/login';
 
-
 const ErrorPageBundle = Bundle.generateBundle(loadErrorPage);
-
 
 const ContextType = {
   // Enables critical path CSS rendering
@@ -35,26 +33,27 @@ const ContextType = {
 //   return true;
 // };
 
-
-const PrivateRoute = ({ component, isAuthenticated, ...rest }) => ( // eslint-disable-line
+const PrivateRoute = (
+  { component, isAuthenticated, ...rest }, // eslint-disable-line
+) => (
   <Route
-    {...rest} render={props => (
-    isAuthenticated ? (
-      React.createElement(component, props)
-    ) : (
-      <Redirect
-        to={{
-          pathname: '/login',
-          state: { from: props.location }, // eslint-disable-line
-        }}
-      />
-    )
-  )}
+    {...rest}
+    render={props =>
+      isAuthenticated ? (
+        React.createElement(component, props)
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/login',
+            state: { from: props.location }, // eslint-disable-line
+          }}
+        />
+      )
+    }
   />
 );
 
 class App extends React.PureComponent {
-
   static propTypes = {
     context: PropTypes.shape(ContextType),
     store: PropTypes.any, // eslint-disable-line
@@ -64,7 +63,6 @@ class App extends React.PureComponent {
   static defaultProps = {
     context: null,
   };
-
 
   static contextTypes = {
     router: PropTypes.any,
@@ -83,7 +81,11 @@ class App extends React.PureComponent {
       <Switch>
         <Route path="/" exact render={() => <Redirect to="/app/main" />} />
         <Route path="/app" exact render={() => <Redirect to="/app/main" />} />
-        <PrivateRoute isAuthenticated={this.props.isAuthenticated} path="/app" component={LayoutComponent} />
+        <PrivateRoute
+          isAuthenticated={this.props.isAuthenticated}
+          path="/app"
+          component={LayoutComponent}
+        />
         <Route path="/login" exact component={LoginComponent} />
         <Route component={ErrorPageBundle} />
       </Switch>

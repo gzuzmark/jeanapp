@@ -18,7 +18,7 @@ class MessageTable extends Component {
     messages: mock,
     checkedIds: [],
     searchString: '',
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     const { filter } = this.props;
@@ -43,11 +43,11 @@ class MessageTable extends Component {
     }
 
     this.setState({ checkedIds: newCheckedIds });
-  }
+  };
 
   chooseNone = () => {
     this.setState({ checkedIds: [] });
-  }
+  };
 
   chooseRead = () => {
     const { messages } = this.state;
@@ -62,7 +62,7 @@ class MessageTable extends Component {
     this.setState({
       checkedIds: newCheckedIds,
     });
-  }
+  };
 
   chooseUnread = () => {
     const { messages } = this.state;
@@ -77,7 +77,7 @@ class MessageTable extends Component {
     this.setState({
       checkedIds: newCheckedIds,
     });
-  }
+  };
 
   choose(id) {
     const { checkedIds } = this.state;
@@ -104,7 +104,7 @@ class MessageTable extends Component {
     });
 
     this.setState({ messages: newMessages });
-  }
+  };
 
   markRead = () => {
     const { messages, checkedIds } = this.state;
@@ -118,7 +118,7 @@ class MessageTable extends Component {
     });
 
     this.setState({ messages: newMessages });
-  }
+  };
 
   delete = () => {
     const { messages, checkedIds } = this.state;
@@ -135,7 +135,7 @@ class MessageTable extends Component {
       messages: newMessages.filter(message => !message.deleted),
       checkedIds: [],
     });
-  }
+  };
 
   starItem(id) {
     const { messages } = this.state;
@@ -170,15 +170,17 @@ class MessageTable extends Component {
 
   search = (value) => {
     this.setState({ searchString: value.toLowerCase() });
-  }
+  };
 
   _searchable(m) {
     const { searchString } = this.state;
 
     if (searchString) {
-      return (m.content.toLowerCase().indexOf(searchString) !== -1 ||
+      return (
+        m.content.toLowerCase().indexOf(searchString) !== -1 ||
         m.from.toLowerCase().indexOf(searchString) !== -1 ||
-        m.theme.toLowerCase().indexOf(searchString) !== -1);
+        m.theme.toLowerCase().indexOf(searchString) !== -1
+      );
     }
 
     return true;
@@ -186,17 +188,28 @@ class MessageTable extends Component {
 
   render() {
     const { messages, checkedIds } = this.state;
-    const { filter, openedMessage, openMessage, compose, composeData, changeCompose } = this.props;
+    const {
+      filter,
+      openedMessage,
+      openMessage,
+      compose,
+      composeData,
+      changeCompose,
+    } = this.props;
     const filteredMessages = messages.filter(message => message[filter]);
     const dataToDisplay = filter ? filteredMessages : messages;
     return (
       <div className={s.messages}>
-        {openedMessage === null && !compose
-          ? <Pagination />
-          : <button className={cx('btn btn-default', s.backButton)} onClick={() => openMessage(null)}>
+        {openedMessage === null && !compose ? (
+          <Pagination />
+        ) : (
+          <button
+            className={cx('btn btn-default', s.backButton)}
+            onClick={() => openMessage(null)}
+          >
             <i className="fa fa-angle-left fa-lg" />
           </button>
-        }
+        )}
         {/* eslint-disable */}
         {openedMessage === null && !compose
           ? <Widget>

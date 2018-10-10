@@ -9,10 +9,12 @@ class Html extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    styles: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      cssText: PropTypes.string.isRequired,
-    }).isRequired),
+    styles: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        cssText: PropTypes.string.isRequired,
+      }).isRequired,
+    ),
     scripts: PropTypes.arrayOf(PropTypes.string.isRequired),
     app: PropTypes.object, // eslint-disable-line
     children: PropTypes.string.isRequired,
@@ -36,18 +38,26 @@ class Html extends React.Component {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           <link rel="icon" href="/favicon.png" />
-          {styles.map(style =>
-            (<style
+          {styles.map(style => (
+            <style
               key={style.id}
               id={style.id}
               dangerouslySetInnerHTML={{ __html: style.cssText }}
-            />),
-          )}
-          <script dangerouslySetInnerHTML={{ __html: {/* analytics here */} }} />
+            />
+          ))}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: {
+                /* analytics here */
+              },
+            }}
+          />
         </head>
         <body>
           <div id="app" dangerouslySetInnerHTML={{ __html: children }} />
-          <script dangerouslySetInnerHTML={{ __html: `window.App=${serialize(app)}` }} />
+          <script
+            dangerouslySetInnerHTML={{ __html: `window.App=${serialize(app)}` }}
+          />
           {scripts.map(script => <script key={script} src={script} />)}
         </body>
       </html>

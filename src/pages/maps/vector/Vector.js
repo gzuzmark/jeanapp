@@ -47,7 +47,7 @@ const mapData = {
   },
   backgroundColor: '#eee',
   markers: [
-    { latLng: [41.90, 12.45], name: 'Vatican City' },
+    { latLng: [41.9, 12.45], name: 'Vatican City' },
     { latLng: [43.73, 7.41], name: 'Monaco' },
     { latLng: [-0.52, 166.93], name: 'Nauru' },
     { latLng: [-8.51, 179.21], name: 'Tuvalu' },
@@ -77,7 +77,6 @@ const mapData = {
 };
 
 class VectorMap extends React.Component {
-
   componentDidMount() {
     $(this.vectorMap).vectorMap(mapData);
   }
@@ -86,20 +85,25 @@ class VectorMap extends React.Component {
     return (
       <div>
         <div
-          className={`${s.contentMap} vector-map`} ref={(r) => {
+          className={`${s.contentMap} vector-map`}
+          ref={(r) => {
             this.vectorMap = r;
           }}
         />
         <header className="page-title">
-          <h1 className="m-0 mb-sm">Vector <span className="fw-semi-bold">Maps</span></h1>
+          <h1 className="m-0 mb-sm">
+            Vector <span className="fw-semi-bold">Maps</span>
+          </h1>
           <p className="page-title fs-sm m-0">
             <span className="fw-semi-bold">1 656 843</span>
-            <span className="ml-xs circle bg-gray"><i className="text-gray-lighter fa fa-circle" /></span>
+            <span className="ml-xs circle bg-gray">
+              <i className="text-gray-lighter fa fa-circle" />
+            </span>
           </p>
         </header>
-      </div>);
+      </div>
+    );
   }
-
 }
 
 export default withStyles(s)(VectorMap);

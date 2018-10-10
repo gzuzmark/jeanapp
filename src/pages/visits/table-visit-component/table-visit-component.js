@@ -1,8 +1,20 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 import ReactTable from 'react-table';
+
+// import { connect } from 'react-redux';
+// import { compose } from 'redux';
+// import { createStructuredSelector } from 'reselect';
+
+// import injectReducer from '../../../utils/injectReducer';
+// import injectSaga from '../../../utils/injectSaga';
+// import {
+//   makeSelectRepos,
+//   makeSelectLoading,
+//   makeSelectError,
+// } from '../../../components/Selectors';
 
 import { reactTableData } from './data';
 import Widget from '../../../components/Widget/Widget';
@@ -29,10 +41,6 @@ class TableVisitsComponent extends React.Component {
     const { addVisit } = this.state;
     return (
       <div>
-        <Breadcrumb>
-          <BreadcrumbItem>Estás aquí</BreadcrumbItem>
-          <BreadcrumbItem active>Agenda</BreadcrumbItem>
-        </Breadcrumb>
         <h2 className="page-title">
           Visitas en <span className="fw-semi-bold">agenda</span>
         </h2>
@@ -47,9 +55,13 @@ class TableVisitsComponent extends React.Component {
             collapse
             close
           >
-            <Button color="primary" className="width-200 mb-xs mr-xs" onClick={() => this.openVisitWizard()}>
+            <Button
+              color="primary"
+              className="width-200 mb-xs mr-xs"
+              onClick={() => this.openVisitWizard()}
+            >
               <i className="glyphicon glyphicon-plus text-white mr-xs mb-xs" />
-              Agregar visitar
+              Agregar visita
             </Button>
             <ReactTable
               data={this.state.reactTable}

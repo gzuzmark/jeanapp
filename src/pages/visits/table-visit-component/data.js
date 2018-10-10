@@ -7,322 +7,368 @@ export function reactTableData() {
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',
       fecha: '015/08/19',
       hora: '08:10',
       estado: 'Activo',
-    }, {
+    },
+    {
       ruc: '2015489963',
       contacto: 'Integer Corporation',
       direccion: 'Croatia',

@@ -6,7 +6,8 @@ import pkg from '../package.json';
 
 const isDebug = !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose');
-const isAnalyze = process.argv.includes('--analyze') || process.argv.includes('--analyse');
+const isAnalyze =
+  process.argv.includes('--analyze') || process.argv.includes('--analyse');
 
 //
 // Common configuration chunk to be used for both
@@ -27,9 +28,7 @@ const config = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        include: [
-          path.resolve(__dirname, '../src'),
-        ],
+        include: [path.resolve(__dirname, '../src')],
         query: {
           // https://github.com/babel/babel-loader#options
           cacheDirectory: isDebug,
@@ -39,14 +38,17 @@ const config = {
           presets: [
             // A Babel preset that can automatically determine the Babel plugins and polyfills
             // https://github.com/babel/babel-preset-env
-            ['env', {
-              targets: {
-                browsers: pkg.browserslist,
+            [
+              'env',
+              {
+                targets: {
+                  browsers: pkg.browserslist,
+                },
+                modules: false,
+                useBuiltIns: false,
+                debug: false,
               },
-              modules: false,
-              useBuiltIns: false,
-              debug: false,
-            }],
+            ],
             // Experimental ECMAScript proposals
             // https://babeljs.io/docs/plugins/#presets-stage-x-experimental-presets-
             'stage-2',
@@ -55,15 +57,15 @@ const config = {
             'react',
             // Optimize React code for the production build
             // https://github.com/thejameskyle/babel-react-optimize
-            ...isDebug ? [] : ['react-optimize'],
+            ...(isDebug ? [] : ['react-optimize']),
           ],
           plugins: [
             // Adds component stack to warning messages
             // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-source
-            ...isDebug ? ['transform-react-jsx-source'] : [],
+            ...(isDebug ? ['transform-react-jsx-source'] : []),
             // Adds __self attribute to JSX which React will use for some warnings
             // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-jsx-self
-            ...isDebug ? ['transform-react-jsx-self'] : [],
+            ...(isDebug ? ['transform-react-jsx-self'] : []),
           ],
         },
       },
@@ -81,7 +83,9 @@ const config = {
               sourceMap: isDebug,
               // CSS Modules https://github.com/css-modules/css-modules
               modules: true,
-              localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
+              localIdentName: isDebug
+                ? '[name]-[local]-[hash:base64:5]'
+                : '[hash:base64:5]',
               // CSS Nano http://cssnano.co/options/
               minimize: !isDebug,
               discardComments: { removeAll: true },
@@ -93,7 +97,9 @@ const config = {
         test: /theme.scss$/,
         loaders: [
           'isomorphic-style-loader',
-          `css-loader?${isDebug ? 'sourceMap&' : 'minimize&'}modules&localIdentName=[local]&importLoaders=2`,
+          `css-loader?${
+            isDebug ? 'sourceMap&' : 'minimize&'
+          }modules&localIdentName=[local]&importLoaders=2`,
           'resolve-url-loader',
           'sass-loader?sourceMap',
         ],
@@ -103,8 +109,12 @@ const config = {
         exclude: [/theme.scss$/],
         use: [
           'isomorphic-style-loader',
-          `css-loader?${isDebug ? 'sourceMap&' : 'minimize&'}modules&localIdentName=
-          ${isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]'}&importLoaders=2`,
+          `css-loader?${
+            isDebug ? 'sourceMap&' : 'minimize&'
+          }modules&localIdentName=
+          ${
+            isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]'
+          }&importLoaders=2`,
           'sass-loader',
         ],
       },
@@ -169,7 +179,9 @@ const clientConfig = {
   output: {
     ...config.output,
     filename: isDebug ? '[name].js' : '[name].[chunkhash:8].js',
-    chunkFilename: isDebug ? '[name].chunk.js' : '[name].[chunkhash:8].chunk.js',
+    chunkFilename: isDebug
+      ? '[name].chunk.js'
+      : '[name].[chunkhash:8].chunk.js',
   },
 
   plugins: [
@@ -204,31 +216,33 @@ const clientConfig = {
       minChunks: module => /node_modules/.test(module.resource),
     }),
 
-    ...isDebug ? [] : [
-      // Minimize all JavaScript output of chunks
-      // https://github.com/mishoo/UglifyJS2#compressor-options
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: isVerbose,
-          unused: true,
-          dead_code: true,
-          screw_ie8: true,
-        },
-        mangle: {
-          screw_ie8: true,
-          except: ['$super'],
-        },
-        output: {
-          comments: false,
-          screw_ie8: true,
-        },
-        sourceMap: true,
-      }),
-    ],
+    ...(isDebug
+      ? []
+      : [
+          // Minimize all JavaScript output of chunks
+          // https://github.com/mishoo/UglifyJS2#compressor-options
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            warnings: isVerbose,
+            unused: true,
+            dead_code: true,
+            screw_ie8: true,
+          },
+          mangle: {
+            screw_ie8: true,
+            except: ['$super'],
+          },
+          output: {
+            comments: false,
+            screw_ie8: true,
+          },
+          sourceMap: true,
+        }),
+      ]),
 
     // Webpack Bundle Analyzer
     // https://github.com/th0r/webpack-bundle-analyzer
-    ...isAnalyze ? [new BundleAnalyzerPlugin()] : [],
+    ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
   ],
 
   // Choose a developer tool to enhance debugging
@@ -270,20 +284,35 @@ const serverConfig = {
     ...config.module,
 
     // Override babel-preset-env configuration for Node.js
-    rules: config.module.rules.map(rule => (rule.loader !== 'babel-loader' ? rule : {
-      ...rule,
-      query: {
-        ...rule.query,
-        presets: rule.query.presets.map(preset => (preset[0] !== 'env' ? preset : ['env', {
-          targets: {
-            node: parseFloat(pkg.engines.node.replace(/^\D+/g, '')),
+    rules: config.module.rules.map(
+      rule =>
+        rule.loader !== 'babel-loader'
+          ? rule
+          : {
+            ...rule,
+            query: {
+              ...rule.query,
+              presets: rule.query.presets.map(
+                  preset =>
+                    preset[0] !== 'env'
+                      ? preset
+                      : [
+                        'env',
+                        {
+                          targets: {
+                            node: parseFloat(
+                                pkg.engines.node.replace(/^\D+/g, ''),
+                              ),
+                          },
+                          modules: false,
+                          useBuiltIns: false,
+                          debug: false,
+                        },
+                      ],
+                ),
+            },
           },
-          modules: false,
-          useBuiltIns: false,
-          debug: false,
-        }])),
-      },
-    })),
+    ),
   },
 
   externals: [

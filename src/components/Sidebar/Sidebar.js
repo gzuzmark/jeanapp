@@ -7,7 +7,11 @@ import { dismissAlert } from '../../actions/alerts';
 import s from './Sidebar.scss';
 import LinksGroup from './LinksGroup/LinksGroup';
 
-import { openSidebar, closeSidebar, changeActiveSidebarItem } from '../../actions/navigation';
+import {
+  openSidebar,
+  closeSidebar,
+  changeActiveSidebarItem,
+} from '../../actions/navigation';
 import isScreen from '../../core/screenHelper';
 import { logoutUser } from '../../actions/user';
 
@@ -63,15 +67,24 @@ class Sidebar extends React.Component {
   render() {
     return (
       <nav
-        onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}
-        className={[s.root, this.props.sidebarStatic ? s.staticSidebar : '', !this.props.sidebarOpened ? s.sidebarClose : ''].join(' ')}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+        className={[
+          s.root,
+          this.props.sidebarStatic ? s.staticSidebar : '',
+          !this.props.sidebarOpened ? s.sidebarClose : '',
+        ].join(' ')}
       >
         <header className={s.logo}>
-          <a href="#"><span className="text-warning">App</span></a>
+          <a href="#">
+            <span className="text-warning">App</span>
+          </a>
         </header>
         <ul className={s.nav}>
           <LinksGroup
-            onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+            onActiveSidebarItemChange={activeItem =>
+              this.props.dispatch(changeActiveSidebarItem(activeItem))
+            }
             activeItem={this.props.activeItem}
             header="Agenda"
             isHeader
@@ -80,12 +93,32 @@ class Sidebar extends React.Component {
             index="main"
             childrenLinks={[
               {
-                header: 'Visitas', link: '/app/visits/main',
+                header: 'Visitas',
+                link: '/app/visits/main',
               },
             ]}
           />
           <LinksGroup
-            onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
+            onActiveSidebarItemChange={activeItem =>
+              this.props.dispatch(changeActiveSidebarItem(activeItem))
+            }
+            activeItem={this.props.activeItem}
+            header="Fuerza de Ventas"
+            isHeader
+            iconName="flaticon-home"
+            link="/app/main"
+            index="main"
+            childrenLinks={[
+              {
+                header: 'Seguimiento y rastreo',
+                link: '/app/sales/main',
+              },
+            ]}
+          />
+          <LinksGroup
+            onActiveSidebarItemChange={activeItem =>
+              this.props.dispatch(changeActiveSidebarItem(activeItem))
+            }
             activeItem={this.props.activeItem}
             header="Maps"
             isHeader
@@ -94,15 +127,17 @@ class Sidebar extends React.Component {
             index="maps"
             childrenLinks={[
               {
-                header: 'Google Maps', link: '/app/maps/google',
+                header: 'Google Maps',
+                link: '/app/maps/google',
               },
               {
-                header: 'Vector Map', link: '/app/maps/vector',
+                header: 'Vector Map',
+                link: '/app/maps/vector',
               },
             ]}
           />
         </ul>
-      </nav >
+      </nav>
     );
   }
 }

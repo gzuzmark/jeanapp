@@ -2,9 +2,7 @@ import React from 'react';
 import Rickshaw from 'rickshaw';
 import PropTypes from 'prop-types';
 
-
 class RickshawGraph extends React.Component {
-
   static propTypes = {
     height: PropTypes.number,
   };
@@ -51,7 +49,8 @@ class RickshawGraph extends React.Component {
           color: '#ffdddd',
           data: seriesData[0],
           name: 'Uploads',
-        }, {
+        },
+        {
           color: '#f55d5d',
           data: seriesData[1],
           name: 'Downloads',

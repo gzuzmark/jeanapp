@@ -14,12 +14,13 @@ export default class ScatterplotChart extends Component {
   }
 
   onResize = () => {
-    const width = $(this.rickshawChart).closest('.widget-body')[0].clientWidth - 30;
+    const width =
+      $(this.rickshawChart).closest('.widget-body')[0].clientWidth - 30;
 
     this.state.graph.configure({ width });
 
     this.state.graph.render();
-  }
+  };
 
   createChart() {
     const seriesData = [[], []];
@@ -37,7 +38,8 @@ export default class ScatterplotChart extends Component {
           color: '#ffd7de',
           data: seriesData[0],
           name: 'Series 1',
-        }, {
+        },
+        {
           color: '#8fe5d4',
           data: seriesData[1],
           name: 'Series 2',
@@ -45,7 +47,9 @@ export default class ScatterplotChart extends Component {
       ],
     });
 
-    const hoverDetail = new Rickshaw.Graph.HoverDetail({ graph: this.state.graph });
+    const hoverDetail = new Rickshaw.Graph.HoverDetail({
+      graph: this.state.graph,
+    });
 
     hoverDetail.show();
 
@@ -55,7 +59,11 @@ export default class ScatterplotChart extends Component {
   render() {
     return (
       <div>
-        <div ref={(r) => { this.rickshawChart = r; }} />
+        <div
+          ref={(r) => {
+            this.rickshawChart = r;
+          }}
+        />
       </div>
     );
   }

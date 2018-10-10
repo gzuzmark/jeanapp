@@ -28,7 +28,7 @@ export default class RevenueChart extends PureComponent {
       const result = [];
       const xStep = 1;
       const smoothness = 0.3;
-      const pointsPerPick = Math.ceil(xMax / ((picksAmount * 2) + 1) / 2);
+      const pointsPerPick = Math.ceil(xMax / (picksAmount * 2 + 1) / 2);
 
       const maxValues = [];
       const minValues = [];
@@ -43,14 +43,19 @@ export default class RevenueChart extends PureComponent {
 
       let localMax = maxValues.shift(0);
       let localMin = 0;
-      let yStep = parseFloat(((localMax - localMin) / pointsPerPick).toFixed(2));
+      let yStep = parseFloat(
+        ((localMax - localMin) / pointsPerPick).toFixed(2),
+      );
 
       for (let j = 0; j < Math.ceil(xMax); j += 1) {
         result.push([x, y]);
 
-        if ((y + yStep >= localMax) || (y + yStep <= localMin)) {
+        if (y + yStep >= localMax || y + yStep <= localMin) {
           y += yStep * smoothness;
-        } else if ((result[result.length - 1][1] === localMax) || (result[result.length - 1][1] === localMin)) {
+        } else if (
+          result[result.length - 1][1] === localMax ||
+          result[result.length - 1][1] === localMin
+        ) {
           y += yStep * smoothness;
         } else {
           y += yStep;
@@ -66,7 +71,10 @@ export default class RevenueChart extends PureComponent {
           localMax = maxValues.shift(0) || localMax;
 
           const share = (localMax - localMin) / localMax;
-          const p = share > 0.5 ? Math.round(pointsPerPick * 1.2) : Math.round(pointsPerPick * share);
+          const p =
+            share > 0.5
+              ? Math.round(pointsPerPick * 1.2)
+              : Math.round(pointsPerPick * share);
 
           yStep = parseFloat(((localMax - localMin) / p).toFixed(2));
           yStep *= Math.abs(yStep);
@@ -76,7 +84,10 @@ export default class RevenueChart extends PureComponent {
           localMin = minValues.shift(0) || localMin;
 
           const share = (localMax - localMin) / localMax;
-          const p = share > 0.5 ? Math.round(pointsPerPick * 1.5) : Math.round(pointsPerPick * 0.5);
+          const p =
+            share > 0.5
+              ? Math.round(pointsPerPick * 1.5)
+              : Math.round(pointsPerPick * 0.5);
 
           yStep = parseFloat(((localMax - localMin) / p).toFixed(2));
           yStep *= -1;
@@ -127,107 +138,132 @@ export default class RevenueChart extends PureComponent {
   initChart() {
     const data = this.getMainChartData();
 
-    const ticks = ['Dec 19', 'Dec 25', 'Dec 31', 'Jan 10', 'Jan 14',
-      'Jan 20', 'Jan 27', 'Jan 30', 'Feb 2', 'Feb 8', 'Feb 15',
-      'Feb 22', 'Feb 28', 'Mar 7', 'Mar 17'];
+    const ticks = [
+      'Dec 19',
+      'Dec 25',
+      'Dec 31',
+      'Jan 10',
+      'Jan 14',
+      'Jan 20',
+      'Jan 27',
+      'Jan 30',
+      'Feb 2',
+      'Feb 8',
+      'Feb 15',
+      'Feb 22',
+      'Feb 28',
+      'Mar 7',
+      'Mar 17',
+    ];
 
     // check the screen size and either show tick for every 4th tick on large screens, or
     // every 8th tick on mobiles
     const tickInterval = screen.width < 500 ? 10 : 6;
     let counter = 0;
 
-    return $.plot(this.$chartContainer, [{
-      label: 'Light Blue',
-      data: data[0],
-      lines: {
-        show: true,
-        fill: 0.3,
-        lineWidth: 0,
-      },
-      points: {
-        fillColor: '#A7BEFF',
-        symbol: (ctx, x, y) => {
-                // count for every 8nd point to show on line
-          if (counter % 8 === 0) { ctx.arc(x, y, 2, 0, Math.PI * 2, false); }
+    return $.plot(
+      this.$chartContainer,
+      [
+        {
+          label: 'Light Blue',
+          data: data[0],
+          lines: {
+            show: true,
+            fill: 0.3,
+            lineWidth: 0,
+          },
+          points: {
+            fillColor: '#A7BEFF',
+            symbol: (ctx, x, y) => {
+              // count for every 8nd point to show on line
+              if (counter % 8 === 0) {
+                ctx.arc(x, y, 2, 0, Math.PI * 2, false);
+              }
 
-          counter += 1;
+              counter += 1;
+            },
+          },
+          shadowSize: 0,
         },
-      },
-      shadowSize: 0,
-    }, {
-      label: 'RNS App',
-      data: data[1],
-      dashes: {
-        show: true,
-        lineWidth: 1.5,
-        dashLength: [5, 2],
-      },
-      points: {
-        fillColor: '#3abf94',
-      },
-      shadowSize: 0,
-    }, {
-      label: 'Sing App',
-      data: data[2],
-      lines: {
-        show: true,
-        lineWidth: 1.5,
-      },
-      points: {
-        fillColor: '#f55d5d',
+        {
+          label: 'RNS App',
+          data: data[1],
+          dashes: {
+            show: true,
+            lineWidth: 1.5,
+            dashLength: [5, 2],
+          },
+          points: {
+            fillColor: '#3abf94',
+          },
+          shadowSize: 0,
+        },
+        {
+          label: 'Sing App',
+          data: data[2],
+          lines: {
+            show: true,
+            lineWidth: 1.5,
+          },
+          points: {
+            fillColor: '#f55d5d',
+          },
+          shadowSize: 0,
+        },
+      ],
+      {
+        xaxis: {
+          tickColor: '#f8f9fa',
+          tickSize: tickInterval,
+          tickFormatter: i => ticks[i / tickInterval],
+          font: {
+            lineHeight: 11,
+            weight: 400,
+          },
+        },
+        yaxis: {
+          tickColor: '#f8f9fa',
+          max: 5,
+          font: {
+            lineHeight: 11,
+            weight: 400,
+          },
+        },
+        points: {
+          show: true,
+          fill: true,
+          lineWidth: 1,
+          radius: 1,
+          symbol: (ctx, x, y) => {
+            // show every 5th point on line
+            if (counter % 5 === 0) {
+              ctx.arc(x, y, 2, 0, Math.PI * 2, false);
+            }
 
-      },
-      shadowSize: 0,
-    }], {
-      xaxis: {
-        tickColor: '#f8f9fa',
-        tickSize: tickInterval,
-        tickFormatter: i => ticks[i / tickInterval],
-        font: {
-          lineHeight: 11,
-          weight: 400,
+            counter += 1;
+          },
+        },
+        grid: {
+          backgroundColor: { colors: ['#ffffff', '#ffffff'] },
+          borderWidth: 1,
+          borderColor: '#ffffff',
+          margin: 0,
+          minBorderMargin: 0,
+          labelMargin: 20,
+          hoverable: true,
+          clickable: true,
+          mouseActiveRadius: 6,
+        },
+        legend: {
+          noColumns: 3,
+          container: this.$chartLegend,
+        },
+        colors: ['#E2E1FF', '#3abf94', '#ffc247'],
+        hooks: {
+          draw: [this.onDrawHook.bind(this)],
         },
       },
-      yaxis: {
-        tickColor: '#f8f9fa',
-        max: 5,
-        font: {
-          lineHeight: 11,
-          weight: 400,
-        },
-      },
-      points: {
-        show: true,
-        fill: true,
-        lineWidth: 1,
-        radius: 1,
-        symbol: (ctx, x, y) => {
-                // show every 5th point on line
-          if (counter % 5 === 0) { ctx.arc(x, y, 2, 0, Math.PI * 2, false); }
-
-          counter += 1;
-        },
-      },
-      grid: {
-        backgroundColor: { colors: ['#ffffff', '#ffffff'] },
-        borderWidth: 1,
-        borderColor: '#ffffff',
-        margin: 0,
-        minBorderMargin: 0,
-        labelMargin: 20,
-        hoverable: true,
-        clickable: true,
-        mouseActiveRadius: 6,
-      },
-      legend: {
-        noColumns: 3,
-        container: this.$chartLegend,
-      },
-      colors: ['#E2E1FF', '#3abf94', '#ffc247'],
-      hooks: {
-        draw: [this.onDrawHook.bind(this)],
-      },
-    });
+    );
   }
 
   initEventListeners() {
@@ -238,10 +274,11 @@ export default class RevenueChart extends PureComponent {
         const x = item.datapoint[0].toFixed(2);
         const y = item.datapoint[1].toFixed(2);
 
-        self.$chartTooltip.html(`${item.series.label} at ${x} : ${y}`)
+        self.$chartTooltip
+          .html(`${item.series.label} at ${x} : ${y}`)
           .css({
-            top: (item.pageY + 5) - window.scrollY,
-            left: (item.pageX + 5) - window.scrollX,
+            top: item.pageY + 5 - window.scrollY,
+            left: item.pageX + 5 - window.scrollX,
           })
           .fadeIn(200);
       } else {
@@ -263,13 +300,27 @@ export default class RevenueChart extends PureComponent {
               </h5>
             </Col>
             <Col xs={12} sm={7}>
-              <div ref={(r) => { this.$chartLegend = $(r); }} />
+              <div
+                ref={(r) => {
+                  this.$chartLegend = $(r);
+                }}
+              />
             </Col>
           </Row>
         }
       >
-        <div ref={(r) => { this.$chartContainer = $(r); }} style={{ width: '100%', height: '250px' }} />
-        <div className="chart-tooltip" ref={(r) => { this.$chartTooltip = $(r); }} />
+        <div
+          ref={(r) => {
+            this.$chartContainer = $(r);
+          }}
+          style={{ width: '100%', height: '250px' }}
+        />
+        <div
+          className="chart-tooltip"
+          ref={(r) => {
+            this.$chartTooltip = $(r);
+          }}
+        />
       </Widget>
     );
   }

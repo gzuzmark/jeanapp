@@ -1,11 +1,6 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import {
-  Button,
-  ButtonGroup,
-  Breadcrumb,
-  BreadcrumbItem,
-} from 'reactstrap';
+import { Button, ButtonGroup, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import Lightbox from 'react-images';
 import Shuffle from 'react-shuffle';
@@ -13,109 +8,84 @@ import s from './Gallery.scss';
 
 import pic1 from '../../../images/pictures/1.jpg';
 
-
 const items = [
   {
     name: 'Mountains',
-    groups: [
-      'nature',
-    ],
+    groups: ['nature'],
     src: pic1,
     date: '10 mins',
   },
   {
     name: 'Empire State Pigeon',
-    groups: [
-      'people',
-    ],
+    groups: ['people'],
     src: pic1,
     date: '1 hour',
     like: true,
   },
   {
     name: 'Big Lake',
-    groups: [
-      'nature',
-    ],
+    groups: ['nature'],
     src: pic1,
     date: '2 mins',
     like: true,
   },
   {
     name: 'Forest',
-    groups: [
-      'nature',
-    ],
+    groups: ['nature'],
     src: pic1,
     date: '2 mins',
     like: true,
   },
   {
     name: 'Smile',
-    groups: [
-      'people',
-    ],
+    groups: ['people'],
     src: pic1,
     date: '2 mins',
   },
   {
     name: 'Smile',
-    groups: [
-      'people',
-    ],
+    groups: ['people'],
     src: pic1,
     date: '1 hour',
     like: true,
   },
   {
     name: 'Fog',
-    groups: [
-      'nature',
-    ],
+    groups: ['nature'],
     src: pic1,
     date: '2 mins',
     like: true,
   },
   {
     name: 'Beach',
-    groups: [
-      'people',
-    ],
+    groups: ['people'],
     src: pic1,
     date: '2 mins',
   },
   {
     name: 'Pause',
-    groups: [
-      'people',
-    ],
+    groups: ['people'],
     src: pic1,
     date: '3 hour',
     like: true,
   },
   {
     name: 'Space',
-    groups: [
-      'space',
-    ],
+    groups: ['space'],
     src: pic1,
     date: '3 hour',
     like: true,
   },
   {
     name: 'Shuttle',
-    groups: [
-      'space',
-    ],
+    groups: ['space'],
     src: pic1,
     date: '35 mins',
     like: true,
   },
   {
     name: 'Sky',
-    groups: [
-      'space',
-    ],
+    groups: ['space'],
     src: pic1,
     date: '2 mins',
   },
@@ -194,10 +164,13 @@ class Gallery extends React.Component {
 
   filterChildren(type) {
     this.setState({
-      children: type === 'all' ? items : items.filter((child) => {
-        const group = child.groups.find(item => item === type);
-        return !!group;
-      }),
+      children:
+        type === 'all'
+          ? items
+          : items.filter((child) => {
+            const group = child.groups.find(item => item === type);
+            return !!group;
+          }),
       activeGroup: type,
     });
   }
@@ -227,19 +200,56 @@ class Gallery extends React.Component {
           <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
           <BreadcrumbItem active>Gallery</BreadcrumbItem>
         </Breadcrumb>
-        <h1 className="page-title">Media - <span className="fw-semi-bold">Images</span>
+        <h1 className="page-title">
+          Media - <span className="fw-semi-bold">Images</span>
         </h1>
 
         <div className={s.galleryControls}>
           <ButtonGroup id="shuffle-buttons">
-            <Button color="default" onClick={() => this.filterChildren('all')} active={this.state.activeGroup === 'all'}>All</Button>
-            <Button color="default" onClick={() => this.filterChildren('nature')} active={this.state.activeGroup === 'nature'}>Nature</Button>
-            <Button color="default" onClick={() => this.filterChildren('people')} active={this.state.activeGroup === 'people'}>People</Button>
-            <Button color="default" onClick={() => this.filterChildren('space')} active={this.state.activeGroup === 'space'}>Space</Button>
+            <Button
+              color="default"
+              onClick={() => this.filterChildren('all')}
+              active={this.state.activeGroup === 'all'}
+            >
+              All
+            </Button>
+            <Button
+              color="default"
+              onClick={() => this.filterChildren('nature')}
+              active={this.state.activeGroup === 'nature'}
+            >
+              Nature
+            </Button>
+            <Button
+              color="default"
+              onClick={() => this.filterChildren('people')}
+              active={this.state.activeGroup === 'people'}
+            >
+              People
+            </Button>
+            <Button
+              color="default"
+              onClick={() => this.filterChildren('space')}
+              active={this.state.activeGroup === 'space'}
+            >
+              Space
+            </Button>
           </ButtonGroup>
           <ButtonGroup id="order-buttons">
-            <Button color="default" onClick={() => this.orderChildren('asc')} active={this.state.order === 'asc'}><i className="fa fa-sort-numeric-asc" /></Button>
-            <Button color="default" onClick={() => this.orderChildren('desc')} active={this.state.order === 'desc'}><i className="fa fa-sort-numeric-desc" /></Button>
+            <Button
+              color="default"
+              onClick={() => this.orderChildren('asc')}
+              active={this.state.order === 'asc'}
+            >
+              <i className="fa fa-sort-numeric-asc" />
+            </Button>
+            <Button
+              color="default"
+              onClick={() => this.orderChildren('desc')}
+              active={this.state.order === 'desc'}
+            >
+              <i className="fa fa-sort-numeric-desc" />
+            </Button>
           </ButtonGroup>
         </div>
         <Shuffle duration={500} fade={false} className={s.gallery}>
@@ -247,13 +257,30 @@ class Gallery extends React.Component {
             const key = item.name + index;
             return (
               <div key={key} className={`${s.picture} card`}>
-                <a href={item.src} onClick={e => this.openLightbox(index, e)}><img className="figure-img" src={item.src} alt="..." /></a>
+                <a href={item.src} onClick={e => this.openLightbox(index, e)}>
+                  <img className="figure-img" src={item.src} alt="..." />
+                </a>
                 <div className={s.description}>
                   <h6 className="mt-0 mb-xs">{item.name}</h6>
                   <ul className="post-links">
-                    <li><a href="#">{item.date}</a></li>
-                    <li><a href="#"><span className="text-danger"><i className={`fa ${item.like ? 'fa-heart' : 'fa-heart-o'}`} /> Like</span></a></li>
-                    <li><a href="#">Details</a></li>
+                    <li>
+                      <a href="#">{item.date}</a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span className="text-danger">
+                          <i
+                            className={`fa ${
+                              item.like ? 'fa-heart' : 'fa-heart-o'
+                            }`}
+                          />{' '}
+                          Like
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">Details</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -273,9 +300,9 @@ class Gallery extends React.Component {
           enableKeyboardInput
           theme={this.state.theme}
         />
-      </div>);
+      </div>
+    );
   }
-
 }
 
 export default withStyles(s)(Gallery);

@@ -45,12 +45,19 @@ class PieChart extends PureComponent {
   }
 
   labelFormatter(label, series) { // eslint-disable-line
-    return `<h1><span class="badge badge-secondary">${label}: ${Math.round(series.percent)}%</span></h1>`;
+    return `<h1><span class="badge badge-secondary">${label}: ${Math.round(
+      series.percent,
+    )}%</span></h1>`;
   }
 
   render() {
     return (
-      <div ref={(r) => { this.$chartContainer = $(r); }} style={{ height: '150px' }} />
+      <div
+        ref={(r) => {
+          this.$chartContainer = $(r);
+        }}
+        style={{ height: '150px' }}
+      />
     );
   }
 }

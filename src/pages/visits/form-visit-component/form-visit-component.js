@@ -1,15 +1,37 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { Row, Col, Button, FormGroup, Label, Nav, NavLink, NavItem, Progress } from 'reactstrap';
+import {
+  Row,
+  Col,
+  Button,
+  FormGroup,
+  Label,
+  Nav,
+  NavLink,
+  NavItem,
+  Progress,
+} from 'reactstrap';
 import Formsy from 'formsy-react';
 import Select2 from 'react-select2-wrapper';
-import MaskedInput from 'react-maskedinput';
 import Datetime from 'react-datetime';
-import { select2CountriesData, select2ShipmentData, cardTypesData } from './form-visit-data';
+// import { connect } from 'react-redux';
+// import { compose } from 'redux';
+// import { createStructuredSelector } from 'reselect';
+
+// import injectReducer from '../../../utils/injectReducer';
+// import injectSaga from '../../../utils/injectSaga';
+// import {
+//   makeSelectRepos,
+//   makeSelectLoading,
+//   makeSelectError,
+// } from '../../../components/Selectors';
+import { cardTypesData } from './form-visit-data';
 
 import InputValidation from '../../../components/InputValidation/InputValidation';
 import Widget from '../../../components/Widget';
 import s from './form-visit-component.scss';
+// import { changeRuc } from './actions';
+// import { loadRepos } from '../table-visit-component/actions';
 
 const count = 4;
 const StepsComponents = {
@@ -17,17 +39,62 @@ const StepsComponents = {
     return (
       <fieldset>
         <FormGroup>
-          <Label for="username">Username</Label>
+          <Label for="username">RUC</Label>
           <InputValidation
             type="text"
-            id="username"
-            name="username"
-            validations={{ isAlphanumeric: true }}
-            trigger="change"
+            id="number"
+            name="number"
             required
-            validationError={{ isAlphanumeric: 'Username can contain any letters or numbers, without spaces' }}
+            validations="isNumeric"
+            validationError={{
+              isNumeric: 'This value should be a valid number.',
+            }}
           />
-          <p className="help-block">Username can contain any letters or numbers, without spaces</p>
+          <p className="help-block">
+            Username can contain any letters or numbers, without spaces
+          </p>
+        </FormGroup>
+      </fieldset>
+    );
+  },
+  Step2: function Step2() {
+    return (
+      <fieldset>
+        <FormGroup>
+          <Label for="address">Nombres</Label>
+          <InputValidation
+            type="text"
+            id="address"
+            name="address"
+            validations={{ isAlpha: true }}
+            required
+            validationError={{ isAlpha: 'Indique sus nombres' }}
+          />
+          <p className="help-block">Indique sus nombres</p>
+        </FormGroup>
+        <FormGroup>
+          <Label for="address">Apellidos</Label>
+          <InputValidation
+            type="text"
+            id="address"
+            name="address"
+            validations={{ isAlpha: true }}
+            required
+            validationError={{ isAlpha: 'Indique sus apellidos' }}
+          />
+          <p className="help-block">Pndique sus apellidos</p>
+        </FormGroup>
+        <FormGroup>
+          <Label for="address">Teléfono</Label>
+          <InputValidation
+            type="text"
+            id="address"
+            name="address"
+            validations={{ isAlpha: true }}
+            required
+            validationError={{ isAlpha: 'Indique su teléfono' }}
+          />
+          <p className="help-block">Pndique sus apellidos</p>
         </FormGroup>
         <FormGroup>
           <Label for="email">Email</Label>
@@ -42,42 +109,15 @@ const StepsComponents = {
           <p className="help-block">Please provide your E-mail</p>
         </FormGroup>
         <FormGroup>
-          <Label for="address">Address</Label>
+          <Label for="address">Cargo</Label>
           <InputValidation
             type="text"
             id="address"
             name="address"
             validations={{ isAlpha: true }}
-            required
-            validationError={{ isAlpha: 'Please provide your address' }}
+            validationError={{ isAlpha: 'Indique su teléfono' }}
           />
-          <p className="help-block">Please provide your address</p>
-        </FormGroup>
-      </fieldset>
-    );
-  },
-  Step2: function Step2() {
-    return (
-      <fieldset>
-        <FormGroup>
-          <Label for="country-select">Destination Country</Label>
-          <Select2 style={{ width: '100%' }} id="country-selec" data={select2CountriesData} />
-          <p className="help-block">Please choose your country destination</p>
-        </FormGroup>
-        <FormGroup>
-          <Label for="courier">Choose shipping option</Label>
-          <Select2 style={{ width: '100%' }} id="courier" data={select2ShipmentData} />
-          <p className="help-block">Please choose your shipping option</p>
-        </FormGroup>
-        <FormGroup>
-          <Label for="destination">Destination Zip Code</Label>
-          <MaskedInput className="form-control" id="destination" mask="111111" size="6" />
-          <p className="help-block">Please provide your Destination Zip Code</p>
-        </FormGroup>
-        <FormGroup>
-          <Label for="dest-address">Destination Address</Label>
-          <InputValidation type="text" id="dest-address" name="dest-address" />
-          <p className="help-block">Please provide the destination address</p>
+          <p className="help-block">Pndique sus apellidos</p>
         </FormGroup>
       </fieldset>
     );
@@ -91,7 +131,11 @@ const StepsComponents = {
         </FormGroup>
         <FormGroup>
           <Label for="credit-card-type">Choose shipping option</Label>
-          <Select2 style={{ width: '100%' }} id="credit-card-type" data={cardTypesData} />
+          <Select2
+            style={{ width: '100%' }}
+            id="credit-card-type"
+            data={cardTypesData}
+          />
         </FormGroup>
         <FormGroup>
           <Label for="credit">Credit Card Number</Label>
@@ -161,73 +205,78 @@ class FormWizardVisitComponet extends React.Component {
   }
 
   render() {
+    // const { loading, error, visits } = this.props;
+    // const visitsListProps = {
+    //   loading,
+    //   error,
+    //   visits,
+    // };
     const currentStep = this.state.currentStep;
     return (
       <div className={s.root}>
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">YOU ARE HERE</li>
-          <li className="breadcrumb-item active">Form Wizard</li>
-        </ol>
-        <h1 className="page-title">
-          Form - <span className="fw-semi-bold">Wizard</span>
-        </h1>
         <Row>
+          <Col xs={0} lg={1} />
           <Col xl={8} lg={12}>
-            <Widget
-              close
-              collapse
-              className={s.formWizard}
-              title={
-                <div>
-                  <h4>
-                    Wizard&nbsp;
-                    <small>Tunable widget</small>
-                  </h4>
-                  <p className="text-muted">An example of complete wizard form in widget.</p>
-                </div>
-              }
-            >
+            <Widget className={s.formWizard}>
               <Nav pills justified className={s.wizardNavigation}>
                 <NavItem>
                   <NavLink active={currentStep === 1}>
                     <small>1.</small>
-                    &nbsp; Your Details
+                    &nbsp; Validacion
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink active={currentStep === 2}>
+                  <NavLink active={currentStep === 2} onClick={this.nextStep}>
                     <small>2.</small>
-                    &nbsp; Shipping
+                    &nbsp;Contacto
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink active={currentStep === 3}>
                     <small>3.</small>
-                    &nbsp; Pay
+                    &nbsp;Visita
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink active={currentStep === 4}>
                     <small>4.</small>
-                    &nbsp; Thank you!
+                    &nbsp;Ubicacion
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink active={currentStep === 5}>
+                    <small>4.</small>
+                    &nbsp;Confirmación
                   </NavLink>
                 </NavItem>
               </Nav>
-              <Progress value={this.state.progress} color="gray-light" className="progress-xs" />
+              <Progress
+                value={this.state.progress}
+                color="gray-light"
+                className="progress-xs"
+              />
               <div className="tab-content">
                 <div className={s.stepBody}>
                   <Formsy.Form>
                     {currentStep === 1 && <StepsComponents.Step1 />}
                     {currentStep === 2 && <StepsComponents.Step2 />}
                     {currentStep === 3 && <StepsComponents.Step3 />}
-                    {currentStep === 4 && <StepsComponents.Step4 isDatePickerOpen={this.state.isDatePickerOpen} />}
+                    {currentStep === 4 && (
+                      <StepsComponents.Step4
+                        isDatePickerOpen={this.state.isDatePickerOpen}
+                      />
+                    )}
                   </Formsy.Form>
                 </div>
 
                 <div className="description">
                   <ul className="pager wizard">
                     <li className="previous">
-                      <Button disabled={currentStep === 1} color="primary" onClick={this.previousStep}>
+                      <Button
+                        disabled={currentStep === 1}
+                        color="primary"
+                        onClick={this.previousStep}
+                      >
                         <i className="fa fa-caret-left" />
                         &nbsp;Previous
                       </Button>

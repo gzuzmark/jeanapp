@@ -11,7 +11,6 @@ import AnimateNumber from '../animate-number/AnimateNumber';
 import s from './MapaelMap.scss';
 
 class MapaelMap extends React.Component {
-
   componentDidMount() {
     let state = '';
     const geoLocationData = {
@@ -73,14 +72,14 @@ class MapaelMap extends React.Component {
           tooltip: { content: 'San Francisco' },
         },
         la: {
-          latitude: 26.935080,
+          latitude: 26.93508,
           longitude: -80.851766,
           size: 26,
           tooltip: { content: 'Lake Okeechobee' },
         },
         gc: {
           latitude: 36.331308,
-          longitude: -83.336050,
+          longitude: -83.33605,
           size: 10,
           tooltip: { content: 'Grainger County' },
         },
@@ -113,7 +112,7 @@ class MapaelMap extends React.Component {
           tooltip: { content: 'Union County' },
         },
         lm: {
-          latitude: 33.844630,
+          latitude: 33.84463,
           longitude: -118.157483,
           tooltip: { content: 'Lakewood Mutual' },
         },
@@ -128,7 +127,9 @@ class MapaelMap extends React.Component {
         <div className="stats">
           <h6 className="mt-1">GEO-LOCATIONS</h6>
           <p className="h3 m-0">
-            <span className="mr-xs fw-normal"><AnimateNumber>1 656 843</AnimateNumber></span>
+            <span className="mr-xs fw-normal">
+              <AnimateNumber>1 656 843</AnimateNumber>
+            </span>
             <i className="fa fa-map-marker" />
           </p>
         </div>

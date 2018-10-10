@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import Section from './components/Section/Section';
 import Banner from './components/Banner/Banner';
@@ -29,8 +26,7 @@ const Product = () => (
     <Section title="You may also like">
       <Slider slides={cardsMock} />
     </Section>
-  </div >
+  </div>
 );
-
 
 export default Product;

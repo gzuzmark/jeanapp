@@ -100,10 +100,19 @@ class YearsMap extends React.Component {
     const height = 394;
     $map.css('height', height);
     if ($map.parents('.widget')[0]) {
-      $map.find('.map').css('height', parseInt($map.parents('.widget').css('height'), 10) - 35);
+      $map
+        .find('.map')
+        .css(
+          'height',
+          parseInt($map.parents('.widget').css('height'), 10) - 35,
+        );
     }
     $map.mapael(data);
-    $map.trigger('zoom', { level: 6, latitude: 59.599254, longitude: 8.863224 });
+    $map.trigger('zoom', {
+      level: 6,
+      latitude: 59.599254,
+      longitude: 8.863224,
+    });
   }
 
   triggerYear(year) {
@@ -111,53 +120,92 @@ class YearsMap extends React.Component {
       activeYear: year,
     });
     const $map = $('#mapael');
-    $map.trigger('update', [{
-      mapOptions: fakeWorldData[year],
-      animDuration: 300,
-    }]);
+    $map.trigger('update', [
+      {
+        mapOptions: fakeWorldData[year],
+        animDuration: 300,
+      },
+    ]);
   }
 
   render() {
-    return (<div>
-      <div className="mapael" id="mapael">
-        <div className="stats">
-          <h6 className="text-gray-dark">YEARLY <span className="fw-semi-bold">DISTRIBUTIONS</span></h6>
-          <span className="pull-left mr-xs">
-            <small><span className="circle bg-warning text-gray-dark">
-              <i className="fa fa-plus" /></span></small>
-          </span>
-          <p className="h4 m-0">
-            <strong>17% last year</strong>
-          </p>
+    return (
+      <div>
+        <div className="mapael" id="mapael">
+          <div className="stats">
+            <h6 className="text-gray-dark">
+              YEARLY <span className="fw-semi-bold">DISTRIBUTIONS</span>
+            </h6>
+            <span className="pull-left mr-xs">
+              <small>
+                <span className="circle bg-warning text-gray-dark">
+                  <i className="fa fa-plus" />
+                </span>
+              </small>
+            </span>
+            <p className="h4 m-0">
+              <strong>17% last year</strong>
+            </p>
+          </div>
+          <div className="map">
+            <span>Alternative content for the map</span>
+          </div>
+          <div className="areaLegend">
+            <span>Alternative content for the legend</span>
+          </div>
         </div>
-        <div className="map">
-          <span>Alternative content for the map</span>
-        </div>
-        <div className="areaLegend">
-          <span>Alternative content for the legend</span>
-        </div>
+        <Nav className="map-controls" pills fill>
+          <NavItem>
+            <NavLink
+              active={this.state.activeYear === 2012}
+              onClick={() => this.triggerYear(2012)}
+            >
+              2012
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              active={this.state.activeYear === 2013}
+              onClick={() => this.triggerYear(2013)}
+            >
+              2013
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              active={this.state.activeYear === 2014}
+              onClick={() => this.triggerYear(2014)}
+            >
+              2014
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              active={this.state.activeYear === 2015}
+              onClick={() => this.triggerYear(2015)}
+            >
+              2015
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              active={this.state.activeYear === 2016}
+              onClick={() => this.triggerYear(2016)}
+            >
+              2016
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              active={this.state.activeYear === 2017}
+              onClick={() => this.triggerYear(2017)}
+            >
+              2017
+            </NavLink>
+          </NavItem>
+        </Nav>
       </div>
-      <Nav className="map-controls" pills fill>
-        <NavItem>
-          <NavLink active={this.state.activeYear === 2012} onClick={() => this.triggerYear(2012)}>2012</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink active={this.state.activeYear === 2013} onClick={() => this.triggerYear(2013)}>2013</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink active={this.state.activeYear === 2014} onClick={() => this.triggerYear(2014)}>2014</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink active={this.state.activeYear === 2015} onClick={() => this.triggerYear(2015)}>2015</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink active={this.state.activeYear === 2016} onClick={() => this.triggerYear(2016)}>2016</NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink active={this.state.activeYear === 2017} onClick={() => this.triggerYear(2017)}>2017</NavLink>
-        </NavItem>
-      </Nav>
-    </div>);
+    );
   }
 }
 

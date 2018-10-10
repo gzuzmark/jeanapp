@@ -54,13 +54,19 @@ import loadChartsSparkline from 'bundle-loader?lazy!../../pages/charts/sparkline
 import loadChartsRickshaw from 'bundle-loader?lazy!../../pages/charts/rickshaw';
 import loadDashboardAnalytics from 'bundle-loader?lazy!../../pages/analytics'; 
 import loadVisits from 'bundle-loader?lazy!../../pages/visits/table-visit-component';
+import loadSales from 'bundle-loader?lazy!../../pages/sales';
 /* eslint-enable */
 
 import s from './Layout.scss';
 import Header from '../Header';
 import Bundle from '../../core/Bundle';
 import Sidebar from '../Sidebar';
-import { openSidebar, closeSidebar, changeActiveSidebarItem, toggleSidebar } from '../../actions/navigation';
+import {
+  openSidebar,
+  closeSidebar,
+  changeActiveSidebarItem,
+  toggleSidebar,
+} from '../../actions/navigation';
 
 // Dashboard component is loaded directly as an example of server side rendering
 import Dashboard from '../../pages/dashboard';
@@ -110,6 +116,7 @@ const ChartsSparklineBundle = Bundle.generateBundle(loadChartsSparkline);
 const ChartsRickshawBundle = Bundle.generateBundle(loadChartsRickshaw);
 const DashboardAnalyticsBundle = Bundle.generateBundle(loadDashboardAnalytics);
 const VisitsBundle = Bundle.generateBundle(loadVisits);
+const SalesBundle = Bundle.generateBundle(loadSales);
 
 class Layout extends React.Component {
   static propTypes = {
@@ -152,11 +159,14 @@ class Layout extends React.Component {
     setTimeout(() => {
       // demo: add class & badge to indicate incoming messages from contact
       // .js-notification-added ensures notification added only once
-      $('#chat-sidebar-user-group').find('.list-group-item:first-child:not(.js-notification-added)')
+      $('#chat-sidebar-user-group')
+        .find('.list-group-item:first-child:not(.js-notification-added)')
         .addClass('active js-notification-added')
         .find('.fa-circle')
-        .after('<span class="badge badge-danger badge-pill ' +
-        'float-right animated bounceInDown">3</span>');
+        .after(
+          '<span class="badge badge-danger badge-pill ' +
+            'float-right animated bounceInDown">3</span>',
+        );
     }, 1000);
   }
 
@@ -191,63 +201,227 @@ class Layout extends React.Component {
           <Hammer onSwipe={this.handleSwipe}>
             <main className={s.content}>
               <Switch>
-                <Route path="/app/main" exact render={() => <Redirect to="/app/visits/main" />} />
+                <Route
+                  path="/app/main"
+                  exact
+                  render={() => <Redirect to="/app/visits/main" />}
+                />
                 <Route path="/app/visits/main" exact component={VisitsBundle} />
+                <Route path="/app/sales/main" exact component={SalesBundle} />
                 <Route path="/app/main/dashboard" exact component={Dashboard} />
-                <Route path="/app/main/widgets" exact component={WidgetsBundle} />
-                <Route path="/app/main/analytics" exact component={DashboardAnalyticsBundle} />
-                <Route path="/app/ecommerce/products" exact component={ProductsBundle} />
-                <Route path="/app/ecommerce/product" exact component={ProductBundle} />
+                <Route
+                  path="/app/main/widgets"
+                  exact
+                  component={WidgetsBundle}
+                />
+                <Route
+                  path="/app/main/analytics"
+                  exact
+                  component={DashboardAnalyticsBundle}
+                />
+                <Route
+                  path="/app/ecommerce/products"
+                  exact
+                  component={ProductsBundle}
+                />
+                <Route
+                  path="/app/ecommerce/product"
+                  exact
+                  component={ProductBundle}
+                />
                 <Route path="/app/profile" exact component={ProfileBundle} />
                 <Route path="/app/inbox" exact component={EmailBundle} />
-                <Route path="/app/ui" exact render={() => <Redirect to="/app/ui/components" />} />
-                <Route path="/app/ui/buttons" exact component={UIButtonsBundle} />
+                <Route
+                  path="/app/ui"
+                  exact
+                  render={() => <Redirect to="/app/ui/components" />}
+                />
+                <Route
+                  path="/app/ui/buttons"
+                  exact
+                  component={UIButtonsBundle}
+                />
                 <Route path="/app/ui/icons" exact component={UIIconsBundle} />
-                <Route path="/app/ui/tabs-accordion" exact component={UITabsAccordionBundle} />
-                <Route path="/app/ui/notifications" exact component={UINotificationsBundle} />
-                <Route path="/app/ui/list-groups" exact component={UIListGroupsBundle} />
+                <Route
+                  path="/app/ui/tabs-accordion"
+                  exact
+                  component={UITabsAccordionBundle}
+                />
+                <Route
+                  path="/app/ui/notifications"
+                  exact
+                  component={UINotificationsBundle}
+                />
+                <Route
+                  path="/app/ui/list-groups"
+                  exact
+                  component={UIListGroupsBundle}
+                />
                 <Route path="/app/ui/alerts" exact component={UIAlertsBundle} />
                 <Route path="/app/ui/badge" exact component={UIBadgeBundle} />
                 <Route path="/app/ui/card" exact component={UICardBundle} />
-                <Route path="/app/ui/carousel" exact component={UICarouselBundle} />
-                <Route path="/app/ui/jumbotron" exact component={UIJumbotronBundle} />
+                <Route
+                  path="/app/ui/carousel"
+                  exact
+                  component={UICarouselBundle}
+                />
+                <Route
+                  path="/app/ui/jumbotron"
+                  exact
+                  component={UIJumbotronBundle}
+                />
                 <Route path="/app/ui/modal" exact component={UIModalBundle} />
-                <Route path="/app/ui/popovers" exact component={UIPopoversBundle} />
-                <Route path="/app/ui/progress" exact component={UIProgressBundle} />
+                <Route
+                  path="/app/ui/popovers"
+                  exact
+                  component={UIPopoversBundle}
+                />
+                <Route
+                  path="/app/ui/progress"
+                  exact
+                  component={UIProgressBundle}
+                />
                 <Route path="/app/ui/navbar" exact component={UINavbarBundle} />
                 <Route path="/app/ui/nav" exact component={UINavBundle} />
                 <Route path="/app/grid" exact component={GridBundle} />
                 <Route path="/app/package" exact component={PackageBundle} />
-                <Route path="/app/forms" exact render={() => <Redirect to="/app/forms/elements" />} />
-                <Route path="/app/forms/elements" exact component={FormsElementsBundle} />
-                <Route path="/app/forms/validation" exact component={FormsValidationBundle} />
-                <Route path="/app/forms/wizard" exact component={FormsWizardBundle} />
-                <Route path="/app/charts/" exact render={() => <Redirect to="/app/charts/overview" />} />
-                <Route path="/app/charts/overview" exact component={ChartsBundle} />
-                <Route path="/app/charts/easy-pie" exact component={ChartsEasyPieBundle} />
-                <Route path="/app/charts/morris" exact component={ChartsMorrisBundle} />
-                <Route path="/app/charts/flot" exact component={ChartsFlotBundle} />
-                <Route path="/app/charts/sparkline" exact component={ChartsSparklineBundle} />
-                <Route path="/app/charts/rickshaw" exact component={ChartsRickshawBundle} />
-                <Route path="/app/tables" exact render={() => <Redirect to="/app/tables/static" />} />
-                <Route path="/app/tables/static" exact component={TablesStaticBundle} />
-                <Route path="/app/tables/dynamic" exact component={TablesDynamicBundle} />
-                <Route path="/app/maps" exact render={() => <Redirect to="/app/maps/google" />} />
-                <Route path="/app/maps/google" exact component={MapsGoogleBundle} />
-                <Route path="/app/maps/vector" exact component={MapsVectorBundle} />
-                <Route path="/app/extra" exact render={() => <Redirect to="/app/extra/calendar" />} />
-                <Route path="/app/extra/calendar" exact component={ExtraCalendarBundle} />
-                <Route path="/app/extra/invoice" exact component={ExtraInvoiceBundle} />
-                <Route path="/app/extra/search" exact component={ExtraSearchBundle} />
-                <Route path="/app/extra/timeline" exact component={ExtraTimelineBundle} />
-                <Route path="/app/extra/gallery" exact component={ExtraGallerylineBundle} />
-                <Route path="/app/core" exact render={() => <Redirect to="/app/core/typography" />} />
-                <Route path="/app/core/typography" exact component={CoreTypographyBundle} />
-                <Route path="/app/core/colors" exact component={CoreColorsBundle} />
+                <Route
+                  path="/app/forms"
+                  exact
+                  render={() => <Redirect to="/app/forms/elements" />}
+                />
+                <Route
+                  path="/app/forms/elements"
+                  exact
+                  component={FormsElementsBundle}
+                />
+                <Route
+                  path="/app/forms/validation"
+                  exact
+                  component={FormsValidationBundle}
+                />
+                <Route
+                  path="/app/forms/wizard"
+                  exact
+                  component={FormsWizardBundle}
+                />
+                <Route
+                  path="/app/charts/"
+                  exact
+                  render={() => <Redirect to="/app/charts/overview" />}
+                />
+                <Route
+                  path="/app/charts/overview"
+                  exact
+                  component={ChartsBundle}
+                />
+                <Route
+                  path="/app/charts/easy-pie"
+                  exact
+                  component={ChartsEasyPieBundle}
+                />
+                <Route
+                  path="/app/charts/morris"
+                  exact
+                  component={ChartsMorrisBundle}
+                />
+                <Route
+                  path="/app/charts/flot"
+                  exact
+                  component={ChartsFlotBundle}
+                />
+                <Route
+                  path="/app/charts/sparkline"
+                  exact
+                  component={ChartsSparklineBundle}
+                />
+                <Route
+                  path="/app/charts/rickshaw"
+                  exact
+                  component={ChartsRickshawBundle}
+                />
+                <Route
+                  path="/app/tables"
+                  exact
+                  render={() => <Redirect to="/app/tables/static" />}
+                />
+                <Route
+                  path="/app/tables/static"
+                  exact
+                  component={TablesStaticBundle}
+                />
+                <Route
+                  path="/app/tables/dynamic"
+                  exact
+                  component={TablesDynamicBundle}
+                />
+                <Route
+                  path="/app/maps"
+                  exact
+                  render={() => <Redirect to="/app/maps/google" />}
+                />
+                <Route
+                  path="/app/maps/google"
+                  exact
+                  component={MapsGoogleBundle}
+                />
+                <Route
+                  path="/app/maps/vector"
+                  exact
+                  component={MapsVectorBundle}
+                />
+                <Route
+                  path="/app/extra"
+                  exact
+                  render={() => <Redirect to="/app/extra/calendar" />}
+                />
+                <Route
+                  path="/app/extra/calendar"
+                  exact
+                  component={ExtraCalendarBundle}
+                />
+                <Route
+                  path="/app/extra/invoice"
+                  exact
+                  component={ExtraInvoiceBundle}
+                />
+                <Route
+                  path="/app/extra/search"
+                  exact
+                  component={ExtraSearchBundle}
+                />
+                <Route
+                  path="/app/extra/timeline"
+                  exact
+                  component={ExtraTimelineBundle}
+                />
+                <Route
+                  path="/app/extra/gallery"
+                  exact
+                  component={ExtraGallerylineBundle}
+                />
+                <Route
+                  path="/app/core"
+                  exact
+                  render={() => <Redirect to="/app/core/typography" />}
+                />
+                <Route
+                  path="/app/core/typography"
+                  exact
+                  component={CoreTypographyBundle}
+                />
+                <Route
+                  path="/app/core/colors"
+                  exact
+                  component={CoreColorsBundle}
+                />
                 <Route path="/app/core/grid" exact component={CoreGridBundle} />
               </Switch>
               <footer className={s.contentFooter}>
-                Jean - Made by <a href="#" rel="nofollow noopener noreferrer" target="_blank">ForEach</a>
+                Jean - Made by{' '}
+                <a href="#" rel="nofollow noopener noreferrer" target="_blank">
+                  ForEach
+                </a>
               </footer>
             </main>
           </Hammer>

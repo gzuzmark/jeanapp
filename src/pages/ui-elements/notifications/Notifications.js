@@ -1,8 +1,6 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import {
-  Row, Col, Button,
-} from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 /* eslint-disable */
 import 'imports-loader?$=jquery,this=>window!messenger/build/js/messenger';
 /* eslint-enable */
@@ -75,7 +73,6 @@ class Notifications extends React.Component {
     };
   }
 
-
   componentDidMount() {
     initializationMessengerCode();
     Messenger.options = {
@@ -102,9 +99,12 @@ class Notifications extends React.Component {
       actions: {
         cancel: {
           label: 'cancel launch',
-          action: () => msg.update({
-            message: 'Thermonuclear war averted', type: 'success', actions: false,
-          }),
+          action: () =>
+            msg.update({
+              message: 'Thermonuclear war averted',
+              type: 'success',
+              actions: false,
+            }),
         },
       },
     });
@@ -135,7 +135,7 @@ class Notifications extends React.Component {
 
   toggleLocation(vertical = 'top', horizontal = '') {
     let className = `messenger-fixed messenger-on-${vertical}`;
-    className += (horizontal === '') ? '' : ` messenger-on-${horizontal}`;
+    className += horizontal === '' ? '' : ` messenger-on-${horizontal}`;
     this.setState({
       locationClasses: className,
     });
@@ -153,18 +153,20 @@ class Notifications extends React.Component {
           <li className="breadcrumb-item">YOU ARE HERE</li>
           <li className="breadcrumb-item active">UI Notifications</li>
         </ol>
-        <h1 className="page-title">Messages - <span className="fw-semi-bold">Notifications</span>
+        <h1 className="page-title">
+          Messages - <span className="fw-semi-bold">Notifications</span>
         </h1>
 
         <Widget title={<h6> Messenger </h6>} close collapse settings>
           <Row>
             <Col lg="4" xs="12">
               <h5 className="m-t-1">Layout options</h5>
-              <p>There are few position options available for notifications. You can click any of
-                them
-                to change notifications position:</p>
+              <p>
+                There are few position options available for notifications. You
+                can click any of them to change notifications position:
+              </p>
               <div className="location-selector">
-                { /* eslint-disable */}
+                {/* eslint-disable */}
                 <div
                   className="bit top left" onClick={() => {
                     this.toggleLocation('top', 'left');
@@ -201,26 +203,56 @@ class Notifications extends React.Component {
 
             <Col lg="4" xs="12">
               <h5 className="m-t-1">Notification Types</h5>
-              <p>Different types of notifications for lost of use cases. Custom classes are also
-                supported.</p>
-              <p><Button color="info" id="show-info-message" onClick={this.addInfoNotification}>Info
-                Message</Button></p>
-              <p><Button color="danger" id="show-error-message" onClick={this.addErrorNotification}>Error
-                + Retry Message</Button></p>
-              <p><Button
-                color="success" id="show-success-message" onClick={this.addSuccessNotification}
-              >Success
-                Message</Button></p>
+              <p>
+                Different types of notifications for lost of use cases. Custom
+                classes are also supported.
+              </p>
+              <p>
+                <Button
+                  color="info"
+                  id="show-info-message"
+                  onClick={this.addInfoNotification}
+                >
+                  Info Message
+                </Button>
+              </p>
+              <p>
+                <Button
+                  color="danger"
+                  id="show-error-message"
+                  onClick={this.addErrorNotification}
+                >
+                  Error + Retry Message
+                </Button>
+              </p>
+              <p>
+                <Button
+                  color="success"
+                  id="show-success-message"
+                  onClick={this.addSuccessNotification}
+                >
+                  Success Message
+                </Button>
+              </p>
             </Col>
 
             <Col lg="4" xs="12">
               <h5 className="m-t-1">Dead Simple Usage</h5>
-              <p>Just few lines of code to instantiate a notifications object. Does not require
-                passing any options:</p>
-              <pre><code>{'Messenger().post("Thanks for checking out Messenger!");'}</code></pre>
+              <p>
+                Just few lines of code to instantiate a notifications object.
+                Does not require passing any options:
+              </p>
+              <pre>
+                <code>
+                  {'Messenger().post("Thanks for checking out Messenger!");'}
+                </code>
+              </pre>
               <p>More complex example:</p>
               <pre>
-                <code>{'\nMessenger().post({\n  message: \'There was an explosion while processing your request.\',\n  type: \'error\',\n  showCloseButton: true\n});\n\n'}
+                <code>
+                  {
+                    "\nMessenger().post({\n  message: 'There was an explosion while processing your request.',\n  type: 'error',\n  showCloseButton: true\n});\n\n"
+                  }
                 </code>
               </pre>
             </Col>

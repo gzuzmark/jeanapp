@@ -53,7 +53,14 @@ class Email extends Component {
   };
 
   render() {
-    const { isNotificationOpen, filter, openedMessage, alertAfter, compose, composeData } = this.state;
+    const {
+      isNotificationOpen,
+      filter,
+      openedMessage,
+      alertAfter,
+      compose,
+      composeData,
+    } = this.state;
     return (
       <div>
         <Breadcrumb>
@@ -70,11 +77,16 @@ class Email extends Component {
             toggle={() => this.closeNotification()}
             className={cx(s.alert, { [s.alertAfter]: alertAfter })}
           >
-            Hey! This is a <span className="fw-semi-bold">real app</span> with CRUD and Search functions. Have fun!
+            Hey! This is a <span className="fw-semi-bold">real app</span> with
+            CRUD and Search functions. Have fun!
           </Alert>
         </div>
         <div className={s.view}>
-          <Filters filter={this.filter} openMessage={this.openMessage} compose={this.changeCompose} />
+          <Filters
+            filter={this.filter}
+            openMessage={this.openMessage}
+            compose={this.changeCompose}
+          />
           <MessageTable
             filter={filter}
             openedMessage={openedMessage}

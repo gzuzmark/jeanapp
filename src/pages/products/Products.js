@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import FilterElement from './components/FilterElement/FilterElement';
 import ProductCard from './components/ProductCard/ProductCard';
@@ -12,39 +9,43 @@ import MobileModal from './components/MobileModal/MobileModal';
 import mock from './mock';
 import s from './Products.scss';
 
-const filtersData = [{
-  title: 'Filter',
-  data: [{
-    id: 0,
-    label: 'Type',
-    options: ['Shoes', 'Boots', 'Trainers'],
+const filtersData = [
+  {
+    title: 'Filter',
+    data: [
+      {
+        id: 0,
+        label: 'Type',
+        options: ['Shoes', 'Boots', 'Trainers'],
+      },
+      {
+        id: 1,
+        label: 'Brands',
+        options: ['All', 'Nike', 'Adidas'],
+      },
+      {
+        id: 2,
+        label: 'Size',
+        options: [7, 8, 9, 10, 11, 12, 12.5, 13],
+      },
+      {
+        id: 3,
+        label: 'Colour',
+        options: ['All', 'White', 'Black'],
+      },
+      {
+        id: 4,
+        label: 'Range',
+        options: ['All', '-', 'None'],
+      },
+    ],
   },
   {
-    id: 1,
-    label: 'Brands',
-    options: ['All', 'Nike', 'Adidas'],
+    id: 6,
+    title: 'Sort',
+    data: ['Favourite', 'Price', 'Popular'],
   },
-  {
-    id: 2,
-    label: 'Size',
-    options: [7, 8, 9, 10, 11, 12, 12.5, 13],
-  },
-  {
-    id: 3,
-    label: 'Colour',
-    options: ['All', 'White', 'Black'],
-  },
-  {
-    id: 4,
-    label: 'Range',
-    options: ['All', '-', 'None'],
-  }],
-},
-{
-  id: 6,
-  title: 'Sort',
-  data: ['Favourite', 'Price', 'Popular'],
-}];
+];
 
 class ProductList extends Component {
   state = {
@@ -58,27 +59,41 @@ class ProductList extends Component {
 
   closeModal = () => {
     this.setState({ isModalActive: false, modalId: null });
-  }
+  };
 
   render() {
     const { isModalActive, modalId } = this.state;
     return (
       <div>
-        {!isModalActive &&
+        {!isModalActive && (
           <div>
             <Breadcrumb>
               <BreadcrumbItem>YOU ARE HERE</BreadcrumbItem>
               <BreadcrumbItem active>E-commerce</BreadcrumbItem>
             </Breadcrumb>
             {/* eslint-disable */}
-            <h1 className="page-title">E-commerce - <span className="fw-semi-bold">Product Grid</span></h1>
+            <h1 className="page-title">
+              E-commerce - <span className="fw-semi-bold">Product Grid</span>
+            </h1>
             {/* eslint-enable */}
             <div className={s.productsListFilters}>
-              {filtersData.map(item =>
-                (typeof item.data[0] === 'string'
-                  ? <FilterElement defaultLable={item.title} options={item.data} key={item.id} />
-                  : item.data.map(i =>
-                    <FilterElement defaultLable={i.label} options={i.options} key={i.id} />)),
+              {filtersData.map(
+                item =>
+                  typeof item.data[0] === 'string' ? (
+                    <FilterElement
+                      defaultLable={item.title}
+                      options={item.data}
+                      key={item.id}
+                    />
+                  ) : (
+                    item.data.map(i => (
+                      <FilterElement
+                        defaultLable={i.label}
+                        options={i.options}
+                        key={i.id}
+                      />
+                    ))
+                  ),
               )}
             </div>
             <div className={s.mobileFilterButtons}>
@@ -99,10 +114,18 @@ class ProductList extends Component {
               {mock.map(item => <ProductCard key={item.id} {...item} />)}
             </div>
           </div>
-        }
-        <MobileModal active={isModalActive && modalId === 0} data={filtersData[0]} close={this.closeModal} />
-        <MobileModal active={isModalActive && modalId === 1} data={filtersData[1]} close={this.closeModal} />
-      </div >
+        )}
+        <MobileModal
+          active={isModalActive && modalId === 0}
+          data={filtersData[0]}
+          close={this.closeModal}
+        />
+        <MobileModal
+          active={isModalActive && modalId === 1}
+          data={filtersData[1]}
+          close={this.closeModal}
+        />
+      </div>
     );
   }
 }

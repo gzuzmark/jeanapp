@@ -3,7 +3,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-
 import Rating from '../../../product/components/Rating/Rating';
 
 import star from '../../../../images/stars/star.svg';
@@ -14,7 +13,7 @@ import s from './ProductCard.scss';
 class ProductCard extends Component {
   state = {
     favourite: this.props.favourite,
-  }
+  };
 
   changeFavourite() {
     this.setState(pvState => ({ favourite: !pvState.favourite }));
@@ -25,25 +24,40 @@ class ProductCard extends Component {
     const { favourite } = this.state;
     return (
       <div className={[s.productCard, 'product-card'].join(' ')}>
-        <div className={s.productCardPhoto} style={{ backgroundImage: `url(${img})` }}>
-          {label && <div className={cx(s.label, label === 'Sale' ? 'bg-danger' : 'bg-success')}>{label}</div>}
+        <div
+          className={s.productCardPhoto}
+          style={{ backgroundImage: `url(${img})` }}
+        >
+          {label && (
+            <div
+              className={cx(
+                s.label,
+                label === 'Sale' ? 'bg-danger' : 'bg-success',
+              )}
+            >
+              {label}
+            </div>
+          )}
           <button className={s.star} onClick={() => this.changeFavourite()}>
             <img src={favourite ? starFilled : star} alt="star" />
           </button>
         </div>
         <div className={s.productCardDataWrapper}>
           <div className={cx(s.productsCardTitle, 'title')}>{title}</div>
-          <div className={cx(s.productsCardDescription, 'description')}>{description}</div>
+          <div className={cx(s.productsCardDescription, 'description')}>
+            {description}
+          </div>
         </div>
         <div className={s.productsCardPrice}>
-          {typeof price === 'number'
-            ? `$${price}`
-            : <div className={s.sale}>
+          {typeof price === 'number' ? (
+            `$${price}`
+          ) : (
+            <div className={s.sale}>
               <span className={s.old}>${price.old}</span>
               {price.percents}% off
               <span className={s.new}> ${price.new}</span>
             </div>
-          }
+          )}
           {rating && <Rating rating={rating} size="sm" />}
         </div>
       </div>

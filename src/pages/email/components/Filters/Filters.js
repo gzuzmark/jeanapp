@@ -22,7 +22,13 @@ class Filters extends Component {
       { id: 0, title: 'Inbox', notifications: 2, filter: null },
       { id: 1, title: 'Starred', filter: 'starred' },
       { id: 2, title: 'Sent Mail', filter: 'sent' },
-      { id: 3, title: 'Draft', notifications: 3, lable: 'danger', filter: 'draft' },
+      {
+        id: 3,
+        title: 'Draft',
+        notifications: 3,
+        lable: 'danger',
+        filter: 'draft',
+      },
       { id: 4, title: 'Trash', filter: 'trash' },
     ];
     const quickViewButton = [
@@ -34,13 +40,18 @@ class Filters extends Component {
     const { compose } = this.props;
     return (
       <div className={s.filters}>
-        <button className="btn btn-danger btn-block" onClick={() => compose(true)}>
+        <button
+          className="btn btn-danger btn-block"
+          onClick={() => compose(true)}
+        >
           Compose
         </button>
         <div className={s.mainFilterButtons}>
           {mainButtons.map(button => (
             <button
-              className={cx('btn', s.button, { [s.buttonActive]: button.id === activeButtonId })}
+              className={cx('btn', s.button, {
+                [s.buttonActive]: button.id === activeButtonId,
+              })}
               key={button.id}
               onClick={() => this.handleButtonClick(button.id, button.filter)}
             >
@@ -58,7 +69,11 @@ class Filters extends Component {
           {quickViewButton.map(button => (
             <button className={cx('btn', s.button)} key={button.id}>
               {button.title}
-              <i className={cx('fa fa-circle', { [`text-${button.colour}`]: true })} />
+              <i
+                className={cx('fa fa-circle', {
+                  [`text-${button.colour}`]: true,
+                })}
+              />
             </button>
           ))}
         </div>

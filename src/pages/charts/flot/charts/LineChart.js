@@ -45,61 +45,52 @@ class LineChart extends PureComponent {
 
   getData() { // eslint-disable-line
     return [
-      [
-        [1, 20],
-        [2, 20],
-        [3, 40],
-        [4, 30],
-        [5, 40],
-        [6, 35],
-        [7, 47],
-      ], [
-        [1, 13],
-        [2, 8],
-        [3, 17],
-        [4, 10],
-        [5, 17],
-        [6, 15],
-        [7, 16],
-      ], [
-        [1, 23],
-        [2, 13],
-        [3, 33],
-        [4, 16],
-        [5, 32],
-        [6, 28],
-        [7, 31],
-      ],
+      [[1, 20], [2, 20], [3, 40], [4, 30], [5, 40], [6, 35], [7, 47]],
+      [[1, 13], [2, 8], [3, 17], [4, 10], [5, 17], [6, 15], [7, 16]],
+      [[1, 23], [2, 13], [3, 33], [4, 16], [5, 32], [6, 28], [7, 31]],
     ];
   }
 
   createChart(data) { // eslint-disable-line
-    return $.plotAnimator(this.$chartContainer, [{
-      label: 'Traffic',
-      data: data[2],
-      lines: {
-        fill: 0.3,
-        lineWidth: 0,
-      },
-    }, {
-      label: 'Traffic',
-      data: data[1],
-      lines: {
-        fill: 0.6,
-        lineWidth: 0,
-      },
-    }, {
-      label: 'Traffic',
-      data: data[0],
-      animator: { steps: 60, duration: 1000, start: 0 },
-      lines: { lineWidth: 2 },
-      shadowSize: 0,
-    }], this.options);
+    return $.plotAnimator(
+      this.$chartContainer,
+      [
+        {
+          label: 'Traffic',
+          data: data[2],
+          lines: {
+            fill: 0.3,
+            lineWidth: 0,
+          },
+        },
+        {
+          label: 'Traffic',
+          data: data[1],
+          lines: {
+            fill: 0.6,
+            lineWidth: 0,
+          },
+        },
+        {
+          label: 'Traffic',
+          data: data[0],
+          animator: { steps: 60, duration: 1000, start: 0 },
+          lines: { lineWidth: 2 },
+          shadowSize: 0,
+        },
+      ],
+      this.options,
+    );
   }
 
   render() {
     return (
-      <div ref={(r) => { this.$chartContainer = $(r); }} style={{ height: '250px' }} />
+      <div
+        ref={(r) => {
+          this.$chartContainer = $(r);
+        }}
+        style={{ height: '250px' }}
+      />
     );
   }
 }

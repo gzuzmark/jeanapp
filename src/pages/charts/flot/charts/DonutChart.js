@@ -42,10 +42,20 @@ class DonutChart extends PureComponent {
     return (
       <Row>
         <Col xs={12} md={6} lg={7} className="mt mb">
-          <div style={{ height: '120px' }} ref={(r) => { this.$chartContainer = $(r); }} />
+          <div
+            style={{ height: '120px' }}
+            ref={(r) => {
+              this.$chartContainer = $(r);
+            }}
+          />
         </Col>
-        <Col xs={12} md={5} lg={4} >
-          <div className="mt" ref={(r) => { this.$chartLegend = $(r); }} />
+        <Col xs={12} md={5} lg={4}>
+          <div
+            className="mt"
+            ref={(r) => {
+              this.$chartLegend = $(r);
+            }}
+          />
         </Col>
       </Row>
     );

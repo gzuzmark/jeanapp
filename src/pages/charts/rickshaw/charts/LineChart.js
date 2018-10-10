@@ -14,12 +14,13 @@ export default class LineChart extends Component {
   }
 
   onResize = () => {
-    const width = $(this.rickshawChart).closest('.widget-body')[0].clientWidth - 30;
+    const width =
+      $(this.rickshawChart).closest('.widget-body')[0].clientWidth - 30;
 
     this.state.graph.configure({ width });
 
     this.state.graph.render();
-  }
+  };
 
   createChart() {
     const seriesData = [[], []];
@@ -38,7 +39,8 @@ export default class LineChart extends Component {
           color: '#b7b3ff',
           data: seriesData[0],
           name: 'Series 1',
-        }, {
+        },
+        {
           color: '#e2e1ff',
           data: seriesData[1],
           name: 'Series 2',
@@ -46,7 +48,9 @@ export default class LineChart extends Component {
       ],
     });
 
-    const hoverDetail = new Rickshaw.Graph.HoverDetail({ graph: this.state.graph });
+    const hoverDetail = new Rickshaw.Graph.HoverDetail({
+      graph: this.state.graph,
+    });
     hoverDetail.show();
 
     new Rickshaw.Graph.Axis.Y({ // eslint-disable-line
@@ -62,8 +66,23 @@ export default class LineChart extends Component {
   render() {
     return (
       <div>
-        <div ref={(r) => { this.rickshawChart = r; }} style={{ left: '30px', maxWidth: '90%' }} />
-        <div ref={(r) => { this.axis = r; }} style={{ position: 'absolute', width: '30px', height: '300px', top: '102px' }} />
+        <div
+          ref={(r) => {
+            this.rickshawChart = r;
+          }}
+          style={{ left: '30px', maxWidth: '90%' }}
+        />
+        <div
+          ref={(r) => {
+            this.axis = r;
+          }}
+          style={{
+            position: 'absolute',
+            width: '30px',
+            height: '300px',
+            top: '102px',
+          }}
+        />
       </div>
     );
   }

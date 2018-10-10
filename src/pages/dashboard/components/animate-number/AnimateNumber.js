@@ -19,17 +19,18 @@ class AnimateNumber extends React.Component {
     const animate = require('jquery.animate-number');
     /* eslint-enable */
     const el = $(`#${this.state.id}`);
-    el.animateNumber({
-      number: el.text().replace(/ /gi, ''),
-      numberStep: $.animateNumber.numberStepFactories.separator(' '),
-      easing: 'easeInQuad',
-    }, 1000);
+    el.animateNumber(
+      {
+        number: el.text().replace(/ /gi, ''),
+        numberStep: $.animateNumber.numberStepFactories.separator(' '),
+        easing: 'easeInQuad',
+      },
+      1000,
+    );
   }
 
   render() {
-    return (
-      <span id={this.state.id}>{this.props.children}</span>
-    );
+    return <span id={this.state.id}>{this.props.children}</span>;
   }
 }
 

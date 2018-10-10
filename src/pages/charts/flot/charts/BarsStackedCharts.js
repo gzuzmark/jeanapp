@@ -60,7 +60,12 @@ class StackedBarChart extends PureComponent {
 
   render() {
     return (
-      <div ref={(r) => { this.$chartContainer = $(r); }} style={{ height: '200px' }} />
+      <div
+        ref={(r) => {
+          this.$chartContainer = $(r);
+        }}
+        style={{ height: '200px' }}
+      />
     );
   }
 }

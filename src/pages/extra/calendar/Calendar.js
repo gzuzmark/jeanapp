@@ -1,11 +1,6 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import {
-  Row,
-  Col,
-  ButtonGroup,
-  Button,
-} from 'reactstrap';
+import { Row, Col, ButtonGroup, Button } from 'reactstrap';
 
 import 'fullcalendar/dist/fullcalendar';
 import 'jquery-ui/ui/widgets/draggable';
@@ -16,7 +11,6 @@ import s from './Calendar.scss';
 import Widget from '../../../components/Widget';
 
 class Calendar extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -81,13 +75,14 @@ class Calendar extends React.Component {
           end: new Date(y, m, d + 18, 13, 0),
           backgroundColor: '#79A5F0',
           textColor: '#fff',
-          description: 'Node.js is a platform built ' +
-          'on Chrome\'s JavaScript runtime for easily' +
-          ' building fast, scalable network applications.' +
-          ' Node.js uses an event-driven, non-blocking' +
-          ' I/O model that makes it lightweight and' +
-          ' efficient, perfect for data-intensive real-time' +
-          ' applications that run across distributed devices.',
+          description:
+            'Node.js is a platform built ' +
+            "on Chrome's JavaScript runtime for easily" +
+            ' building fast, scalable network applications.' +
+            ' Node.js uses an event-driven, non-blocking' +
+            ' I/O model that makes it lightweight and' +
+            ' efficient, perfect for data-intensive real-time' +
+            ' applications that run across distributed devices.',
         },
         {
           title: 'Click for Flatlogic',
@@ -105,7 +100,8 @@ class Calendar extends React.Component {
         this.createEvent = () => {
           const title = this.event.title;
           if (title) {
-            this.$calendar.fullCalendar('renderEvent',
+            this.$calendar.fullCalendar(
+              'renderEvent',
               {
                 title,
                 start,
@@ -130,7 +126,8 @@ class Calendar extends React.Component {
       editable: true,
       droppable: true,
 
-      drop: (dateItem, event) => { // this function is called when something is dropped
+      drop: (dateItem, event) => {
+        // this function is called when something is dropped
         // retrieve the dropped element's stored Event Object
         const originalEventObject = {
           // use the element's text as the event title
@@ -210,28 +207,48 @@ class Calendar extends React.Component {
               <li className="breadcrumb-item active">Calendar</li>
             </ol>
             <h1 className="page-title">
-              {this.state.currentMonth} - <span className="fw-semi-bold">{this.state.currentDay}</span>
+              {this.state.currentMonth} -{' '}
+              <span className="fw-semi-bold">{this.state.currentDay}</span>
             </h1>
-            <h3>Draggable <span className="fw-semi-bold">Events</span></h3>
-            <p>Just drap and drop events from there directly into the calendar.</p>
+            <h3>
+              Draggable <span className="fw-semi-bold">Events</span>
+            </h3>
+            <p>
+              Just drap and drop events from there directly into the calendar.
+            </p>
             <div className="calendar-external-events mb-lg">
-              <div className="external-event draggable" data-event-class="bg-success text-white">
+              <div
+                className="external-event draggable"
+                data-event-class="bg-success text-white"
+              >
                 <i className="fa fa-circle fa-fw text-success ml-xs mr-xs" />
                 Make a tea
               </div>
-              <div className="external-event draggable" data-event-class="bg-warning text-white">
+              <div
+                className="external-event draggable"
+                data-event-class="bg-warning text-white"
+              >
                 <i className="fa fa-circle fa-fw text-warning ml-xs mr-xs" />
                 Open windows
               </div>
-              <div className="external-event draggable" data-event-class="bg-gray text-white">
+              <div
+                className="external-event draggable"
+                data-event-class="bg-gray text-white"
+              >
                 <i className="fa fa-circle-o fa-fw text-gray-light ml-xs mr-xs" />
                 Some stuff
               </div>
-              <div className="external-event draggable" data-event-class="bg-danger text-white">
+              <div
+                className="external-event draggable"
+                data-event-class="bg-danger text-white"
+              >
                 <i className="fa fa-square fa-fw text-danger ml-xs mr-xs" />
                 Study UX engineering
               </div>
-              <div className="external-event draggable" data-event-class="bg-gray text-white">
+              <div
+                className="external-event draggable"
+                data-event-class="bg-gray text-white"
+              >
                 <i className="fa fa-circle-o fa-fw text-gray-light ml-xs mr-xs" />
                 Another stuff
               </div>
@@ -253,17 +270,26 @@ class Calendar extends React.Component {
                 <Col md={9} className="calendar-controls text-right">
                   <ButtonGroup>
                     <Button
-                      color="default" onClick={() => this.changeView('month')}
+                      color="default"
+                      onClick={() => this.changeView('month')}
                       active={this.state.calendarView === 'month'}
-                    >Month</Button>
+                    >
+                      Month
+                    </Button>
                     <Button
-                      color="default" onClick={() => this.changeView('agendaWeek')}
+                      color="default"
+                      onClick={() => this.changeView('agendaWeek')}
                       active={this.state.calendarView === 'agendaWeek'}
-                    >Week</Button>
+                    >
+                      Week
+                    </Button>
                     <Button
-                      color="default" onClick={() => this.changeView('agendaDay')}
+                      color="default"
+                      onClick={() => this.changeView('agendaDay')}
                       active={this.state.calendarView === 'agendaDay'}
-                    >Day</Button>
+                    >
+                      Day
+                    </Button>
                   </ButtonGroup>
                 </Col>
               </Row>
@@ -274,7 +300,6 @@ class Calendar extends React.Component {
       </div>
     );
   }
-
 }
 
 export default withStyles(s)(Calendar);

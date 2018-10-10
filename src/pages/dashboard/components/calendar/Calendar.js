@@ -30,11 +30,11 @@ const dayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 class Calendar extends React.Component {
   static propTypes = {
     white: PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     white: false,
-  }
+  };
 
   componentDidMount() {
     const $calendar = $('#calendar');
@@ -42,13 +42,7 @@ class Calendar extends React.Component {
     const month = now.getMonth() + 1;
     const year = now.getFullYear();
     const events = [
-      [
-        `2/${month}/${year}`,
-        'The flower bed',
-        '#',
-        '#5d8fc2',
-        'Contents here',
-      ],
+      [`2/${month}/${year}`, 'The flower bed', '#', '#5d8fc2', 'Contents here'],
       [
         `5/${month}/${year}`,
         'Stop world water pollution',
@@ -63,12 +57,7 @@ class Calendar extends React.Component {
         '#64bd63',
         'Some contents here',
       ],
-      [
-        `29/${month}/${year}`,
-        'A link',
-        'http://www.flatlogic.com',
-        '#dd5826',
-      ],
+      [`29/${month}/${year}`, 'A link', 'http://www.flatlogic.com', '#dd5826'],
     ];
     $calendar.calendar({
       months: monthNames,
@@ -90,12 +79,20 @@ class Calendar extends React.Component {
         $(el).css('background-color', '');
       });
     };
-    $calendar.find('.icon-arrow-left, .icon-arrow-right').parent().on('click', restyleCalendar);
+    $calendar
+      .find('.icon-arrow-left, .icon-arrow-right')
+      .parent()
+      .on('click', restyleCalendar);
     restyleCalendar();
   }
 
   render() {
-    return (<div id="calendar" className={cx('calendar', { 'calendar-white': this.props.white })} />);
+    return (
+      <div
+        id="calendar"
+        className={cx('calendar', { 'calendar-white': this.props.white })}
+      />
+    );
   }
 }
 

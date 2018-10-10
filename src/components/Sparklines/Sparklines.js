@@ -9,9 +9,7 @@ import 'imports-loader?jQuery=jquery,this=>window!jquery-sparkline';
 
 class Sparklines extends React.Component {
   static propTypes = {
-    data: PropTypes.arrayOf(
-      PropTypes.arrayOf(PropTypes.number),
-    ),
+    data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
     options: PropTypes.oneOfType([
       PropTypes.arrayOf(
         PropTypes.shape({
@@ -36,16 +34,18 @@ class Sparklines extends React.Component {
   initSparkline() {
     const $el = $(this.sparklineRef);
 
-    const model = $.type(this.data) === 'string' ?
-      this.props.data.replace(/(^,)|(,$)/g, '')
-      : this.props.data;
+    const model =
+      $.type(this.data) === 'string'
+        ? this.props.data.replace(/(^,)|(,$)/g, '')
+        : this.props.data;
     const options = this.props.options;
 
     if ($.type(model) === 'array' && $.type(options) === 'array') {
       options.forEach((singleOptions, i) => {
         if (i === 0) {
           $el.sparkline(model[i], singleOptions);
-        } else { // set composite for next calls
+        } else {
+          // set composite for next calls
           $el.sparkline(model[i], $.extend({ composite: true }, singleOptions));
         }
       });
@@ -58,7 +58,8 @@ class Sparklines extends React.Component {
   render() {
     return (
       <div
-        className="sparkline" ref={(r) => {
+        className="sparkline"
+        ref={(r) => {
           this.sparklineRef = r;
         }}
       />

@@ -14,12 +14,13 @@ export default class RealtimeChart extends Component {
   }
 
   onResize = () => {
-    const width = $(this.rickshawChart).closest('.widget-body')[0].clientWidth + 40;
+    const width =
+      $(this.rickshawChart).closest('.widget-body')[0].clientWidth + 40;
 
     this.state.graph.configure({ width });
 
     this.state.graph.render();
-  }
+  };
 
   createChart() {
     const seriesData = [[], []];
@@ -36,7 +37,8 @@ export default class RealtimeChart extends Component {
           color: '#d1dcff',
           data: seriesData[0],
           name: 'Uploads',
-        }, {
+        },
+        {
           color: '#547fff',
           data: seriesData[1],
           name: 'Downloads',
@@ -63,7 +65,12 @@ export default class RealtimeChart extends Component {
   render() {
     return (
       <div>
-        <div className="chart-overflow-bottom" ref={(r) => { this.rickshawChart = r; }} />
+        <div
+          className="chart-overflow-bottom"
+          ref={(r) => {
+            this.rickshawChart = r;
+          }}
+        />
       </div>
     );
   }

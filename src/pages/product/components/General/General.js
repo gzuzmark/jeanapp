@@ -14,7 +14,8 @@ const General = ({ rating, title, subtitle, price }) => (
     </div>
     <div className={s.dataWrapper}>
       <span className={cx(s.title, 'title')}>{title}</span>
-      <span className={cx(s.subtitle, 'subtitle')}>{subtitle}</span></div>
+      <span className={cx(s.subtitle, 'subtitle')}>{subtitle}</span>
+    </div>
     <span className={s.price}>${price}</span>
   </div>
 );
