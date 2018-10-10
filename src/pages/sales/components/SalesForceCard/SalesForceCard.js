@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { Badge, Row, Col } from 'reactstrap';
 
 import Widget from '../../../../components/Widget';
 
-import s from './SalesForceCard.scss';
-
-class SalesForceCard extends Component {
+class SalesForceCard extends React.Component {
   componentDidMount() {}
 
   render() {
@@ -67,4 +64,4 @@ SalesForceCard.propTypes = {
   visitState: PropTypes.any.isRequired,
 };
 
-export default withStyles(s)(SalesForceCard);
+export default SalesForceCard;
