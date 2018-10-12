@@ -1,80 +1,149 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import { Row, Col } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { searchSalesVisits } from '../../actions/sales';
 
-import FilterElement from './components/SalesFilter/SalesFilter';
 import SalesForceCard from './components/SalesForceCard/SalesForceCard';
 
 import mock from './mock';
 import s from './Sales.scss';
 
-const filtersData = [
-  {
-    title: 'Filter',
-    data: [
-      {
-        id: 0,
-        label: 'Type',
-        options: ['Shoes', 'Boots', 'Trainers'],
-      },
-      {
-        id: 1,
-        label: 'Brands',
-        options: ['All', 'Nike', 'Adidas'],
-      },
-      {
-        id: 2,
-        label: 'Size',
-        options: [7, 8, 9, 10, 11, 12, 12.5, 13],
-      },
-      {
-        id: 3,
-        label: 'Colour',
-        options: ['All', 'White', 'Black'],
-      },
-      {
-        id: 4,
-        label: 'Range',
-        options: ['All', '-', 'None'],
-      },
-    ],
-  },
-  {
-    id: 6,
-    title: 'Sort',
-    data: ['Favourite', 'Price', 'Popular'],
-  },
-];
-
 class ProductList extends Component {
-  state = {
-    isModalActive: false,
-    modalId: null,
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired,
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      salesman: '',
+      visitState: 'En progreso',
+      companyName: '',
+      date: new Date(),
+      visits: mock,
+    };
 
-  openModal(id) {
-    this.setState({ isModalActive: true, modalId: id });
+    this.doSearch = this.doSearch.bind(this);
+    this.changeSalesman = this.changeSalesman.bind(this);
+    this.changeCompany = this.changeCompany.bind(this);
+    this.changeVisitState = this.changeVisitState.bind(this);
+    this.filterVisits = this.filterVisits.bind(this);
   }
 
-  closeModal = () => {
-    this.setState({ isModalActive: false, modalId: null });
-  };
+  changeSalesman(event) {
+    this.setState({ salesman: event.target.value });
+  }
+
+  changeCompany(event) {
+    this.setState({ companyName: event.target.value });
+  }
+
+  changeVisitState(event) {
+    this.setState({ visitState: event.target.value });
+  }
+
+  doSearch(e) {
+    this.props.dispatch(searchSalesVisits({ salesman: this.state.salesman, companyName: this.state.companyName }));
+    e.preventDefault();
+  }
+
+  filterVisits(item) {
+    const isSalesman = item.salesman.toLowerCase().indexOf(this.state.salesman.toLowerCase()) !== -1;
+    const isCompany = item.client.toLowerCase().indexOf(this.state.companyName.toLowerCase()) !== -1;
+    const isState = item.visitState.toLowerCase().indexOf(this.state.visitState.toLowerCase()) !== -1;
+    return isSalesman && isCompany && isState;
+  }
+
+  // openMap = (item) => {
+  //   localStorage.setItem('lat', item.lat);
+  //   localStorage.setItem('lng', item.long);
+
+  //   this.props.history.push({
+  //     pathname: '/app/maps/google',
+  //   });
+  // };
 
   render() {
     const { isModalActive } = this.state;
+    // if (redirect) {
+    //   return <Redirect push to="/app/maps/google" />;
+    // }
     return (
       <div>
         {!isModalActive && (
           <div>
-            <div className={s.productsListFilters}>
-              {filtersData.map(
-                item =>
-                  typeof item.data[0] === 'string' ? (
-                    <FilterElement defaultLable={item.title} options={item.data} key={item.id} />
-                  ) : (
-                    item.data.map(i => <FilterElement defaultLable={i.label} options={i.options} key={i.id} />)
-                  ),
-              )}
-            </div>
+            <form onSubmit={this.filterVisits}>
+              <div className={s.productsListFilters}>
+                <Row>
+                  <Col>
+                    <label htmlFor="salesman">Nombre del Vendedor:</label>
+                  </Col>
+                  <Col>
+                    <div className="input-group input-group-transparent">
+                      <input
+                        id="salesman"
+                        className="form-control fs-mini"
+                        type="text"
+                        placeholder="vendedor..."
+                        value={this.state.salesman}
+                        onChange={this.changeSalesman}
+                      />
+                      <span className="input-group-addon">
+                        <i className="fa fa-search" />
+                      </span>
+                    </div>
+                  </Col>
+                  <Col>
+                    <select
+                      value={this.state.visitState}
+                      onChange={this.changeVisitState}
+                      className="form-control fs-mini"
+                    >
+                      <option>En progreso</option>
+                      <option>Finalizada</option>
+                    </select>
+                  </Col>
+                </Row>
+              </div>
+              <div className={s.productsListFilters}>
+                <Row>
+                  <Col>
+                    <label htmlFor="companyName">Razón Social:</label>
+                  </Col>
+                  <Col>
+                    <div className="input-group input-group-transparent">
+                      <input
+                        id="companyName"
+                        className="form-control fs-mini"
+                        type="text"
+                        placeholder="vendedor..."
+                        value={this.state.companyName}
+                        onChange={this.changeCompany}
+                      />
+                      <span className="input-group-addon">
+                        <i className="fa fa-search" />
+                      </span>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div className={s.filterElement}>
+                      <div className={s.filterElementLable}>Fecha actual</div>
+                      <span>{new Date().toLocaleDateString()}</span>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+              <div className="clearfix">
+                <div className="btn-toolbar float-right">
+                  <button type="submit" href="/app" className="btn btn-inverse btn-sm">
+                    {this.props.isFetching ? 'Loading...' : 'Search'}
+                  </button>
+                </div>
+              </div>
+            </form>
             <div className={s.mobileFilterButtons}>
               <button className="btn btn-transparent btn-lg" onClick={() => this.openModal(1)}>
                 Sort <i className="fa fa-2x fa-angle-down" />
@@ -83,22 +152,26 @@ class ProductList extends Component {
                 Filter <i className="fa fa-2x fa-angle-down" />
               </button>
             </div>
-            <div className={s.productsListElements}>{mock.map(item => <SalesForceCard key={item.id} {...item} />)}</div>
+            <div className={s.productsListElements}>
+              {this.state.visits.filter(this.filterVisits).map(item => <SalesForceCard key={item.id} {...item} />)}
+            </div>
           </div>
+
+          // <Switch>
+
+          // </Switch>
         )}
-        {/* <MobileModal
-          active={isModalActive && modalId === 0}
-          data={filtersData[0]}
-          close={this.closeModal}
-        />
-        <MobileModal
-          active={isModalActive && modalId === 1}
-          data={filtersData[1]}
-          close={this.closeModal}
-        /> */}
       </div>
     );
   }
 }
 
-export default withStyles(s)(ProductList);
+function mapStateToProps(state) {
+  return {
+    isFetching: state.salesVisits.isFetching,
+    isSearched: state.salesVisits.isSearched,
+    visits: state.salesVisits.visits,
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(withStyles(s)(ProductList)));

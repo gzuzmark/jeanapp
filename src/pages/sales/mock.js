@@ -4,10 +4,19 @@ import img1 from '../../images/products/img1.jpg';
 export default [
   {
     id: 0,
-    salesman: 'Jean Ferruzo',
+    salesmanId: 10,
+    salesman: 'Jean Esquerra',
+    clientId: 9,
     client: 'Oriflame',
     visitDate: '13-10-2018',
+    visitEndDate: '13-10-2015',
+    visitStateId: 10,
     visitState: 'En progreso',
+    lat: -12.1033699,
+    long: -77.022958,
+    startAddress: 'Address 1',
+    clientAddress: 'Av Peru 455',
+    duration: '20000', // segundos o milissegundos
   },
   {
     id: 1,
@@ -15,6 +24,8 @@ export default [
     client: 'Corpac SA',
     visitDate: '12-10-2018',
     visitState: 'En progreso',
+    lat: -12.0931412,
+    long: -77.062003,
   },
   {
     id: 3,
@@ -23,6 +34,8 @@ export default [
     client: 'Fedex',
     visitDate: '08-10-2018',
     visitState: 'Finalizada',
+    lat: -12.0709208,
+    long: -76.954205,
   },
   {
     id: 4,
@@ -30,6 +43,8 @@ export default [
     client: 'Mrkl',
     visitDate: '01-12-2018',
     visitState: 'En progreso',
+    lat: -12.1033699,
+    long: -77.022958,
   },
   {
     id: 5,
@@ -37,6 +52,8 @@ export default [
     client: 'Oriflame',
     visitDate: '04-11-2018',
     visitState: 'En progreso',
+    lat: -12.1033699,
+    long: -77.022958,
   },
   {
     id: 6,
@@ -44,5 +61,7 @@ export default [
     client: 'Oriflame',
     visitDate: '01/12/2018',
     visitState: 'En progreso',
+    lat: -12.1033699,
+    long: -77.022958,
   },
 ];

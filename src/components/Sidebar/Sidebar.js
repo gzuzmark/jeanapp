@@ -7,11 +7,7 @@ import { dismissAlert } from '../../actions/alerts';
 import s from './Sidebar.scss';
 import LinksGroup from './LinksGroup/LinksGroup';
 
-import {
-  openSidebar,
-  closeSidebar,
-  changeActiveSidebarItem,
-} from '../../actions/navigation';
+import { openSidebar, closeSidebar, changeActiveSidebarItem } from '../../actions/navigation';
 import isScreen from '../../core/screenHelper';
 import { logoutUser } from '../../actions/user';
 
@@ -82,9 +78,7 @@ class Sidebar extends React.Component {
         </header>
         <ul className={s.nav}>
           <LinksGroup
-            onActiveSidebarItemChange={activeItem =>
-              this.props.dispatch(changeActiveSidebarItem(activeItem))
-            }
+            onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
             activeItem={this.props.activeItem}
             header="Agenda"
             isHeader
@@ -99,40 +93,17 @@ class Sidebar extends React.Component {
             ]}
           />
           <LinksGroup
-            onActiveSidebarItemChange={activeItem =>
-              this.props.dispatch(changeActiveSidebarItem(activeItem))
-            }
+            onActiveSidebarItemChange={activeItem => this.props.dispatch(changeActiveSidebarItem(activeItem))}
             activeItem={this.props.activeItem}
             header="Fuerza de Ventas"
             isHeader
-            iconName="flaticon-home"
-            link="/app/main"
-            index="main"
+            iconName="flaticon-map"
+            link="/app/sales/main"
+            index="sales"
             childrenLinks={[
               {
                 header: 'Seguimiento y rastreo',
                 link: '/app/sales/main',
-              },
-            ]}
-          />
-          <LinksGroup
-            onActiveSidebarItemChange={activeItem =>
-              this.props.dispatch(changeActiveSidebarItem(activeItem))
-            }
-            activeItem={this.props.activeItem}
-            header="Maps"
-            isHeader
-            iconName="flaticon-equal-1"
-            link="/app/maps"
-            index="maps"
-            childrenLinks={[
-              {
-                header: 'Google Maps',
-                link: '/app/maps/google',
-              },
-              {
-                header: 'Vector Map',
-                link: '/app/maps/vector',
               },
             ]}
           />

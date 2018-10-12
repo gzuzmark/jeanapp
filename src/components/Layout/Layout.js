@@ -361,7 +361,7 @@ class Layout extends React.Component {
                   render={() => <Redirect to="/app/maps/google" />}
                 />
                 <Route
-                  path="/app/maps/google"
+                  path="/app/maps/google/:visitId"
                   exact
                   component={MapsGoogleBundle}
                 />

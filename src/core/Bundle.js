@@ -10,7 +10,7 @@ class Bundle extends Component {
   static generateBundle = loadModule => () => (
     /* eslint-disable */
     <Bundle load={loadModule}>
-      {Mod => Mod ? <Mod /> : <div style={{ textAlign: 'center', paddingTop: '35vh' }}>Loading</div>}
+      {Mod => (Mod ? <Mod /> : <div style={{ textAlign: 'center', paddingTop: '35vh' }}>Loading</div>)}
     </Bundle>
     /* eslint-enable */
   );

@@ -35,9 +35,7 @@ class Login extends React.Component {
   }
 
   doLogin(e) {
-    this.props.dispatch(
-      loginUser({ login: this.state.login, password: this.state.password }),
-    );
+    this.props.dispatch(loginUser({ login: this.state.login, password: this.state.password }));
     e.preventDefault();
   }
 
@@ -45,7 +43,7 @@ class Login extends React.Component {
     const { from } = this.props.location.state || { from: { pathname: '/app' } }; // eslint-disable-line
 
     // cant access login page while logged in
-    if (this.props.isAuthenticated) { // eslint-disable-line
+    if (this.props.isAuthenticated) {// eslint-disable-line      
       return <Redirect to={from} />;
     }
 
@@ -57,38 +55,53 @@ class Login extends React.Component {
             Login
             <i className="fa fa-circle text-warning" />
           </h5>
-          <Widget
-            className={`${s.widget} mx-auto`}
-            title={<h3 className="mt-0">Login Jean App</h3>}
-          >
+          <Widget className={`${s.widget} mx-auto`} title={<h3 className="mt-0">Login Jean App</h3>}>
             {/* eslint-disable */}
-            <p className={s.widgetLoginInfo}>
-              Don't have an account? Sign up now!
-            </p>
+            <p className={s.widgetLoginInfo}>Don't have an account? Sign up now!</p>
             {/* eslint-disable */}
             <form className="mt" onSubmit={this.doLogin}>
-              {
-                this.props.errorMessage && ( // eslint-disable-line
-                  <Alert className="alert-sm" bsStyle="danger">
-                    {this.props.errorMessage}
-                  </Alert>
-                )
-              }
+              {this.props.errorMessage && ( // eslint-disable-line
+                <Alert className="alert-sm" bsStyle="danger">
+                  {this.props.errorMessage}
+                </Alert>
+              )}
               <div className="form-group">
-                <input className="form-control no-border" value={this.state.login} onChange={this.changeLogin} type="text" required name="username" placeholder="Username" />
+                <input
+                  className="form-control no-border"
+                  value={this.state.login}
+                  onChange={this.changeLogin}
+                  type="text"
+                  required
+                  name="username"
+                  placeholder="Username"
+                />
               </div>
               <div className="form-group">
-                <input className="form-control no-border" value={this.state.password} onChange={this.changePassword} type="password" required name="password" placeholder="Password" />
+                <input
+                  className="form-control no-border"
+                  value={this.state.password}
+                  onChange={this.changePassword}
+                  type="password"
+                  required
+                  name="password"
+                  placeholder="Password"
+                />
               </div>
               <div className="clearfix">
                 <div className="btn-toolbar float-right">
-                  <button type="reset" className="btn btn-secondary btn-sm">Create an Account</button>
-                  <button type="submit" href="/app" className="btn btn-inverse btn-sm">{this.props.isFetching ? 'Loading...' : 'Login'}</button>
+                  <button type="reset" className="btn btn-secondary btn-sm">
+                    Create an Account
+                  </button>
+                  <button type="submit" href="/app" className="btn btn-inverse btn-sm">
+                    {this.props.isFetching ? 'Loading...' : 'Login'}
+                  </button>
                 </div>
               </div>
               <div className="row no-gutters mt-3">
                 <div className="col">
-                  <a className="mt-sm" href="">Trouble with account?</a>
+                  <a className="mt-sm" href="">
+                    Trouble with account?
+                  </a>
                 </div>
                 <div className="col =">
                   <FormGroup className="abc-checkbox float-right" check>
@@ -102,9 +115,7 @@ class Login extends React.Component {
             </form>
           </Widget>
         </Container>
-        <footer className={s.footer}>
-          2018 Jean app
-        </footer>
+        <footer className={s.footer}>2018 Jean app</footer>
       </div>
     );
   }
@@ -119,4 +130,3 @@ function mapStateToProps(state) {
 }
 
 export default withRouter(connect(mapStateToProps)(withStyles(s)(Login)));
-
