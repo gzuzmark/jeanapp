@@ -98,7 +98,7 @@ class Sidebar extends React.Component {
             header="Fuerza de Ventas"
             isHeader
             iconName="flaticon-map"
-            link="/app/sales/main"
+            link="/app/sales"
             index="sales"
             childrenLinks={[
               {
