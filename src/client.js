@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 import FastClick from 'fastclick';
 import { createPath } from 'history/PathUtils';
+
+import { ApolloProvider } from 'react-apollo';
+import { Rehydrated } from 'aws-appsync-react';
+import AWSAppSyncClient from 'aws-appsync';
+import appSyncConfig from './aws-exports';
+
 import history from './history';
 import App from './components/App';
 import createFetch from './createFetch';
@@ -12,6 +18,29 @@ import theme from './styles/theme.scss';
 
 // eslint-disable-next-line no-underscore-dangle
 theme._insertCss();
+
+const client = new AWSAppSyncClient({
+  url: appSyncConfig.aws_appsync_graphqlEndpoint,
+  region: appSyncConfig.aws_appsync_region,
+  auth: {
+    type: appSyncConfig.aws_appsync_authenticationType,
+    apiKey: appSyncConfig.aws_appsync_apiKey,
+
+    // type: AUTH_TYPE.AWS_IAM,
+    // Note - Testing purposes only
+    // credentials: new AWS.Credentials({
+    //   accessKeyId: 'AKIAIFW2HGS472LEVYXQ',
+    //   secretAccessKey: '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',
+    // }),
+
+    // Amazon Cognito Federated Identities using AWS Amplify
+    // credentials: () => Auth.currentCredentials(),
+
+    // Amazon Cognito user pools using AWS Amplify
+    // type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
+    // jwtToken: async () => (await Auth.currentSession()).getIdToken().getJwtToken(),
+  },
+});
 
 // Global (context) variables that can be easily accessed from any React component
 // https://facebook.github.io/react/docs/context.html
@@ -112,7 +141,11 @@ async function onLocationChange(location, action) {
 
     appInstance = ReactDOM.render(
       <Router history={history}>
-        <App store={context.store} context={context} />
+        <ApolloProvider client={client}>
+          <Rehydrated>
+            <App store={context.store} context={context} />
+          </Rehydrated>
+        </ApolloProvider>
       </Router>,
       container,
       () => onRenderComplete(location),

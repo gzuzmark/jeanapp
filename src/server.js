@@ -9,6 +9,12 @@ import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
+
+import { ApolloProvider } from 'react-apollo';
+import { Rehydrated } from 'aws-appsync-react';
+import AWSAppSyncClient from 'aws-appsync';
+import appSyncConfig from './aws-exports';
+
 import App from './components/App';
 import Html from './components/Html';
 import { ErrorPageWithoutStyle } from './pages/error/ErrorPage';
@@ -21,6 +27,29 @@ import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import theme from './styles/theme.scss';
 
 const app = express();
+
+const client = new AWSAppSyncClient({
+  url: appSyncConfig.aws_appsync_graphqlEndpoint,
+  region: appSyncConfig.aws_appsync_region,
+  auth: {
+    type: appSyncConfig.aws_appsync_authenticationType,
+    apiKey: appSyncConfig.aws_appsync_apiKey,
+
+    // type: AUTH_TYPE.AWS_IAM,
+    // Note - Testing purposes only
+    // credentials: new AWS.Credentials({
+    //   accessKeyId: 'AKIAIFW2HGS472LEVYXQ',
+    //   secretAccessKey: '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',
+    // }),
+
+    // Amazon Cognito Federated Identities using AWS Amplify
+    // credentials: () => Auth.currentCredentials(),
+
+    // Amazon Cognito user pools using AWS Amplify
+    // type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
+    // jwtToken: async () => (await Auth.currentSession()).getIdToken().getJwtToken(),
+  },
+});
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -82,9 +111,7 @@ app.post('/login', (req, res) => {
     });
     res.json({ id_token: token });
   } else {
-    res
-      .status(401)
-      .json({ message: 'To login use any user/password combination' });
+    res.status(401).json({ message: 'To login use any user/password combination' });
   }
 });
 
@@ -156,9 +183,13 @@ app.get('*', async (req, res, next) => {
 
     const html = ReactDOM.renderToString(
       <StaticRouter location={req.url} context={context}>
-        <Provider store={store}>
-          <App store={store} />
-        </Provider>
+        <ApolloProvider client={client}>
+          <Rehydrated>
+            <Provider store={store}>
+              <App store={store} />
+            </Provider>
+          </Rehydrated>
+        </ApolloProvider>
       </StaticRouter>,
     );
 

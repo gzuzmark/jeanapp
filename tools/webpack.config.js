@@ -6,8 +6,7 @@ import pkg from '../package.json';
 
 const isDebug = !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose');
-const isAnalyze =
-  process.argv.includes('--analyze') || process.argv.includes('--analyse');
+const isAnalyze = process.argv.includes('--analyze') || process.argv.includes('--analyse');
 
 //
 // Common configuration chunk to be used for both
@@ -83,9 +82,7 @@ const config = {
               sourceMap: isDebug,
               // CSS Modules https://github.com/css-modules/css-modules
               modules: true,
-              localIdentName: isDebug
-                ? '[name]-[local]-[hash:base64:5]'
-                : '[hash:base64:5]',
+              localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
               // CSS Nano http://cssnano.co/options/
               minimize: !isDebug,
               discardComments: { removeAll: true },
@@ -94,12 +91,15 @@ const config = {
         ],
       },
       {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: ['graphql-tag/loader'],
+      },
+      {
         test: /theme.scss$/,
         loaders: [
           'isomorphic-style-loader',
-          `css-loader?${
-            isDebug ? 'sourceMap&' : 'minimize&'
-          }modules&localIdentName=[local]&importLoaders=2`,
+          `css-loader?${isDebug ? 'sourceMap&' : 'minimize&'}modules&localIdentName=[local]&importLoaders=2`,
           'resolve-url-loader',
           'sass-loader?sourceMap',
         ],
@@ -109,12 +109,8 @@ const config = {
         exclude: [/theme.scss$/],
         use: [
           'isomorphic-style-loader',
-          `css-loader?${
-            isDebug ? 'sourceMap&' : 'minimize&'
-          }modules&localIdentName=
-          ${
-            isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]'
-          }&importLoaders=2`,
+          `css-loader?${isDebug ? 'sourceMap&' : 'minimize&'}modules&localIdentName=
+          ${isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]'}&importLoaders=2`,
           'sass-loader',
         ],
       },
@@ -179,9 +175,7 @@ const clientConfig = {
   output: {
     ...config.output,
     filename: isDebug ? '[name].js' : '[name].[chunkhash:8].js',
-    chunkFilename: isDebug
-      ? '[name].chunk.js'
-      : '[name].[chunkhash:8].chunk.js',
+    chunkFilename: isDebug ? '[name].chunk.js' : '[name].[chunkhash:8].chunk.js',
   },
 
   plugins: [
@@ -300,9 +294,7 @@ const serverConfig = {
                         'env',
                         {
                           targets: {
-                            node: parseFloat(
-                                pkg.engines.node.replace(/^\D+/g, ''),
-                              ),
+                            node: parseFloat(pkg.engines.node.replace(/^\D+/g, '')),
                           },
                           modules: false,
                           useBuiltIns: false,
@@ -318,9 +310,7 @@ const serverConfig = {
   externals: [
     /^\.\/assets\.json$/,
     (context, request, callback) => {
-      const isExternal =
-        request.match(/^[@a-z][a-z/.\-0-9]*$/i) &&
-        !request.match(/\.(css|less|scss|sss)$/i);
+      const isExternal = request.match(/^[@a-z][a-z/.\-0-9]*$/i) && !request.match(/\.(css|less|scss|sss)$/i);
       callback(null, Boolean(isExternal));
     },
   ],
@@ -346,7 +336,10 @@ const serverConfig = {
       entryOnly: false,
     }),
   ],
-
+  resolve: {
+    extensions: ['.re', '.ml', '.web.js', '.js', '.json', '.web.jsx', '.jsx', '.mjs', '.gql', '.graphql'],
+    modules: [path.resolve(__dirname), 'node_modules'],
+  },
   node: {
     console: false,
     global: false,

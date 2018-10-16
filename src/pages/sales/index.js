@@ -2,19 +2,42 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { Row, Col } from 'reactstrap';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import gql from 'graphql-tag';
+// import { connect } from 'react-redux';
+import { graphql, compose, withApollo } from 'react-apollo';
 import { searchSalesVisits } from '../../actions/sales';
 
 import SalesForceCard from './components/SalesForceCard/SalesForceCard';
 
-import mock from './mock';
+// import mock from './mock';
 import s from './Sales.scss';
+
+const getVisits = gql(`
+query listVisits {
+  listVisits {
+    items {
+      visitId
+      salesmanId
+      salesman
+      clientId
+      client
+      visitDate
+      visitEndDate
+      visitStateId
+      visitState
+      startAddress
+      clientAddress
+      duration
+    }
+  }
+}
+`);
 
 class ProductList extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     isFetching: PropTypes.bool.isRequired,
+    visits: PropTypes.any.isRequired,
   };
   constructor(props) {
     super(props);
@@ -23,7 +46,6 @@ class ProductList extends Component {
       visitState: 'En progreso',
       companyName: '',
       date: new Date(),
-      visits: mock,
     };
 
     this.doSearch = this.doSearch.bind(this);
@@ -68,6 +90,7 @@ class ProductList extends Component {
 
   render() {
     const { isModalActive } = this.state;
+    const { visits } = this.props;
     // if (redirect) {
     //   return <Redirect push to="/app/maps/google" />;
     // }
@@ -153,7 +176,7 @@ class ProductList extends Component {
               </button>
             </div>
             <div className={s.productsListElements}>
-              {this.state.visits.filter(this.filterVisits).map(item => <SalesForceCard key={item.id} {...item} />)}
+              {visits.filter(this.filterVisits).map(item => <SalesForceCard key={item.id} {...item} />)}
             </div>
           </div>
 
@@ -166,12 +189,23 @@ class ProductList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    isFetching: state.salesVisits.isFetching,
-    isSearched: state.salesVisits.isSearched,
-    visits: state.salesVisits.visits,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     isFetching: state.salesVisits.isFetching,
+//     isSearched: state.salesVisits.isSearched,
+//     visits: state.salesVisits.visits,
+//   };
+// }
 
-export default withRouter(connect(mapStateToProps)(withStyles(s)(ProductList)));
+export default withApollo(
+  compose(
+    graphql(getVisits, {
+      options: {
+        fetchPolicy: 'cache-first',
+      },
+      props: ({ data: { listVisits = { items: [] } } }) => ({
+        visits: listVisits.items,
+      }),
+    }),
+  )(withStyles(s)(ProductList)),
+);

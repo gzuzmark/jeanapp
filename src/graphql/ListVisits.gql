@@ -1,0 +1,18 @@
+query listVisits {
+  listVisits {
+    items {
+      visitId
+      salesmanId
+      salesman
+      clientId
+      client
+      visitDate
+      visitEndDate
+      visitStateId
+      visitState
+      startAddress
+      clientAddress
+      duration
+    }
+  }
+}
