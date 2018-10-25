@@ -1,4 +1,4 @@
-import { SALES_VISIT_REQUEST, SALES_VISIT_SUCCESS, SALES_VISIT_FAILURE } from '../actions/sales';
+import { SALES_VISIT_REQUEST, SALES_VISIT_SUCCESS, SALES_VISIT_FAILURE, SALES_SEND_COORDENATE } from '../actions/sales';
 
 // The auth reducer. The starting state sets authentication
 // based on a token being in local storage. In a real app,
@@ -8,6 +8,7 @@ export default function salesVisits(
     isFetching: false,
     isSearched: false,
     visits: [],
+    messages: [],
   },
   action,
 ) {
@@ -30,6 +31,12 @@ export default function salesVisits(
         isFetching: false,
         isSearched: false,
         errorMessage: action.message,
+      });
+    case SALES_SEND_COORDENATE:
+      return Object.assign({}, state, {
+        errorMessage: '',
+        visits: action.visits,
+        messages: [...state.messages, action.coord],
       });
     default:
       return state;

@@ -5,7 +5,7 @@ import FastClick from 'fastclick';
 import { createPath } from 'history/PathUtils';
 
 import { ApolloProvider } from 'react-apollo';
-import { Rehydrated } from 'aws-appsync-react';
+// import { Rehydrated } from 'aws-appsync-react';
 import AWSAppSyncClient from 'aws-appsync';
 import appSyncConfig from './aws-exports';
 
@@ -142,9 +142,7 @@ async function onLocationChange(location, action) {
     appInstance = ReactDOM.render(
       <Router history={history}>
         <ApolloProvider client={client}>
-          <Rehydrated>
-            <App store={context.store} context={context} />
-          </Rehydrated>
+          <App store={context.store} context={context} />
         </ApolloProvider>
       </Router>,
       container,

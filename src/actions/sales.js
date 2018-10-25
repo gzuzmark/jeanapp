@@ -1,3 +1,4 @@
+import database from '../firebase/firebase';
 import visitMock from './visitsMock';
 
 export const SALES_VISIT_REQUEST = 'SALES_VISIT_REQUEST';
@@ -6,6 +7,7 @@ export const SALES_VISIT_FAILURE = 'SALES_VISIT_FAILURE';
 export const SALES_VISIT_DETAIL_REQUEST = 'SALES_VISIT_DETAIL_REQUEST';
 export const SALES_VISIT_DETAIL_SUCCESS = 'SALES_VISIT_DETAIL_SUCCESS';
 export const SALES_VISIT_DETAIL_FAILURE = 'SALES_VISIT_DETAIL_FAILURE';
+export const SALES_SEND_COORDENATE = 'SALES_SEND_COORDENATE';
 
 function requestSalesVisit(salesVisitSearch) {
   return {
@@ -34,6 +36,12 @@ function salesVisitError(message) {
   };
 }
 
+export const sendCoord = (coord, visits) => ({
+  type: SALES_SEND_COORDENATE,
+  coord,
+  visits,
+});
+
 export function searchSalesVisits(salesVisitSearch) {
   const config = {
     method: 'POST',
@@ -48,7 +56,7 @@ export function searchSalesVisits(salesVisitSearch) {
 
     return fetch(visitMock, config)
       .then(response => response.json().then(visits => ({ visits, response })))
-      .then(({ visits, response }) => { // eslint-disable-line
+      .then(({ visits, response }) => {// eslint-disable-line      
 
         if (!response.ok) {
           // If there was a problem, we want to
@@ -66,3 +74,18 @@ export function searchSalesVisits(salesVisitSearch) {
       .catch(err => console.log('Error: ', err)); // eslint-disable-line
   };
 }
+
+export const startListeningCoordenates = visitId => (dispatch) => database.ref('visits').once('value', (snapshot) => { // eslint-disable-line 
+  const visits = [];
+  snapshot.forEach((childSnapshot) => {
+    visits.push({
+      ...childSnapshot.val(),
+    });
+  });
+  if (!visits.find(r => r.visitId === visitId)) {
+    return database.ref(`visits/${visitId}/coord`).on('child_added', (coordSnapshot) => {
+      const coord = coordSnapshot.val();
+      dispatch(sendCoord({ ...coord, id: coordSnapshot.key }, visitId));
+    });
+  }
+});

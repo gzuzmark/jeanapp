@@ -91,6 +91,7 @@ class ProductList extends Component {
   render() {
     const { isModalActive } = this.state;
     const { visits } = this.props;
+
     // if (redirect) {
     //   return <Redirect push to="/app/maps/google" />;
     // }
@@ -176,7 +177,7 @@ class ProductList extends Component {
               </button>
             </div>
             <div className={s.productsListElements}>
-              {visits.filter(this.filterVisits).map(item => <SalesForceCard key={item.id} {...item} />)}
+              {visits.filter(this.filterVisits).map(item => <SalesForceCard key={item.visitId} {...item} />)}
             </div>
           </div>
 
@@ -201,7 +202,8 @@ export default withApollo(
   compose(
     graphql(getVisits, {
       options: {
-        fetchPolicy: 'cache-first',
+        fetchPolicy: 'network-only',
+        errorPolicy: 'ignore',
       },
       props: ({ data: { listVisits = { items: [] } } }) => ({
         visits: listVisits.items,

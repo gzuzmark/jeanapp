@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
 
 import { ApolloProvider } from 'react-apollo';
-import { Rehydrated } from 'aws-appsync-react';
+// import { Rehydrated } from 'aws-appsync-react';
 import AWSAppSyncClient from 'aws-appsync';
 import appSyncConfig from './aws-exports';
 
@@ -184,11 +184,9 @@ app.get('*', async (req, res, next) => {
     const html = ReactDOM.renderToString(
       <StaticRouter location={req.url} context={context}>
         <ApolloProvider client={client}>
-          <Rehydrated>
-            <Provider store={store}>
-              <App store={store} />
-            </Provider>
-          </Rehydrated>
+          <Provider store={store}>
+            <App store={store} />
+          </Provider>
         </ApolloProvider>
       </StaticRouter>,
     );
