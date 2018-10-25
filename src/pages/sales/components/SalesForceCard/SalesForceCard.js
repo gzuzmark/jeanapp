@@ -10,8 +10,8 @@ class SalesForceCard extends React.Component {
   componentDidMount() {}
 
   render() {
-    const { id, salesman, client, visitDate, visitState } = this.props;
-    const link = getLink(id);
+    const { visitId, salesman, client, visitDate, visitState } = this.props;
+    const link = getLink(visitId);
     return (
       <div className="">
         <Row>
@@ -63,7 +63,7 @@ class SalesForceCard extends React.Component {
 }
 
 SalesForceCard.propTypes = {
-  id: PropTypes.number.isRequired,
+  visitId: PropTypes.any.isRequired,
   salesman: PropTypes.any.isRequired,
   client: PropTypes.string.isRequired,
   visitDate: PropTypes.string.isRequired,

@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
+// import { connect } from 'react-redux';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { withGoogleMap, withScriptjs, GoogleMap, Marker, Polyline } from 'react-google-maps';
+
+import Widget from '../../../components/Widget';
+// import { startListeningCoordenates } from '../../../actions/sales';
 
 import s from './Google.scss';
 
@@ -19,6 +25,7 @@ const pathCoordinates = [
   { lat: -12.119851, lng: -76.997634 },
   { lat: -12.117732, lng: -76.996647 },
 ];
+
 const BasicMap = withScriptjs(
   withGoogleMap(() => (
     <GoogleMap
@@ -48,10 +55,76 @@ class Maps extends React.Component {
     const lng = localStorage.getItem('lng');
     return (
       <div>
-        <h1 className={`${s.MapTitle} page-title`}>
-          Google <span className="fw-semi-bold">Maps</span>
-        </h1>
         <div className={s.MapContainer}>
+          <Row>
+            <Col md={12} sm={12} xs={12}>
+              <Widget
+                title={
+                  <h6>
+                    {' '}
+                    Info <span className="fw-semi-bold">visita</span>
+                  </h6>
+                }
+              >
+                <Row>
+                  <Col md={3} sm={6} xs={12}>
+                    <label htmlFor="companyName">Nombre del Vendedor:</label>
+                  </Col>
+                  <Col md={3} sm={6} xs={12}>
+                    {' '}
+                    <label htmlFor="companyName">Estado de la visita:</label>
+                  </Col>
+
+                  <Col md={3} sm={6} xs={12}>
+                    {' '}
+                    <label htmlFor="companyName">Duración del trayecto:</label>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={3} sm={6} xs={12}>
+                    <span>Miguel Alfaro</span>
+                  </Col>
+
+                  <Col md={3} sm={6} xs={12}>
+                    <span>En progreso</span>
+                  </Col>
+
+                  <Col md={3} sm={6} xs={12}>
+                    <span>45 min</span>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={3} sm={6} xs={12}>
+                    <label htmlFor="companyName">Razón Social del cliente:</label>
+                  </Col>
+
+                  <Col md={3} sm={6} xs={12}>
+                    {' '}
+                    <label htmlFor="companyName">Fecha y hora inicial:</label>
+                  </Col>
+
+                  <Col md={3} sm={6} xs={12}>
+                    {' '}
+                    <label htmlFor="companyName">Fecha y hora final:</label>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col md={3} sm={6} xs={12}>
+                    <span>Oriflame</span>
+                  </Col>
+
+                  <Col md={3} sm={6} xs={12}>
+                    <span>10/11/2015 10:25 am</span>
+                  </Col>
+
+                  <Col md={3} sm={6} xs={12}>
+                    <span />
+                  </Col>
+                </Row>
+              </Widget>
+            </Col>
+          </Row>
           <BasicMap
             lat={lat}
             lng={lng}
@@ -60,6 +133,38 @@ class Maps extends React.Component {
             containerElement={<div style={{ height: 'inherit' }} />}
             mapElement={<div style={{ height: 'inherit' }} />}
           />
+          <Row>
+            <Col md={12} sm={12} xs={12}>
+              <Widget>
+                <Row>
+                  <Col md={3} sm={6} xs={12}>
+                    <label htmlFor="companyName">Dirección de la partida:</label>
+                  </Col>
+                  <Col md={3} sm={6} xs={12}>
+                    <label htmlFor="companyName">Dirección del cliente:</label>
+                  </Col>
+                  <Col md={6} sm={6} xs={12}>
+                    <Link to="/app/sales/main">
+                      <Button color="default" className="width-100 mb-xs mr-xs">
+                        Retornar
+                      </Button>
+                    </Link>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={3} sm={6} xs={12}>
+                    <span>Av Bernardo Alcedo 1203</span>
+                  </Col>
+                  <Col md={3} sm={6} xs={12}>
+                    <span>Av Camino real 221 int 102</span>
+                  </Col>
+                  <Col md={6} sm={6} xs={12}>
+                    <span />
+                  </Col>
+                </Row>
+              </Widget>
+            </Col>
+          </Row>
         </div>
       </div>
     );
@@ -70,5 +175,13 @@ Maps.propTypes = {
   lat: PropTypes.any.isRequired,
   lng: PropTypes.any.isRequired,
 };
+
+// const mapDispatchToProps = dispatch => ({
+//   startListeningCoordenates: visitId => dispatch(startListeningCoordenates(visitId)),
+// });
+
+// const mapStateToProps = state => ({
+//   auth: state.messages,
+// });
 
 export default withStyles(s)(Maps);

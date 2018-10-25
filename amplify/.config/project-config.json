@@ -1,0 +1,20 @@
+{
+    "projectName": "CodeGithub",
+    "projectPath": "D:\\FREELANCES\\Tesis Jean Claude Esquerra\\CodeGithub",
+    "defaultEditor": "code",
+    "frontendHandler": {
+        "javascript": "C:\\Users\\jesus\\AppData\\Roaming\\nvm\\v9.11.1\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-frontend-javascript"
+    },
+    "javascript": {
+        "framework": "react",
+        "config": {
+            "SourceDir": "src",
+            "DistributionDir": "build",
+            "BuildCommand": "yarn run build",
+            "StartCommand": "yarn start"
+        }
+    },
+    "providers": {
+        "awscloudformation": "C:\\Users\\jesus\\AppData\\Roaming\\nvm\\v9.11.1\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-provider-awscloudformation"
+    }
+}
