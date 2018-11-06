@@ -27,7 +27,7 @@ const pathCoordinates = [
 ];
 
 const BasicMap = withScriptjs(
-  withGoogleMap(() => (
+  withGoogleMap(props => (
     <GoogleMap
       defaultZoom={15}
       defaultCenter={{
@@ -36,7 +36,7 @@ const BasicMap = withScriptjs(
       }}
     >
       <Polyline
-        path={pathCoordinates}
+        path={props.coord}
         geodesic
         options={{
           strokeColor: '#ff2527',
@@ -50,9 +50,26 @@ const BasicMap = withScriptjs(
 );
 
 class Maps extends React.Component {
+  constructor() {
+    super();
+    this.state = { coord: [] };
+  }
+  componentDidMount() {
+    let n = 0;
+
+    setInterval(() => {
+      if (n < 12) {
+        this.setState(prevState => ({
+          coord: prevState.coord.concat(pathCoordinates[n]),
+        }));
+        n += 1;
+      }
+    }, 3000);
+  }
   render() {
     const lat = localStorage.getItem('lat');
     const lng = localStorage.getItem('lng');
+    const coord = this.state.coord;
     return (
       <div>
         <div className={s.MapContainer}>
@@ -128,6 +145,7 @@ class Maps extends React.Component {
           <BasicMap
             lat={lat}
             lng={lng}
+            coord={coord}
             googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyB7OXmzfQYua_1LEhRdqsoYzyJOPh9hGLg"
             loadingElement={<div style={{ height: 'inherit', width: 'inherit' }} />}
             containerElement={<div style={{ height: 'inherit' }} />}
