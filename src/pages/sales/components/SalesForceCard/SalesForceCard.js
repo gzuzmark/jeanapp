@@ -5,13 +5,13 @@ import { Badge, Row, Col } from 'reactstrap';
 
 import Widget from '../../../../components/Widget';
 
-const getLink = id => '/app/maps/google/:visitId'.replace('visitId', id);
+const getLink = id => '/app/maps/google/:visitId'.replace(':visitId', id);
 class SalesForceCard extends React.Component {
   componentDidMount() {}
 
   render() {
-    const { visitId, salesman, client, visitDate, visitState } = this.props;
-    const link = getLink(visitId);
+    const { id, salesmanName, clientName, visitDate, visitState } = this.props;
+    const link = getLink(id);
     return (
       <div className="">
         <Row>
@@ -27,19 +27,19 @@ class SalesForceCard extends React.Component {
                     </Col>
                     <Col xs="9">
                       <h6 className="m-0">VENDEDOR</h6>
-                      <p className="h2 m-0 fw-normal">{salesman}</p>
+                      <p className="h2 m-0 fw-normal">{salesmanName}</p>
                     </Col>
                   </Row>
                   <Row className="flex-nowrap">
                     <Col xs={12}>
                       <h6 className="m-0">Cliente</h6>
-                      <p className="value5">{client}</p>
+                      <p className="value5">{clientName}</p>
                     </Col>
                   </Row>
                   <Row className="flex-nowrap">
                     <Col xs="12">
                       <h6 className="m-0">Fecha</h6>
-                      <p className="value5">{visitDate}</p>
+                      <p className="value5">{new Date(visitDate).toLocaleDateString()}</p>
                     </Col>
                   </Row>
                   <Row className="flex-nowrap">
@@ -63,9 +63,9 @@ class SalesForceCard extends React.Component {
 }
 
 SalesForceCard.propTypes = {
-  visitId: PropTypes.any.isRequired,
-  salesman: PropTypes.any.isRequired,
-  client: PropTypes.string.isRequired,
+  id: PropTypes.any.isRequired,
+  salesmanName: PropTypes.any.isRequired,
+  clientName: PropTypes.string.isRequired,
   visitDate: PropTypes.string.isRequired,
   visitState: PropTypes.any.isRequired,
 };

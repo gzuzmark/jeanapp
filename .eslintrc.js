@@ -66,5 +66,7 @@ module.exports = {
     'no-confusing-arrow': 0,
 
     'no-mixed-operators': 0,
+
+    "react/no-did-mount-set-state": 0,
   },
 };

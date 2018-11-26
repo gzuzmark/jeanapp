@@ -1,18 +1,18 @@
 query listVisits {
   listVisits {
     items {
-      visitId
+      id
       salesmanId
-      salesman
+      salesmanName
       clientId
-      client
+      clientName
       visitDate
       visitEndDate
       visitStateId
       visitState
-      startAddress
-      clientAddress
-      duration
+      visitstartAddress
+      visitclientAddress
+      visitduration
     }
   }
 }

@@ -16,18 +16,18 @@ const getVisits = gql(`
 query listVisits {
   listVisits {
     items {
-      visitId
+      id
       salesmanId
-      salesman
+      salesmanName
       clientId
-      client
+      clientName
       visitDate
       visitEndDate
       visitStateId
       visitState
-      startAddress
-      clientAddress
-      duration
+      visitStartAddress
+      visitClientAddress
+      visitDuration
     }
   }
 }
@@ -36,9 +36,21 @@ query listVisits {
 class ProductList extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    isFetching: PropTypes.bool.isRequired,
+    // isFetching: PropTypes.bool.isRequired,
     visits: PropTypes.any.isRequired,
   };
+
+  static sortById(a, b) {
+    if (a.id > b.id) {
+      return 1;
+    }
+    if (a.id < b.id) {
+      return -1;
+    }
+    // a must be equal to b
+    return 0;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -68,15 +80,20 @@ class ProductList extends Component {
   }
 
   doSearch(e) {
-    this.props.dispatch(searchSalesVisits({ salesman: this.state.salesman, companyName: this.state.companyName }));
+    this.props.dispatch(
+      searchSalesVisits({ salesmanName: this.state.salesmanName, companyName: this.state.companyName }),
+    );
     e.preventDefault();
   }
 
   filterVisits(item) {
-    const isSalesman = item.salesman.toLowerCase().indexOf(this.state.salesman.toLowerCase()) !== -1;
-    const isCompany = item.client.toLowerCase().indexOf(this.state.companyName.toLowerCase()) !== -1;
+    const isSalesman = item.salesmanName.toLowerCase().indexOf(this.state.salesman.toLowerCase()) !== -1;
+    const isCompany = item.clientName.toLowerCase().indexOf(this.state.companyName.toLowerCase()) !== -1;
     const isState = item.visitState.toLowerCase().indexOf(this.state.visitState.toLowerCase()) !== -1;
-    return isSalesman && isCompany && isState;
+    const visitDate = new Date(item.visitDate).setHours(0, 0, 0, 0);
+    const actualDate = new Date().setHours(0, 0, 0, 0);
+    const isDate = visitDate === actualDate;
+    return isSalesman && isCompany && isState && isDate;
   }
 
   // openMap = (item) => {
@@ -143,7 +160,7 @@ class ProductList extends Component {
                         id="companyName"
                         className="form-control fs-mini"
                         type="text"
-                        placeholder="vendedor..."
+                        placeholder="razón social..."
                         value={this.state.companyName}
                         onChange={this.changeCompany}
                       />
@@ -160,13 +177,6 @@ class ProductList extends Component {
                   </Col>
                 </Row>
               </div>
-              <div className="clearfix">
-                <div className="btn-toolbar float-right">
-                  <button type="submit" href="/app" className="btn btn-inverse btn-sm">
-                    {this.props.isFetching ? 'Loading...' : 'Search'}
-                  </button>
-                </div>
-              </div>
             </form>
             <div className={s.mobileFilterButtons}>
               <button className="btn btn-transparent btn-lg" onClick={() => this.openModal(1)}>
@@ -177,7 +187,10 @@ class ProductList extends Component {
               </button>
             </div>
             <div className={s.productsListElements}>
-              {visits.filter(this.filterVisits).map(item => <SalesForceCard key={item.visitId} {...item} />)}
+              {visits
+                .sort(this.sortById)
+                .filter(this.filterVisits)
+                .map(item => <SalesForceCard key={item.id} {...item} />)}
             </div>
           </div>
 
