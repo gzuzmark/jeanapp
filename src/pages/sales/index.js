@@ -2,37 +2,36 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import { Row, Col } from 'reactstrap';
-import gql from 'graphql-tag';
 // import { connect } from 'react-redux';
+// import gql from 'graphql-tag';
 import { graphql, compose, withApollo } from 'react-apollo';
 import { searchSalesVisits } from '../../actions/sales';
-
+import ListVisitsQuerys from '../../graphql/listVisits.gql';
 import SalesForceCard from './components/SalesForceCard/SalesForceCard';
 
 // import mock from './mock';
 import s from './Sales.scss';
 
-const getVisits = gql(`
-query listVisits {
-  listVisits {
-    items {
-      id
-      salesmanId
-      salesmanName
-      clientId
-      clientName
-      visitDate
-      visitEndDate
-      visitStateId
-      visitState
-      visitStartAddress
-      visitClientAddress
-      visitDuration
-    }
-  }
-}
-`);
-
+// const getVisits = gql(`
+// query listVisits {
+//   listVisits {
+//     items {
+//       id
+//       salesmanId
+//       salesmanName
+//       clientId
+//       clientName
+//       visitDate
+//       visitEndDate
+//       visitStateId
+//       visitState
+//       visitStartAddress
+//       visitClientAddress
+//       visitDuration
+//     }
+//   }
+// }
+// `);
 class ProductList extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -90,10 +89,10 @@ class ProductList extends Component {
     const isSalesman = item.salesmanName.toLowerCase().indexOf(this.state.salesman.toLowerCase()) !== -1;
     const isCompany = item.clientName.toLowerCase().indexOf(this.state.companyName.toLowerCase()) !== -1;
     const isState = item.visitState.toLowerCase().indexOf(this.state.visitState.toLowerCase()) !== -1;
-    const visitDate = new Date(item.visitDate).setHours(0, 0, 0, 0);
-    const actualDate = new Date().setHours(0, 0, 0, 0);
-    const isDate = visitDate === actualDate;
-    return isSalesman && isCompany && isState && isDate;
+    // const visitDate = new Date(item.visitDate).setHours(0, 0, 0, 0);
+    // const actualDate = new Date().setHours(0, 0, 0, 0);
+    // const isDate = visitDate === actualDate;
+    return isSalesman && isCompany && isState;
   }
 
   // openMap = (item) => {
@@ -213,7 +212,7 @@ class ProductList extends Component {
 
 export default withApollo(
   compose(
-    graphql(getVisits, {
+    graphql(ListVisitsQuerys.listVisits, {
       options: {
         fetchPolicy: 'network-only',
         errorPolicy: 'ignore',

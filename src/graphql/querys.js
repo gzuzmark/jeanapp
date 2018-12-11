@@ -1,3 +1,6 @@
+import gql from 'graphql-tag';
+
+const getVisits = gql(`
 query listVisits {
   listVisits {
     items {
@@ -16,3 +19,6 @@ query listVisits {
     }
   }
 }
+`);
+
+export { getVisits as default };

@@ -1,18 +1,8 @@
 import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import {
-  Row,
-  Col,
-  Button,
-  FormGroup,
-  Label,
-  Nav,
-  NavLink,
-  NavItem,
-  Progress,
-} from 'reactstrap';
+import { Row, Col, Button, FormGroup, Label, Nav, NavLink, NavItem, Progress } from 'reactstrap';
 import Formsy from 'formsy-react';
-import Select2 from 'react-select2-wrapper';
+// import Select2 from 'react-select2-wrapper';
 import Datetime from 'react-datetime';
 // import { connect } from 'react-redux';
 // import { compose } from 'redux';
@@ -25,7 +15,7 @@ import Datetime from 'react-datetime';
 //   makeSelectLoading,
 //   makeSelectError,
 // } from '../../../components/Selectors';
-import { cardTypesData } from './form-visit-data';
+// import { cardTypesData } from './form-visit-data';
 
 import InputValidation from '../../../components/InputValidation/InputValidation';
 import Widget from '../../../components/Widget';
@@ -47,12 +37,10 @@ const StepsComponents = {
             required
             validations="isNumeric"
             validationError={{
-              isNumeric: 'This value should be a valid number.',
+              isNumeric: 'Ingrese el ruc.',
             }}
           />
-          <p className="help-block">
-            Username can contain any letters or numbers, without spaces
-          </p>
+          <p className="help-block">Ejmp. 10460586459</p>
         </FormGroup>
       </fieldset>
     );
@@ -82,7 +70,7 @@ const StepsComponents = {
             required
             validationError={{ isAlpha: 'Indique sus apellidos' }}
           />
-          <p className="help-block">Pndique sus apellidos</p>
+          <p className="help-block">Indique sus apellidos</p>
         </FormGroup>
         <FormGroup>
           <Label for="address">Teléfono</Label>
@@ -94,7 +82,7 @@ const StepsComponents = {
             required
             validationError={{ isAlpha: 'Indique su teléfono' }}
           />
-          <p className="help-block">Pndique sus apellidos</p>
+          <p className="help-block">Ejmp 012720574, 996662509 </p>
         </FormGroup>
         <FormGroup>
           <Label for="email">Email</Label>
@@ -104,9 +92,9 @@ const StepsComponents = {
             name="email"
             validations={{ isEmail: true }}
             required
-            validationError={{ isEmail: 'Please provide your E-mail' }}
+            validationError={{ isEmail: 'Indique su correo electrónico' }}
           />
-          <p className="help-block">Please provide your E-mail</p>
+          <p className="help-block">Indique su correo electrónico</p>
         </FormGroup>
         <FormGroup>
           <Label for="address">Cargo</Label>
@@ -115,9 +103,9 @@ const StepsComponents = {
             id="address"
             name="address"
             validations={{ isAlpha: true }}
-            validationError={{ isAlpha: 'Indique su teléfono' }}
+            validationError={{ isAlpha: 'Indique su cargo' }}
           />
-          <p className="help-block">Pndique sus apellidos</p>
+          <p className="help-block">Indique su cargo</p>
         </FormGroup>
       </fieldset>
     );
@@ -126,23 +114,18 @@ const StepsComponents = {
     return (
       <fieldset>
         <FormGroup>
-          <Label for="name">Name on the Card</Label>
-          <InputValidation type="text" id="name" name="name" />
-        </FormGroup>
-        <FormGroup>
-          <Label for="credit-card-type">Choose shipping option</Label>
-          <Select2
-            style={{ width: '100%' }}
-            id="credit-card-type"
-            data={cardTypesData}
+          <Label for="address">Dirección</Label>
+          <InputValidation
+            type="text"
+            id="address"
+            name="address"
+            validations={{ isAlpha: true }}
+            validationError={{ isAlpha: 'Indique su dirección' }}
           />
+          <p className="help-block">Indique su dirección</p>
         </FormGroup>
         <FormGroup>
-          <Label for="credit">Credit Card Number</Label>
-          <InputValidation type="text" id="credit" name="credit" />
-        </FormGroup>
-        <FormGroup>
-          <Label for="expiration-data">Expiration Date</Label>
+          <Label for="expiration-data">Fecha y hora</Label>
           <div className="datepicker">
             <Datetime
               id="datepicker"
@@ -157,8 +140,8 @@ const StepsComponents = {
   Step4: function Step4() {
     return (
       <fieldset>
-        <h2>Thank you!</h2>
-        <p>Your submission has been received.</p>
+        <h2>Muchas Gracias!</h2>
+        <p>El registro fue exitoso.</p>
       </fieldset>
     );
   },
@@ -234,49 +217,31 @@ class FormWizardVisitComponet extends React.Component {
                 <NavItem>
                   <NavLink active={currentStep === 3}>
                     <small>3.</small>
-                    &nbsp;Visita
+                    &nbsp;Ubicación
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink active={currentStep === 4}>
                     <small>4.</small>
-                    &nbsp;Ubicacion
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink active={currentStep === 5}>
-                    <small>4.</small>
                     &nbsp;Confirmación
                   </NavLink>
                 </NavItem>
               </Nav>
-              <Progress
-                value={this.state.progress}
-                color="gray-light"
-                className="progress-xs"
-              />
+              <Progress value={this.state.progress} color="gray-light" className="progress-xs" />
               <div className="tab-content">
                 <div className={s.stepBody}>
                   <Formsy.Form>
                     {currentStep === 1 && <StepsComponents.Step1 />}
                     {currentStep === 2 && <StepsComponents.Step2 />}
                     {currentStep === 3 && <StepsComponents.Step3 />}
-                    {currentStep === 4 && (
-                      <StepsComponents.Step4
-                        isDatePickerOpen={this.state.isDatePickerOpen}
-                      />
-                    )}
+                    {currentStep === 4 && <StepsComponents.Step4 isDatePickerOpen={this.state.isDatePickerOpen} />}
                   </Formsy.Form>
                 </div>
 
                 <div className="description">
                   <ul className="pager wizard">
                     <li className="previous">
-                      <Button
-                        disabled={currentStep === 1}
-                        color="primary"
-                        onClick={this.previousStep}
-                      >
+                      <Button disabled={currentStep === 1} color="primary" onClick={this.previousStep}>
                         <i className="fa fa-caret-left" />
                         &nbsp;Previous
                       </Button>
