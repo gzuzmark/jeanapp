@@ -1,18 +1,17 @@
-query listVisits {
-  listVisits {
-    items {
-      id
-      salesmanId
-      salesmanName
-      clientId
-      clientName
-      visitDate
-      visitEndDate
-      visitStateId
-      visitState
-      visitStartAddress
-      visitClientAddress
-      visitDuration
-    }
-  }
+query listVisitTables {
+	listVisitTables {
+		items {
+			id
+			salesMan
+			client
+			binnacle
+			visitDate
+			visitEndDate
+			visitStateId
+			visitSate
+			visitStartAddress
+			visitClientAddress
+			visitDuration
+		}
+	}
 }

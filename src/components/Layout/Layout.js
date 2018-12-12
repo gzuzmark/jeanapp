@@ -54,6 +54,7 @@ import loadChartsSparkline from 'bundle-loader?lazy!../../pages/charts/sparkline
 import loadChartsRickshaw from 'bundle-loader?lazy!../../pages/charts/rickshaw';
 import loadDashboardAnalytics from 'bundle-loader?lazy!../../pages/analytics'; 
 import loadVisits from 'bundle-loader?lazy!../../pages/visits/table-visit-component';
+import loadBinnacle from 'bundle-loader?lazy!../../pages/binnacle/table-visits-binnacle-component';
 import loadSales from 'bundle-loader?lazy!../../pages/sales';
 /* eslint-enable */
 
@@ -116,6 +117,7 @@ const ChartsSparklineBundle = Bundle.generateBundle(loadChartsSparkline);
 const ChartsRickshawBundle = Bundle.generateBundle(loadChartsRickshaw);
 const DashboardAnalyticsBundle = Bundle.generateBundle(loadDashboardAnalytics);
 const VisitsBundle = Bundle.generateBundle(loadVisits);
+const BinnacleBundle = Bundle.generateBundle(loadBinnacle);
 const SalesBundle = Bundle.generateBundle(loadSales);
 
 class Layout extends React.Component {
@@ -207,6 +209,7 @@ class Layout extends React.Component {
                   render={() => <Redirect to="/app/visits/main" />}
                 />
                 <Route path="/app/visits/main" exact component={VisitsBundle} />
+                <Route path="/app/binnacle/main" exact component={BinnacleBundle} />
                 <Route path="/app/sales/main" exact component={SalesBundle} />
                 <Route path="/app/main/dashboard" exact component={Dashboard} />
                 <Route

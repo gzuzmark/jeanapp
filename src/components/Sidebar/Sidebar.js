@@ -90,6 +90,14 @@ class Sidebar extends React.Component {
                 header: 'Visitas',
                 link: '/app/visits/main',
               },
+              {
+                header: 'Bitácora',
+                link: '/app/binnacle/main',
+              },
+              {
+                header: 'Gastos',
+                link: '/app/expenses/main',
+              },
             ]}
           />
           <LinksGroup

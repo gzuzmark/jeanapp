@@ -1,72 +1,74 @@
 // ESLint configuration
 // http://eslint.org/docs/user-guide/configuring
 module.exports = {
-  parser: 'babel-eslint',
+	parser: 'babel-eslint',
 
-  extends: ['airbnb', 'plugin:css-modules/recommended'],
+	extends: ['airbnb', 'plugin:css-modules/recommended', 'prettier', 'prettier/react'],
 
-  plugins: ['css-modules'],
+	plugins: ['css-modules'],
 
-  globals: {
-    __DEV__: true,
-  },
+	globals: {
+		__DEV__: true
+	},
 
-  env: {
-    browser: true,
-  },
+	env: {
+		browser: true
+	},
 
-  rules: {
-    // `js` and `jsx` are common extensions
-    // `mjs` is for `universal-router` only, for now
-    'import/extensions': [
-      'error',
-      'always',
-      {
-        js: 'never',
-        jsx: 'never',
-        mjs: 'never',
-      },
-    ],
+	rules: {
+		// `js` and `jsx` are common extensions
+		// `mjs` is for `universal-router` only, for now
+		'import/extensions': [
+			'error',
+			'always',
+			{
+				js: 'never',
+				jsx: 'never',
+				mjs: 'never'
+			}
+		],
 
-    // Not supporting nested package.json yet
-    // https://github.com/benmosher/eslint-plugin-import/issues/458
-    'import/no-extraneous-dependencies': 'off',
+		// Not supporting nested package.json yet
+		// https://github.com/benmosher/eslint-plugin-import/issues/458
+		'import/no-extraneous-dependencies': 'off',
 
-    // Recommend not to leave any console.log in your code
-    // Use console.error, console.warn and console.info instead
-    'no-console': [
-      'error',
-      {
-        allow: ['warn', 'error', 'info'],
-      },
-    ],
+		// Recommend not to leave any console.log in your code
+		// Use console.error, console.warn and console.info instead
+		'no-console': [
+			'error',
+			{
+				allow: ['warn', 'error', 'info']
+			}
+		],
 
-    // Allow js files to use jsx syntax, too
-    'react/jsx-filename-extension': 'off',
+		// Allow js files to use jsx syntax, too
+		'react/jsx-filename-extension': 'off',
 
-    //Allow to reassignment of function parameters
-    'no-param-reassign': [2, { props: false }],
+		//Allow to reassignment of function parameters
+		'no-param-reassign': [2, { props: false }],
 
-    // https://github.com/kriasoft/react-starter-kit/pull/961
-    // You can reopen this if you still want this rule
-    'react/prefer-stateless-function': 'off',
+		// https://github.com/kriasoft/react-starter-kit/pull/961
+		// You can reopen this if you still want this rule
+		'react/prefer-stateless-function': 'off',
 
-    // allow any
-    'react/forbid-prop-types': ['error', { forbid: ['array', 'object'] }],
+		// allow any
+		'react/forbid-prop-types': ['error', { forbid: ['array', 'object'] }],
 
-    'linebreak-style': 0,
+		'linebreak-style': 0,
 
-    // maximum line length
-    // ignore urls and strings
-    'max-len': ['error', 121, { ignoreUrls: true }, { ignoreStrings: true }],
+		// maximum line length
+		// ignore urls and strings
+		'max-len': ['error', 121, { ignoreUrls: true }, { ignoreStrings: true }],
 
-    // allow href="#"
-    'jsx-a11y/href-no-hash': 'off',
+		// allow href="#"
+		'jsx-a11y/href-no-hash': 'off',
 
-    'no-confusing-arrow': 0,
+		'no-confusing-arrow': 0,
 
-    'no-mixed-operators': 0,
+		'no-mixed-operators': 0,
 
-    "react/no-did-mount-set-state": 0,
-  },
+		'react/no-did-mount-set-state': 0,
+
+		'no-tabs': 0
+	}
 };
